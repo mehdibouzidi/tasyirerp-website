@@ -2,21 +2,19 @@
  * Cloudflare Pages Function — POST /api/demande-demo
  *
  * Reçoit le formulaire de demande de démo, filtre les robots (champ piège + délai minimal),
- * valide les champs puis transmet la demande par l'un des moyens configurés dans
- * Cloudflare Pages > Settings > Environment variables :
+ * valide les champs puis envoie la demande par e-mail via le serveur SMTP d'OVH.
  *
- *   Option A — e-mail via Resend (https://resend.com)
- *     RESEND_API_KEY    (secret)  clé API Resend, à créer dans le tableau de bord Cloudflare
- *     DEMO_TO_EMAIL               adresse qui reçoit les demandes (défaut dans wrangler.toml : contact@tasyirerp.com)
- *     DEMO_FROM_EMAIL             expéditeur sur le domaine vérifié chez Resend (défaut : site@tasyirerp.com)
- *     RESEND_API_URL              facultatif, uniquement pour les tests locaux
+ * Secrets à déclarer dans Cloudflare Pages > Settings > Variables and Secrets (type « Secret ») :
+ *   SMTP_USER       adresse de la boîte OVH qui envoie, ex. contact@tasyirerp.com
+ *   SMTP_PASSWORD   mot de passe de cette boîte
  *
- *   Option B — webhook (Make, Zapier, n8n, Google Apps Script, CRM…)
- *     FORM_WEBHOOK_URL  (secret)  reçoit la demande en JSON (POST)
- *
- * Les deux options peuvent être actives en même temps. Sans aucune configuration,
- * la fonction répond 503 et le formulaire affiche un message d'échec (rien n'est perdu côté visiteur).
+ * Facultatif (valeurs par défaut entre parenthèses) :
+ *   SMTP_HOST (ssl0.ovh.net) · SMTP_PORT (465) · SMTP_SECURE (tls ; « starttls » pour le port 587)
+ *   DEMO_TO_EMAIL (contact@tasyirerp.com ; plusieurs adresses séparées par des virgules)
+ *   DEMO_FROM_NAME (Site Tasyir ERP)
+ *   FORM_WEBHOOK_URL : reçoit aussi chaque demande en JSON (Make, Zapier, n8n, CRM…)
  */
+import { sendMail } from "../../lib/smtp.js";
 
 const LIMITS = { nom: 120, entreprise: 160, secteur: 80, effectif: 40, telephone: 30, email: 160, message: 2000 };
 const REQUIRED = ["nom", "entreprise", "secteur", "effectif", "telephone", "email"];
@@ -54,7 +52,7 @@ export async function onRequestPost({ request, env }) {
 
   // 3. Envoi.
   const jobs = [];
-  if (env.RESEND_API_KEY && env.DEMO_TO_EMAIL && env.DEMO_FROM_EMAIL) jobs.push(sendEmail(env, payload));
+  if (env.SMTP_USER && env.SMTP_PASSWORD) jobs.push(sendEmail(env, payload));
   if (env.FORM_WEBHOOK_URL) jobs.push(sendWebhook(env.FORM_WEBHOOK_URL, payload));
   if (!jobs.length) return reply(wantsJson, 503, { ok: false, error: "not_configured" });
 
@@ -92,24 +90,26 @@ async function sendEmail(env, p) {
     ["Nom", p.nom], ["Entreprise", p.entreprise], ["Secteur", p.secteur], ["Salariés", p.effectif],
     ["Téléphone", p.telephone], ["E-mail", p.email], ["Message", p.message || "—"], ["Reçue le", p.recu_le],
   ];
-  const html = `<h2>Nouvelle demande de démo</h2><table cellpadding="6" style="border-collapse:collapse">${rows
+  const html = `<h2 style="font-family:Arial,sans-serif">Nouvelle demande de démo</h2><table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif">${rows
     .map(([k, v]) => `<tr><th align="left" style="border-bottom:1px solid #ddd">${k}</th><td style="border-bottom:1px solid #ddd;white-space:pre-wrap">${escapeHtml(v)}</td></tr>`)
     .join("")}</table>`;
   const text = rows.map(([k, v]) => `${k} : ${v}`).join("\n");
+  const user = env.SMTP_USER.trim();
 
-  const res = await fetch(env.RESEND_API_URL || "https://api.resend.com/emails", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from: env.DEMO_FROM_EMAIL,
-      to: env.DEMO_TO_EMAIL.split(",").map((s) => s.trim()).filter(Boolean),
-      reply_to: p.email,
-      subject: `Demande de démo — ${p.entreprise} (${p.effectif} salariés)`,
-      html,
-      text,
-    }),
+  await sendMail({
+    host: env.SMTP_HOST || "ssl0.ovh.net",
+    port: Number(env.SMTP_PORT || 465),
+    secure: env.SMTP_SECURE || "tls",
+    user,
+    pass: env.SMTP_PASSWORD,
+    // OVH n'accepte que l'adresse de la boîte authentifiée comme expéditeur.
+    from: `${env.DEMO_FROM_NAME || "Site Tasyir ERP"} <${user}>`,
+    to: (env.DEMO_TO_EMAIL || "contact@tasyirerp.com").split(",").map((s) => s.trim()).filter(Boolean),
+    replyTo: p.email,
+    subject: `Demande de démo — ${p.entreprise} (effectif : ${p.effectif})`,
+    text,
+    html,
   });
-  if (!res.ok) throw new Error(`resend ${res.status}`);
 }
 
 async function sendWebhook(url, p) {

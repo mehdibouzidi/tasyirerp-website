@@ -22,6 +22,7 @@ public/                     ← tout ce qui est publié
   _headers                  en-têtes de sécurité et de cache (Cloudflare Pages)
   _redirects                redirections 301
 functions/api/demande-demo.js   réception du formulaire (Cloudflare Pages Function)
+lib/smtp.js                     envoi des e-mails par SMTP (OVH)
 wrangler.toml                   configuration Cloudflare Pages
 A-COMPLETER.md                  liste de ce qu'il faut remplir avant la mise en ligne
 ```
@@ -46,7 +47,7 @@ npm install
 npm run dev
 ```
 
-Pour tester l'envoi en local : copier `.dev.vars.example` en `.dev.vars` (jamais commité) et y mettre une vraie clé Resend.
+Pour tester l'envoi en local : copier `.dev.vars.example` en `.dev.vars` (jamais commité) et y mettre le vrai mot de passe de la boîte OVH.
 
 ## Déployer sur Cloudflare Pages
 
@@ -72,24 +73,46 @@ npx wrangler login
 npm run deploy
 ```
 
-### 2. Brancher le formulaire sur contact@tasyirerp.com
+### 2. Brancher le formulaire sur contact@tasyirerp.com (SMTP OVH)
 
-Les demandes partent par e-mail via [Resend](https://resend.com) (offre gratuite : 3 000 e-mails par mois). Le destinataire `contact@tasyirerp.com` et l'expéditeur `site@tasyirerp.com` sont déjà réglés dans `wrangler.toml`.
+Les demandes partent par le serveur SMTP d'OVH, depuis la boîte contact@tasyirerp.com, vers contact@tasyirerp.com. Il suffit de déclarer **deux secrets** :
 
-1. Créer un compte Resend, puis Domains > Add domain > `tasyirerp.com`.
-2. Ajouter dans Cloudflare (DNS) les enregistrements que Resend affiche (DKIM, SPF du sous-domaine d'envoi). Ils ne touchent pas à la réception des e-mails de `contact@tasyirerp.com`. Attendre « Verified ».
-3. Resend > API Keys > créer une clé « Sending access » limitée à `tasyirerp.com`.
-4. Cloudflare > projet Pages > Settings > Variables and Secrets > ajouter le **secret** `RESEND_API_KEY` (environnement Production), ou :
+1. Cloudflare > Workers & Pages > projet `tasyirerp-website` > Settings > **Variables and Secrets** > Add.
+2. Type **Secret**, environnement **Production** :
+   - `SMTP_USER` = `contact@tasyirerp.com`
+   - `SMTP_PASSWORD` = le mot de passe de cette boîte OVH
+3. Deployments > dernier déploiement > **Retry deployment** (les secrets s'appliquent au déploiement suivant).
+4. Envoyer une demande de test depuis le site : elle arrive sur contact@tasyirerp.com, avec pour objet « Demande de démo — Entreprise (effectif : …) ». « Répondre » écrit directement au prospect.
+
+Ou en ligne de commande :
 
 ```bash
-npx wrangler pages secret put RESEND_API_KEY
+npx wrangler pages secret put SMTP_USER
 ```
 
-5. Redéployer (Deployments > Retry deployment), puis envoyer une demande de test depuis le site.
+```bash
+npx wrangler pages secret put SMTP_PASSWORD
+```
 
-Chaque demande arrive avec pour objet « Demande de démo — Entreprise (tranche de salariés) ». Cliquer sur « Répondre » écrit directement au prospect.
+Valeurs par défaut, à changer seulement si besoin (même écran, en variables) : `SMTP_HOST` = `ssl0.ovh.net`, `SMTP_PORT` = `465`, `SMTP_SECURE` = `tls` (mettre `starttls` avec le port 587), `DEMO_TO_EMAIL` = `contact@tasyirerp.com` (plusieurs adresses séparées par des virgules), `DEMO_FROM_NAME` = `Site Tasyir ERP`.
 
-Tant que la clé n'est pas en place, le formulaire affiche « L'envoi n'a pas abouti » : rien n'est envoyé.
+Bon à savoir :
+- OVH n'accepte comme expéditeur que la boîte authentifiée : l'e-mail part de `SMTP_USER`.
+- Le port 25 est bloqué par Cloudflare ; le 465 (par défaut) fonctionne.
+- Si le mot de passe de la boîte change, mettre à jour le secret `SMTP_PASSWORD` et redéployer.
+- Tant que les secrets ne sont pas déclarés, le formulaire affiche « L'envoi n'a pas abouti » : rien n'est envoyé.
+- En cas d'échec, le détail (par exemple « authentication failed ») apparaît dans Cloudflare > projet > Deployments > Functions > Real-time logs.
+
+### Formulaire : détails techniques
+
+Le formulaire envoie ses données à `/api/demande-demo` (`functions/api/demande-demo.js`). La fonction :
+
+- ignore les robots (champ piège invisible `site_web` et envoi en moins de 3 secondes) ;
+- vérifie les champs obligatoires, l'e-mail, le téléphone et la case de consentement ;
+- envoie l'e-mail par SMTP avec `lib/smtp.js`, un petit client sans dépendance basé sur les sockets TCP de Cloudflare (TLS direct sur le port 465, ou STARTTLS sur le 587) ;
+- en option, transmet aussi la demande en JSON à `FORM_WEBHOOK_URL` (Make, Zapier, n8n, CRM…).
+
+Sans JavaScript, le visiteur est redirigé vers `/merci/` après l'envoi.
 
 ## Modifier les textes
 

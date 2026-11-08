@@ -1,3 +1,4 @@
 # Copier ce fichier en .dev.vars pour tester le formulaire en local (npm run dev).
 # .dev.vars n'est jamais commité.
-RESEND_API_KEY=re_xxxxxxxxxxxxxxxx
+SMTP_USER=contact@tasyirerp.com
+SMTP_PASSWORD=mot-de-passe-de-la-boite-ovh

@@ -1,11 +1,8 @@
 # Configuration Cloudflare Pages
-# Ce fichier fait foi : les variables ci-dessous remplacent celles du tableau de bord.
-# Les secrets (RESEND_API_KEY, FORM_WEBHOOK_URL) se règlent dans le tableau de bord ou avec :
-#   npx wrangler pages secret put RESEND_API_KEY
+# Aucune variable ici : la configuration du formulaire se fait uniquement par des secrets
+# dans Cloudflare Pages > Settings > Variables and Secrets :
+#   SMTP_USER      = contact@tasyirerp.com
+#   SMTP_PASSWORD  = mot de passe de la boîte OVH
 name = "tasyirerp-website"
 pages_build_output_dir = "public"
 compatibility_date = "2026-10-01"
-
-[vars]
-DEMO_TO_EMAIL = "contact@tasyirerp.com"
-DEMO_FROM_EMAIL = "Site Tasyir ERP <site@tasyirerp.com>"

@@ -10,10 +10,9 @@ Les champs à compléter sont surlignés en jaune sur les pages tant qu'ils ne s
 
 ## 1. Formulaire de demande de démo
 
-Le code est prêt et testé : les demandes partent vers contact@tasyirerp.com. Il manque seulement la clé d'envoi.
+Le code est prêt et testé : les demandes partent par le SMTP d'OVH vers contact@tasyirerp.com. Il manque seulement les identifiants.
 
-- [ ] Vérifier le domaine `tasyirerp.com` chez Resend (enregistrements DNS dans Cloudflare).
-- [ ] Ajouter le secret `RESEND_API_KEY` dans Cloudflare Pages, puis redéployer.
+- [ ] Déclarer les secrets `SMTP_USER` (contact@tasyirerp.com) et `SMTP_PASSWORD` dans Cloudflare Pages, puis redéployer.
 - [ ] Envoyer une demande de test depuis le site en ligne et vérifier la réception sur contact@tasyirerp.com.
 
 ## 2. Coordonnées
@@ -39,7 +38,7 @@ Renseignées : contact@tasyirerp.com et Alger (pied de page, mentions légales, 
 - [ ] `[DATE]`
 - [ ] `[RAISON SOCIALE]`, `[ADRESSE]`, `[NIF/RC]`
 - [ ] `[NUMÉRO DE RÉCÉPISSÉ OU D'AUTORISATION ANPDP]` : déclaration du traitement auprès de l'ANPDP
-- [ ] `[HÉBERGEUR]` et `[SERVICE D'ENVOI DU FORMULAIRE]` (ex. Cloudflare, Resend)
+- [ ] `[HÉBERGEUR]` (Cloudflare par défaut)
 - [ ] `[À CONFIRMER SELON L'HÉBERGEUR RETENU]` : transfert des données hors d'Algérie (articles 44 et 45 de la loi 18-07)
 - [ ] `[DURÉE, par exemple 3 ans]` de conservation des demandes
 - [ ] Faire relire la page par un juriste.
