@@ -10,10 +10,10 @@ Les champs à compléter sont surlignés en jaune sur les pages tant qu'ils ne s
 
 ## 1. Formulaire de demande de démo
 
-Le code est prêt et testé : les demandes partent par le SMTP d'OVH vers contact@tasyirerp.com. Il manque seulement les identifiants.
+En service : les demandes partent par le SMTP d'OVH vers contact@tasyirerp.com.
 
-- [ ] Déclarer les secrets `SMTP_USER` (contact@tasyirerp.com) et `SMTP_PASSWORD` dans Cloudflare Pages, puis redéployer.
-- [ ] Envoyer une demande de test depuis le site en ligne et vérifier la réception sur contact@tasyirerp.com.
+- [x] Déclarer les secrets `SMTP_USER` et `SMTP_PASSWORD` dans Cloudflare Pages, puis redéployer.
+- [x] Envoyer une demande de test depuis le site en ligne et vérifier la réception sur contact@tasyirerp.com.
 
 ## 2. Coordonnées
 
