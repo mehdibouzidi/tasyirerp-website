@@ -10,9 +10,11 @@ Les champs à compléter sont surlignés en jaune sur les pages tant qu'ils ne s
 
 ## 1. Formulaire de demande de démo
 
-- [ ] Choisir où arrivent les demandes : e-mail (Resend) ou webhook. Voir « Brancher le formulaire » dans le README.
-- [ ] Renseigner les variables Cloudflare : `RESEND_API_KEY`, `DEMO_TO_EMAIL`, `DEMO_FROM_EMAIL` et/ou `FORM_WEBHOOK_URL`.
-- [ ] Faire un envoi de test après la mise en ligne et vérifier la réception.
+Le code est prêt et testé : les demandes partent vers contact@tasyirerp.com. Il manque seulement la clé d'envoi.
+
+- [ ] Vérifier le domaine `tasyirerp.com` chez Resend (enregistrements DNS dans Cloudflare).
+- [ ] Ajouter le secret `RESEND_API_KEY` dans Cloudflare Pages, puis redéployer.
+- [ ] Envoyer une demande de test depuis le site en ligne et vérifier la réception sur contact@tasyirerp.com.
 
 ## 2. Coordonnées
 
@@ -59,7 +61,12 @@ Les trois photos des secteurs sont des illustrations sous licence libre (Wikimed
 - [ ] Vérifier que ces chiffres sont toujours à jour sur elafiacatering.com.
 - [ ] En option, avec leur accord : leur logo et une citation signée (nom, fonction) à ajouter dans la section « Client de référence ».
 
-## 8. Relecture
+## 8. Mesure d'audience
+
+- [ ] Google Tag Manager (`GTM-5FDP3SFZ`) est chargé sans bandeau de consentement. La loi 18-07 demande le consentement pour les données personnelles : à valider avec votre juriste.
+- [ ] Dans GTM, publier au moins une balise (par exemple Google Analytics 4) : sans version publiée, le conteneur ne mesure rien.
+
+## 9. Relecture
 
 - [ ] Relire la FAQ, en particulier la réponse sur la conformité (G50, IRG, CNAS) et celle sur l'hébergement en Algérie.
 - [ ] Vérifier que les engagements de la section Sécurité (sauvegardes, export, isolation des données) correspondent au contrat.

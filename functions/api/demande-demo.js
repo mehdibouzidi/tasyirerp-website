@@ -6,9 +6,10 @@
  * Cloudflare Pages > Settings > Environment variables :
  *
  *   Option A — e-mail via Resend (https://resend.com)
- *     RESEND_API_KEY    (secret)  clé API Resend
- *     DEMO_TO_EMAIL               adresse qui reçoit les demandes (plusieurs : séparées par des virgules)
- *     DEMO_FROM_EMAIL             expéditeur vérifié chez Resend, ex. "Tasyir ERP <site@votre-domaine.dz>"
+ *     RESEND_API_KEY    (secret)  clé API Resend, à créer dans le tableau de bord Cloudflare
+ *     DEMO_TO_EMAIL               adresse qui reçoit les demandes (défaut dans wrangler.toml : contact@tasyirerp.com)
+ *     DEMO_FROM_EMAIL             expéditeur sur le domaine vérifié chez Resend (défaut : site@tasyirerp.com)
+ *     RESEND_API_URL              facultatif, uniquement pour les tests locaux
  *
  *   Option B — webhook (Make, Zapier, n8n, Google Apps Script, CRM…)
  *     FORM_WEBHOOK_URL  (secret)  reçoit la demande en JSON (POST)
@@ -96,7 +97,7 @@ async function sendEmail(env, p) {
     .join("")}</table>`;
   const text = rows.map(([k, v]) => `${k} : ${v}`).join("\n");
 
-  const res = await fetch("https://api.resend.com/emails", {
+  const res = await fetch(env.RESEND_API_URL || "https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({

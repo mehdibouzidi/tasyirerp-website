@@ -46,25 +46,23 @@ npm install
 npm run dev
 ```
 
-Pour tester l'envoi en local, créer un fichier `.dev.vars` à la racine (il n'est pas versionné) :
-
-```
-FORM_WEBHOOK_URL=https://exemple-de-webhook
-```
+Pour tester l'envoi en local : copier `.dev.vars.example` en `.dev.vars` (jamais commité) et y mettre une vraie clé Resend.
 
 ## Déployer sur Cloudflare Pages
 
-**Option 1 : depuis GitHub (recommandé).**
+Tout est prêt : `wrangler.toml` (dossier publié `public`, variables du formulaire), `functions/` (formulaire), `_headers` (sécurité et cache), `_redirects`, `404.html`. Aucune étape de build.
 
-1. Cloudflare > Workers & Pages > Create > Pages > Connect to Git, choisir ce dépôt.
-2. Framework preset : *None*. Build command : laisser vide. Build output directory : `public`.
-3. Le dossier `functions/` est détecté tout seul : `/api/demande-demo` est créé.
-4. Ajouter les variables du formulaire (voir plus bas), puis relancer un déploiement.
-5. Custom domains : ajouter le domaine (par exemple `tasyirerp.com` et `www.tasyirerp.com`).
+### 1. Créer le projet (une seule fois)
 
-Chaque push sur la branche principale redéploie le site.
+1. Cloudflare > Workers & Pages > Create > Pages > **Connect to Git**, choisir le dépôt `tasyirerp-website`.
+2. Production branch : la branche principale. Framework preset : **None**. Build command : **vide**. Build output directory : **`public`**.
+3. Save and Deploy. Le site est en ligne sur `tasyirerp-website.pages.dev`.
+4. Custom domains : ajouter `tasyirerp.com`, puis `www.tasyirerp.com`. Si le domaine est déjà chez Cloudflare, les DNS se règlent tout seuls.
+5. Rediriger `www` vers le domaine principal : Rules > Redirect Rules (ou Bulk Redirects), `www.tasyirerp.com/*` vers `https://tasyirerp.com/${1}` en 301.
 
-**Option 2 : en ligne de commande.**
+Ensuite, chaque push sur la branche principale redéploie le site ; chaque autre branche obtient une URL de prévisualisation.
+
+En ligne de commande, sans Git :
 
 ```bash
 npx wrangler login
@@ -74,26 +72,24 @@ npx wrangler login
 npm run deploy
 ```
 
-## Brancher le formulaire
+### 2. Brancher le formulaire sur contact@tasyirerp.com
 
-Le formulaire envoie ses données à `/api/demande-demo`. La fonction :
+Les demandes partent par e-mail via [Resend](https://resend.com) (offre gratuite : 3 000 e-mails par mois). Le destinataire `contact@tasyirerp.com` et l'expéditeur `site@tasyirerp.com` sont déjà réglés dans `wrangler.toml`.
 
-- ignore les robots (champ piège invisible `site_web` et envoi en moins de 3 secondes) ;
-- vérifie les champs obligatoires, l'e-mail, le téléphone et la case de consentement ;
-- transmet la demande par e-mail, par webhook, ou les deux.
+1. Créer un compte Resend, puis Domains > Add domain > `tasyirerp.com`.
+2. Ajouter dans Cloudflare (DNS) les enregistrements que Resend affiche (DKIM, SPF du sous-domaine d'envoi). Ils ne touchent pas à la réception des e-mails de `contact@tasyirerp.com`. Attendre « Verified ».
+3. Resend > API Keys > créer une clé « Sending access » limitée à `tasyirerp.com`.
+4. Cloudflare > projet Pages > Settings > Variables and Secrets > ajouter le **secret** `RESEND_API_KEY` (environnement Production), ou :
 
-Variables à définir dans Cloudflare Pages > Settings > Variables and Secrets (en *Production*) :
+```bash
+npx wrangler pages secret put RESEND_API_KEY
+```
 
-| Variable | Rôle |
-|---|---|
-| `RESEND_API_KEY` (secret) | Clé du service d'e-mail [Resend](https://resend.com) (offre gratuite suffisante) |
-| `DEMO_TO_EMAIL` | Adresse qui reçoit les demandes, par exemple `contact@tasyirerp.com` (plusieurs : séparées par des virgules) |
-| `DEMO_FROM_EMAIL` | Expéditeur vérifié chez Resend, ex. `Tasyir ERP <site@tasyirerp.com>` |
-| `FORM_WEBHOOK_URL` (secret) | Optionnel : URL qui reçoit chaque demande en JSON (Make, Zapier, n8n, Google Sheets via Apps Script, CRM…) |
+5. Redéployer (Deployments > Retry deployment), puis envoyer une demande de test depuis le site.
 
-Sans aucune variable, le formulaire affiche un message d'échec : rien n'est envoyé.
+Chaque demande arrive avec pour objet « Demande de démo — Entreprise (tranche de salariés) ». Cliquer sur « Répondre » écrit directement au prospect.
 
-**Utiliser un autre service (Formspree, Getform…)** : remplacer `action="/api/demande-demo"` dans `public/index.html` par l'adresse du service, ou ajouter `data-endpoint="https://…"` sur la balise `<form>`. Ajouter aussi le domaine du service à `connect-src` et `form-action` dans `public/_headers`.
+Tant que la clé n'est pas en place, le formulaire affiche « L'envoi n'a pas abouti » : rien n'est envoyé.
 
 ## Modifier les textes
 
@@ -134,7 +130,8 @@ grep -rl "https://tasyirerp.com" public | xargs sed -i 's#https://tasyirerp.com#
 - Balises title, description, canonical, Open Graph et Twitter sur chaque page.
 - Données structurées : Organization, WebSite, SoftwareApplication, FAQPage, BreadcrumbList.
 - `sitemap.xml` et `robots.txt`. Après la mise en ligne, déclarer le sitemap dans Google Search Console et Bing Webmaster Tools.
-- Polices auto-hébergées (`font-display: swap`, préchargement d'Inter), photos WebP en chargement différé, aucun script tiers, aucun cookie.
+- Polices auto-hébergées (`font-display: swap`, préchargement d'Inter), photos WebP en chargement différé.
+- Google Tag Manager (`GTM-5FDP3SFZ`) chargé sur toutes les pages, sans bandeau de consentement, à la demande du client. Le code est dans `public/assets/js/analytics.js` et dans une balise `<script async>` du `<head>` de chaque page. Les domaines Google sont autorisés dans la CSP de `public/_headers` : si une balise GTM charge un autre service (Meta, LinkedIn, Hotjar…), ajouter son domaine à `script-src`, `connect-src` et `img-src`, sinon le navigateur la bloque. Les balises « HTML personnalisé » de GTM sont bloquées par la CSP (pas de `'unsafe-inline'`).
 - En-têtes de sécurité (CSP stricte, HSTS…) dans `public/_headers`.
 
 ## Version arabe (à venir)
