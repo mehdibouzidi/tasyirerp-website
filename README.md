@@ -25,6 +25,7 @@ functions/api/demande-demo.js   réception du formulaire (Cloudflare Pages Funct
 lib/smtp.js                     envoi des e-mails par SMTP (OVH)
 wrangler.toml                   configuration Cloudflare Pages
 A-COMPLETER.md                  liste de ce qu'il faut remplir avant la mise en ligne
+DEPLOIEMENT.md                  mise en ligne de tasyirerp.com : DNS OVH vers Cloudflare, domaine, e-mails
 ```
 
 ## Lancer le site en local
