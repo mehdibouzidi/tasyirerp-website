@@ -1,0 +1,4 @@
+# Configuration Cloudflare Pages (utilisée par `wrangler pages dev` et `wrangler pages deploy`)
+name = "tasyirerp-website"
+pages_build_output_dir = "public"
+compatibility_date = "2026-10-01"
