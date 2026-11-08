@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" dir="ltr">
+<html lang="fr" dir="ltr" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,7 +10,8 @@
   <link rel="alternate" hreflang="x-default" href="https://tasyirerp.com/">
   <!-- Version arabe (à venir) : <link rel="alternate" hreflang="ar-DZ" href="https://tasyirerp.com/ar/"> -->
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#111827">
+  <meta name="theme-color" content="#0B1120">
+  <meta name="color-scheme" content="dark light">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_DZ">
@@ -30,6 +31,7 @@
   <link rel="manifest" href="/site.webmanifest">
 
   <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/assets/js/theme.js"></script>
   <link rel="stylesheet" href="/assets/css/site.css">
   <script src="/assets/js/site.js" defer></script>
 
@@ -97,21 +99,28 @@
   <header class="nav" id="haut">
     <div class="wrap nav__bar">
       <a class="nav__logo" href="/" aria-label="Tasyir ERP, accueil">
-        <img src="/assets/logo/tasyir-erp-couleur.svg" alt="Tasyir ERP" width="160" height="45">
+        <img class="logo-light" src="/assets/logo/tasyir-erp-couleur.svg" alt="Tasyir ERP" width="160" height="45"><img class="logo-dark" src="/assets/logo/tasyir-erp-negatif.svg" alt="" width="160" height="45">
       </a>
       <nav class="nav__menu" id="menu" aria-label="Navigation principale">
         <ul>
-          <li><a href="#points-forts">Solution</a></li>
+          <li><a href="#points-forts">Points forts</a></li>
           <li><a href="#secteurs">Secteurs</a></li>
           <li><a href="#methode">Méthode</a></li>
           <li><a href="#securite">Sécurité</a></li>
           <li><a href="#questions">Questions</a></li>
+          <li class="nav__menu-cta"><a class="btn btn--primary" href="#demo">Demander une démo</a></li>
         </ul>
       </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+        <span class="sr-only">Activer le thème sombre</span>
+        <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
       <a class="btn btn--primary nav__cta" href="#demo">Demander une démo</a>
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">
         <span class="sr-only">Ouvrir le menu</span>
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="i-open" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
     </div>
   </header>
@@ -122,299 +131,344 @@
     <section class="hero" aria-labelledby="hero-titre">
       <div class="wrap hero__grid">
         <div class="hero__text" data-enter>
-          <p class="pill">ERP algérien · production, comptabilité et paie</p>
-          <h1 id="hero-titre">L'ERP des entreprises qui fabriquent, conforme à la réglementation algérienne</h1>
-          <p class="lead">Ventes, achats, stock, production, comptabilité et paie dans un seul logiciel. La G50, l'IRG, la déclaration CNAS et les fiches de paie sont générées automatiquement.</p>
+          <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Conforme G50, IRG et CNAS</p>
+          <h1 id="hero-titre">L'ERP algérien des entreprises qui fabriquent</h1>
+          <p class="lead">Production, achats, stock, comptabilité et paie dans un seul logiciel, conforme à la réglementation algérienne. La G50, l'IRG, la CNAS et les fiches de paie sont générées automatiquement.</p>
           <div class="btn-row">
             <a class="btn btn--primary" href="#demo">Demander une démo
               <svg class="arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a class="btn btn--secondary" href="#points-forts">Voir les points forts</a>
           </div>
-          <ul class="hero__facts" aria-label="En bref">
-            <li>Catering et restauration collective</li>
-            <li>Usines de production</li>
-            <li>Agroalimentaire</li>
-          </ul>
+          <p class="hero__proof">Pour le catering, la restauration collective, les usines et l'agroalimentaire.</p>
         </div>
 
-        <div class="hero__visual" data-enter aria-hidden="true">
-          <!-- Maquette stylisée : aucune donnée réelle, aucun libellé d'écran -->
-          <div class="mock mock--app">
-            <div class="mock__top">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="bar bar--title"></span>
+        <div class="hero__art" data-enter>
+          <!-- Maquette stylisée de l'écran Paie et déclarations : chiffres fictifs, aucun montant, aucun écran de production -->
+          <div class="win" aria-hidden="true">
+            <div class="win__bar">
+              <span class="win__dots"><i></i><i></i><i></i></span>
+              <span class="win__crumb"><img src="/assets/logo/tasyir-erp-icone.svg" alt="" width="18" height="15"> Tasyir ERP <span class="sep">/</span> <b>Paie et déclarations</b></span>
             </div>
-            <div class="mock__body">
-              <div class="mock__side">
-                <img src="/assets/logo/tasyir-erp-icone.svg" alt="" width="28" height="23">
-                <span class="nav-i is-on"></span><span class="nav-i"></span><span class="nav-i"></span><span class="nav-i"></span><span class="nav-i"></span><span class="nav-i"></span>
+            <div class="win__body">
+              <div class="win__side">
+                <span class="side__i">Tableau de bord</span>
+                <span class="side__i">Commercial</span>
+                <span class="side__i">Achats et stock</span>
+                <span class="side__i">Production</span>
+                <span class="side__i">Comptabilité</span>
+                <span class="side__i is-on">Paie <em>248</em></span>
+                <span class="side__i">Ressources humaines</span>
               </div>
-              <div class="mock__main">
-                <div class="kpis">
-                  <div class="kpi"><span class="bar bar--s"></span><span class="bar bar--num"></span><svg viewBox="0 0 80 20" class="spark"><path d="M0 16 L14 12 L28 14 L42 8 L56 10 L70 4 L80 5" fill="none" stroke="#0099E1" stroke-width="2"/></svg></div>
-                  <div class="kpi"><span class="bar bar--s"></span><span class="bar bar--num"></span><svg viewBox="0 0 80 20" class="spark"><path d="M0 12 L14 14 L28 9 L42 11 L56 6 L70 7 L80 3" fill="none" stroke="#0079BC" stroke-width="2"/></svg></div>
-                  <div class="kpi"><span class="bar bar--s"></span><span class="bar bar--num"></span><svg viewBox="0 0 80 20" class="spark"><path d="M0 6 L14 8 L28 7 L42 11 L56 12 L70 14 L80 16" fill="none" stroke="#EE2E78" stroke-width="2"/></svg></div>
+              <div class="win__main">
+                <div class="win__head">
+                  <div><b>Octobre 2026</b><span>248 salariés · 3 sites</span></div>
+                  <span class="ui-btn">Clôturer la période</span>
                 </div>
-                <div class="chart">
-                  <span class="bar bar--s"></span>
-                  <svg viewBox="0 0 300 120" preserveAspectRatio="none" class="chart__svg">
-                    <g fill="#55CFEA"><rect x="8" y="64" width="18" height="56" rx="3"/><rect x="58" y="52" width="18" height="68" rx="3"/><rect x="108" y="70" width="18" height="50" rx="3"/><rect x="158" y="40" width="18" height="80" rx="3"/><rect x="208" y="46" width="18" height="74" rx="3"/><rect x="258" y="30" width="18" height="90" rx="3"/></g>
-                    <g fill="#0079BC"><rect x="30" y="80" width="18" height="40" rx="3"/><rect x="80" y="72" width="18" height="48" rx="3"/><rect x="130" y="84" width="18" height="36" rx="3"/><rect x="180" y="62" width="18" height="58" rx="3"/><rect x="230" y="66" width="18" height="54" rx="3"/><rect x="280" y="50" width="18" height="70" rx="3" fill="#EE2E78"/></g>
-                  </svg>
-                </div>
-                <div class="rows">
-                  <div class="row"><span class="bar bar--m"></span><span class="bar bar--xs"></span><span class="chip chip--ok"></span></div>
-                  <div class="row"><span class="bar bar--l"></span><span class="bar bar--xs"></span><span class="chip chip--ok"></span></div>
-                  <div class="row"><span class="bar bar--m"></span><span class="bar bar--xs"></span><span class="chip"></span></div>
-                </div>
+                <div class="win__tabs"><span class="is-on">Tout 6</span><span>Prêt 4</span><span>Clôturé 1</span></div>
+                <ul class="win__rows">
+                  <li><span class="doc-i"></span><span class="r__t"><b>Fiches de paie</b><span>248 salariés</span></span><span class="chip chip--ok">Générées</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>IRG sur salaires</b><span>Barème en vigueur</span></span><span class="chip chip--ok">Calculé</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>Déclaration CNAS</b><span>Cotisations du mois</span></span><span class="chip chip--blue">Prête</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>G50</b><span>Ventes, achats et paie repris</span></span><span class="chip chip--blue">Prête</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>Contrats et avenants</b><span>3 nouveaux</span></span><span class="chip chip--ok">Générés</span></li>
+                  <li class="is-locked"><span class="doc-i doc-i--lock"></span><span class="r__t"><b>Septembre 2026</b><span>Période validée</span></span><span class="chip chip--lock">Clôturée</span></li>
+                </ul>
               </div>
             </div>
           </div>
-          <div class="float float--g50">
-            <span class="float__ico"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M6 3h9l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12h7M9 16h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-            <span class="float__txt"><strong>G50</strong><span>générée</span></span>
-            <span class="float__ok"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="runcard" data-run aria-hidden="true">
+            <p class="runcard__t">Clôture de la paie d'octobre</p>
+            <ol>
+              <li><span class="tick"></span>Pointage du mois importé</li>
+              <li><span class="tick"></span>IRG et CNAS calculés</li>
+              <li><span class="tick"></span>248 fiches de paie générées</li>
+            </ol>
+            <p class="runcard__end"><svg viewBox="0 0 24 24" width="14" height="14"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>Période verrouillée</p>
           </div>
-          <div class="float float--paie">
-            <span class="float__ico"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="5" y="9" width="14" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 9V7a4 4 0 0 1 8 0v2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
-            <span class="float__txt"><strong>Paie</strong><span>clôturée</span></span>
-          </div>
+          <button class="pause" type="button" data-run-toggle aria-pressed="false">
+            <span class="sr-only">Mettre l'animation en pause</span>
+            <svg class="i-pause" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            <svg class="i-play" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3l8 5-8 5z" fill="currentColor"/></svg>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- 2. Problèmes résolus -->
-    <section class="section" id="problemes" aria-labelledby="problemes-titre">
+    <!-- 2. Les problèmes résolus -->
+    <section class="section problems-sec" id="problemes" aria-labelledby="problemes-titre">
       <div class="wrap">
-        <div class="section__head">
-          <h2 id="problemes-titre">Quatre problèmes que Tasyir règle. <span class="muted">Ceux de la paie, de la compta et de la production.</span></h2>
-        </div>
+        <h2 class="kicker" id="problemes-titre">Les problèmes que Tasyir règle</h2>
+        <p class="statement" data-highlight>Aujourd'hui, la G50 se recopie depuis Excel, la paie prend des jours, le stock dort en réserve et chaque service a ses propres chiffres. <strong>Tasyir&nbsp;ERP</strong> réunit tout dans un seul logiciel.</p>
         <ol class="problems">
-          <li class="problem">
-            <span class="problem__n">01</span>
-            <h3>Les déclarations faites à la main</h3>
-            <p>La G50 et la déclaration CNAS se remplissent depuis des tableaux Excel. Une erreur de report, et c'est une pénalité.</p>
-          </li>
-          <li class="problem">
-            <span class="problem__n">02</span>
-            <h3>Une paie longue et risquée</h3>
-            <p>Heures, absences, primes, IRG, CNAS : des jours de calcul chaque mois, et un bulletin faux au moindre oubli.</p>
-          </li>
-          <li class="problem">
-            <span class="problem__n">03</span>
-            <h3>Un stock trop gros</h3>
-            <p>On achète « au cas où ». La marchandise dort, se périme, et la trésorerie dort avec elle.</p>
-          </li>
-          <li class="problem">
-            <span class="problem__n">04</span>
-            <h3>Des outils qui ne se parlent pas</h3>
-            <p>Un logiciel pour la paie, un autre pour la compta, Excel pour la production. Personne n'a les mêmes chiffres.</p>
-          </li>
+          <li><span class="problems__n">01</span><h3>Déclarations faites à la main</h3><p>G50 et CNAS remplies depuis Excel. Une erreur de report, et c'est une pénalité.</p></li>
+          <li><span class="problems__n">02</span><h3>Paie longue et risquée</h3><p>Des jours de calcul chaque mois, et un bulletin faux au moindre oubli.</p></li>
+          <li><span class="problems__n">03</span><h3>Stock surdimensionné</h3><p>On achète « au cas où ». La marchandise dort et la trésorerie avec elle.</p></li>
+          <li><span class="problems__n">04</span><h3>Outils séparés</h3><p>Paie, compta et production dans des logiciels qui ne se parlent pas.</p></li>
         </ol>
       </div>
     </section>
 
-    <!-- 3a. Points forts : conformité -->
-    <section class="section section--alt" id="points-forts" aria-labelledby="conformite-titre">
-      <div class="wrap split">
-        <div class="split__text">
-          <h2 id="conformite-titre">Déclarations et paie générées automatiquement</h2>
-          <p class="section__lead">Les montants viennent directement des ventes, des achats et du pointage. Vous vérifiez, vous validez, vous déposez.</p>
-          <ul class="features">
-            <li class="feature">
-              <span class="feature__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></svg></span>
-              <div><h3>G50 et IRG calculés</h3><p>La déclaration G50 et l'IRG sont préparés chaque mois, sans ressaisie.</p></div>
-            </li>
-            <li class="feature">
-              <span class="feature__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 10h8M8 14h5"/></svg></span>
-              <div><h3>Paie et fiches de paie prêtes</h3><p>Pointage, primes, cotisations et déclaration CNAS calculés pour tout l'effectif en une fois.</p></div>
-            </li>
-            <li class="feature">
-              <span class="feature__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10v18H7z"/><path d="M10 8h4M10 12h4M10 16h2"/></svg></span>
-              <div><h3>Contrats et avenants rédigés</h3><p>Contrats de travail et avenants générés depuis la fiche du salarié, prêts à signer.</p></div>
-            </li>
-            <li class="feature">
-              <span class="feature__ico feature__ico--accent" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
-              <div><h3>Périodes verrouillées</h3><p>Une paie clôturée ou une période validée ne peut plus être modifiée.</p></div>
-            </li>
-          </ul>
-        </div>
-        <div class="split__visual" aria-hidden="true">
-          <!-- Maquettes stylisées d'une fiche de paie et d'une G50, sans données -->
-          <div class="doc doc--g50">
-            <div class="doc__head"><strong>G50</strong><span class="bar bar--s"></span></div>
-            <div class="doc__grid">
-              <span class="bar bar--m"></span><span class="cell"></span>
-              <span class="bar bar--l"></span><span class="cell"></span>
-              <span class="bar bar--s"></span><span class="cell"></span>
-              <span class="bar bar--m"></span><span class="cell"></span>
-              <span class="bar bar--l"></span><span class="cell cell--total"></span>
-            </div>
-          </div>
-          <div class="doc doc--paie">
-            <div class="doc__head"><strong>Fiche de paie</strong><span class="bar bar--s"></span></div>
-            <div class="doc__lines">
-              <div><span class="bar bar--l"></span><span class="bar bar--xs"></span></div>
-              <div><span class="bar bar--m"></span><span class="bar bar--xs"></span></div>
-              <div><span class="bar bar--l"></span><span class="bar bar--xs"></span></div>
-              <div><span class="bar bar--s"></span><span class="bar bar--xs"></span></div>
-              <div class="doc__net"><span class="bar bar--m"></span><span class="bar bar--net"></span></div>
-            </div>
-            <div class="doc__lock"><svg viewBox="0 0 24 24" width="16" height="16"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>Période clôturée</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3b. Points forts : chaîne de fabrication -->
-    <section class="section" id="chaine" aria-labelledby="chaine-titre">
+    <!-- 3. Points forts -->
+    <section class="section section--soft" id="points-forts" aria-labelledby="forts-titre">
       <div class="wrap">
         <div class="section__head">
-          <h2 id="chaine-titre">Toute la chaîne, du devis au client. <span class="muted">Le devis lance le besoin, le logiciel organise la suite.</span></h2>
+          <h2 id="forts-titre">Ce que Tasyir fait à votre place</h2>
+          <p class="section__lead">Les déclarations et la paie se préparent seules. Les achats, la production et le stock suivent le besoin réel.</p>
         </div>
-        <div class="flow" aria-hidden="true">
-          <div class="flow__line"><span class="flow__pulse"></span></div>
-          <div class="flow__step"><span class="flow__dot"></span>Devis et proforma</div>
-          <div class="flow__step"><span class="flow__dot"></span>Achat</div>
-          <div class="flow__step"><span class="flow__dot"></span>Production</div>
-          <div class="flow__step"><span class="flow__dot"></span>Logistique</div>
-          <div class="flow__step"><span class="flow__dot flow__dot--accent"></span>Client et suivi</div>
+
+        <div class="bento">
+          <!-- G50 -->
+          <article class="tile tile--7">
+            <div class="tile__art" aria-hidden="true">
+              <div class="frag frag--doc">
+                <div class="frag__head"><b>G50 · Octobre 2026</b><span class="chip chip--blue">Prête à déposer</span></div>
+                <ul class="checks">
+                  <li><span>Ventes du mois</span><em>repris</em></li>
+                  <li><span>Achats du mois</span><em>repris</em></li>
+                  <li><span>Paie du mois</span><em>repris</em></li>
+                  <li><span>IRG sur salaires</span><em>calculé</em></li>
+                </ul>
+              </div>
+            </div>
+            <div class="tile__text"><h3>G50 générée automatiquement</h3><p>Les montants viennent des ventes, des achats et de la paie. Vous vérifiez, vous déposez.</p></div>
+          </article>
+
+          <!-- Paie -->
+          <article class="tile tile--5">
+            <div class="tile__art" aria-hidden="true">
+              <div class="frag frag--slip">
+                <div class="frag__head"><b>Fiche de paie</b><span class="muted-ui">Octobre 2026</span></div>
+                <dl class="slip">
+                  <div><dt>Salaire de base</dt><dd><i class="w70"></i></dd></div>
+                  <div><dt>Heures supplémentaires</dt><dd><i class="w34"></i></dd></div>
+                  <div><dt>Retenue CNAS</dt><dd><i class="w28"></i></dd></div>
+                  <div><dt>IRG</dt><dd><i class="w40"></i></dd></div>
+                  <div class="slip__net"><dt>Net à payer</dt><dd><i class="w62"></i></dd></div>
+                </dl>
+              </div>
+            </div>
+            <div class="tile__text"><h3>Paie calculée en une fois</h3><p>Pointage, IRG, cotisations CNAS et fiches de paie pour tout l'effectif.</p></div>
+          </article>
+
+          <!-- Contrats -->
+          <article class="tile tile--4">
+            <div class="tile__art" aria-hidden="true">
+              <div class="stack">
+                <div class="frag frag--mini stack__back"><b>Contrat de travail</b><span>CDI</span></div>
+                <div class="frag frag--mini stack__front"><b>Avenant n°&nbsp;2</b><span>Changement de poste</span><span class="chip chip--ok">Prêt à signer</span></div>
+              </div>
+            </div>
+            <div class="tile__text"><h3>Contrats et avenants rédigés</h3><p>Générés depuis la fiche du salarié, prêts à signer.</p></div>
+          </article>
+
+          <!-- Verrouillage -->
+          <article class="tile tile--4">
+            <div class="tile__art" aria-hidden="true">
+              <div class="frag frag--lock">
+                <span class="lock-ico"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+                <div><b>Paie de septembre</b><span>Clôturée, plus modifiable</span></div>
+                <span class="ui-btn ui-btn--off">Modifier</span>
+              </div>
+            </div>
+            <div class="tile__text"><h3>Périodes verrouillées</h3><p>Une paie clôturée ou une période validée ne peut plus être modifiée.</p></div>
+          </article>
+
+          <!-- Devis → proforma -->
+          <article class="tile tile--4">
+            <div class="tile__art" aria-hidden="true">
+              <ol class="docflow" data-loop>
+                <li>Devis</li><li>Proforma</li><li>Commande</li><li>Livraison</li><li>Facture</li>
+              </ol>
+            </div>
+            <div class="tile__text"><h3>Du devis à la proforma</h3><p>Le devis lance le besoin. Chaque document suivant se crée sans ressaisie.</p></div>
+          </article>
+
+          <!-- Chaîne complète -->
+          <article class="tile tile--8">
+            <div class="tile__art tile__art--chain" aria-hidden="true">
+              <svg class="chain" viewBox="0 0 640 150" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="ln" x1="0" x2="1"><stop offset="0" stop-color="#55CFEA"/><stop offset="1" stop-color="#0079BC"/></linearGradient>
+                </defs>
+                <path class="chain__line" d="M70 75 H570" stroke="url(#ln)" stroke-width="2.5" fill="none"/>
+                <path class="chain__pulse" d="M70 75 H570" fill="none"/>
+                <g class="chain__node"><circle cx="70" cy="75" r="30"/><path d="M58 70h24l-3 14H61z M64 70v-4a6 6 0 0 1 12 0v4" fill="none" stroke="#0079BC" stroke-width="2" stroke-linejoin="round"/><text x="70" y="132">Achat</text></g>
+                <g class="chain__node"><circle cx="237" cy="75" r="30"/><path d="M224 86V72l8 5v-5l8 5v-5l8 5v14z" fill="none" stroke="#0079BC" stroke-width="2" stroke-linejoin="round"/><text x="237" y="132">Production</text></g>
+                <g class="chain__node"><circle cx="403" cy="75" r="30"/><path d="M389 70h16v14h-16z M405 75h7l5 5v4h-12" fill="none" stroke="#0079BC" stroke-width="2" stroke-linejoin="round"/><circle cx="394" cy="86" r="2.2" fill="#0079BC"/><circle cx="412" cy="86" r="2.2" fill="#0079BC"/><text x="403" y="132">Logistique</text></g>
+                <g class="chain__node chain__node--end"><circle cx="570" cy="75" r="30"/><circle cx="570" cy="69" r="6" fill="none" stroke="#fff" stroke-width="2"/><path d="M559 87a11 9 0 0 1 22 0" fill="none" stroke="#fff" stroke-width="2"/><text x="570" y="132">Client et suivi</text></g>
+              </svg>
+              <ol class="chain-m"><li>Achat</li><li>Production</li><li>Logistique</li><li class="is-end">Client et suivi</li></ol>
+            </div>
+            <div class="tile__text"><h3>Toute la chaîne, reliée</h3><p>De l'achat à la production, de la logistique au client et à son suivi : chaque étape alimente la suivante.</p></div>
+          </article>
+
+          <!-- Zéro stock -->
+          <article class="tile tile--4">
+            <div class="tile__art" aria-hidden="true">
+              <div class="frag frag--stock">
+                <div class="stockbar"><span>Stock « au cas où »</span><i class="stockbar__old"></i></div>
+                <div class="stockbar"><span>Besoin réel calculé</span><i class="stockbar__new"></i></div>
+              </div>
+            </div>
+            <div class="tile__text"><h3>Zéro stock inutile</h3><p>Le logiciel calcule le besoin réel. Vous n'achetez que ce qui sera consommé.</p></div>
+          </article>
+
+          <!-- PPI -->
+          <article class="tile tile--6">
+            <div class="tile__art" aria-hidden="true">
+              <div class="frag frag--doc">
+                <div class="frag__head"><b>Besoins annuels calculés</b><span class="ui-btn ui-btn--ghost">Exporter</span></div>
+                <ul class="qty">
+                  <li><span class="sk sk--m"></span><i class="w82"></i></li>
+                  <li><span class="sk sk--l"></span><i class="w54"></i></li>
+                  <li><span class="sk sk--s"></span><i class="w68"></i></li>
+                </ul>
+              </div>
+            </div>
+            <div class="tile__text"><h3>Une base pour votre PPI</h3><p>Les besoins calculés servent de base au Programme Prévisionnel d'Importation demandé par le ministère du Commerce extérieur.</p></div>
+          </article>
+
+          <!-- Option IA -->
+          <article class="tile tile--6 tile--ai" id="option-ia">
+            <div class="tile__art" aria-hidden="true">
+              <div class="frag frag--ai">
+                <div class="frag__head"><b><svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="#EE2E78"/></svg>Proposition de menus</b><span class="muted-ui">Semaine 46</span></div>
+                <span class="sk sk--l"></span><span class="sk sk--m"></span><span class="sk sk--l"></span>
+                <div class="ai-actions"><span class="ui-btn">Valider</span><span class="ui-btn ui-btn--ghost">Ajuster</span></div>
+              </div>
+            </div>
+            <div class="tile__text"><p class="tag">Option payante, non incluse de base</p><h3>Option IA</h3><p>Propositions de menus et analyses automatiques de votre activité, à ajouter si vous le souhaitez.</p></div>
+          </article>
         </div>
-        <ul class="cards">
-          <li class="card">
-            <h3>Du devis à la proforma</h3>
-            <p>Le devis accepté devient proforma, commande, livraison puis facture, sans ressaisie.</p>
-          </li>
-          <li class="card">
-            <h3>Zéro stock inutile</h3>
-            <p>Le logiciel calcule le besoin réel. Vous n'achetez que ce qui sera consommé.</p>
-          </li>
-          <li class="card">
-            <h3>Une base pour votre PPI</h3>
-            <p>Les besoins calculés servent de base au Programme Prévisionnel d'Importation demandé par le ministère du Commerce extérieur.</p>
-          </li>
-        </ul>
+
         <div class="domains">
-          <p class="domains__title">Six domaines dans un seul logiciel</p>
+          <p class="domains__title">Six domaines, un seul logiciel</p>
           <ul>
-            <li>Commercial</li>
-            <li>Achats et stock</li>
-            <li>Production et restauration</li>
-            <li>Trésorerie et comptabilité</li>
-            <li>Ressources humaines et paie</li>
-            <li>Tableaux de bord</li>
+            <li>Commercial</li><li>Achats et stock</li><li>Production et restauration</li><li>Trésorerie et comptabilité</li><li>Ressources humaines et paie</li><li>Tableaux de bord</li>
           </ul>
         </div>
       </div>
     </section>
 
     <!-- 4. Secteurs -->
-    <section class="section section--alt" id="secteurs" aria-labelledby="secteurs-titre">
+    <section class="section" id="secteurs" aria-labelledby="secteurs-titre">
       <div class="wrap">
         <div class="section__head">
-          <h2 id="secteurs-titre">Fait pour les entreprises qui fabriquent. <span class="muted">Les ERP généralistes ignorent la production.</span></h2>
+          <h2 id="secteurs-titre">Fait pour les entreprises qui fabriquent</h2>
+          <p class="section__lead">Les ERP généralistes ignorent la production. Les logiciels de paie locaux aussi. Tasyir couvre les deux.</p>
         </div>
-        <ul class="sectors">
-          <li class="sector">
+        <div class="sectors">
+          <article class="sector sector--main">
             <div class="sector__photo">
               <img src="/assets/img/secteur-restauration-collective-640.webp"
                    srcset="/assets/img/secteur-restauration-collective-640.webp 640w, /assets/img/secteur-restauration-collective-1137.webp 1137w"
-                   sizes="(max-width: 767px) 100vw, 33vw" width="640" height="480" loading="lazy" decoding="async"
+                   sizes="(max-width: 1023px) 100vw, 58vw" width="1137" height="853" loading="lazy" decoding="async"
                    alt="Cuisiniers en tenue dressant des assiettes dans une cuisine professionnelle">
             </div>
-            <h3>Catering et restauration collective</h3>
-            <p>Bases de vie, cantines d'entreprise, hôpitaux, écoles, traiteurs et cuisines centrales : menus, recettes et coûts suivis au repas près.</p>
-          </li>
-          <li class="sector">
+            <div class="sector__text">
+              <h3>Catering et restauration collective</h3>
+              <p>Bases de vie, cantines d'entreprise, hôpitaux, écoles, traiteurs et cuisines centrales : menus, recettes et coûts suivis au repas près.</p>
+            </div>
+          </article>
+          <article class="sector">
             <div class="sector__photo">
               <img src="/assets/img/secteur-usine-640.webp"
                    srcset="/assets/img/secteur-usine-640.webp 640w, /assets/img/secteur-usine-853.webp 853w"
-                   sizes="(max-width: 767px) 100vw, 33vw" width="640" height="480" loading="lazy" decoding="async"
+                   sizes="(max-width: 1023px) 100vw, 40vw" width="853" height="640" loading="lazy" decoding="async"
                    alt="Ligne de production dans un grand atelier industriel">
             </div>
-            <h3>Usines de production</h3>
-            <p>Planification, consommation des matières et coût de revient, reliés aux achats et à la comptabilité.</p>
-          </li>
-          <li class="sector">
+            <div class="sector__text">
+              <h3>Usines de production</h3>
+              <p>Planification, consommation des matières et coût de revient, reliés aux achats et à la comptabilité.</p>
+            </div>
+          </article>
+          <article class="sector">
             <div class="sector__photo">
               <img src="/assets/img/secteur-agroalimentaire-640.webp"
                    srcset="/assets/img/secteur-agroalimentaire-640.webp 640w, /assets/img/secteur-agroalimentaire-1200.webp 1200w"
-                   sizes="(max-width: 767px) 100vw, 33vw" width="640" height="480" loading="lazy" decoding="async"
+                   sizes="(max-width: 1023px) 100vw, 40vw" width="1200" height="900" loading="lazy" decoding="async"
                    alt="Boulangers façonnant des pains dans un atelier de boulangerie industrielle">
             </div>
-            <h3>Agroalimentaire</h3>
-            <p>Matières premières, lots fabriqués et livraisons suivis de bout en bout, avec un stock au plus juste.</p>
-          </li>
-        </ul>
+            <div class="sector__text">
+              <h3>Agroalimentaire</h3>
+              <p>Matières premières, lots fabriqués et livraisons suivis de bout en bout, avec un stock au plus juste.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- 5. Comment ça se passe -->
-    <section class="section" id="methode" aria-labelledby="methode-titre">
+    <section class="section section--soft" id="methode" aria-labelledby="methode-titre">
       <div class="wrap">
         <div class="section__head">
-          <h2 id="methode-titre">Cinq étapes pour démarrer. <span class="muted">Une équipe vous suit à chaque étape.</span></h2>
+          <h2 id="methode-titre">Cinq étapes pour démarrer</h2>
+          <p class="section__lead">Une équipe vous suit de la première démo jusqu'au quotidien.</p>
         </div>
         <ol class="steps">
-          <li class="step"><span class="step__n">1</span><h3>Démo</h3><p>Nous vous montrons le logiciel sur les cas de votre entreprise.</p></li>
-          <li class="step"><span class="step__n">2</span><h3>Installation</h3><p>Votre espace est préparé, accessible depuis un navigateur.</p></li>
-          <li class="step"><span class="step__n">3</span><h3>Reprise des données</h3><p>Articles, clients, fournisseurs et salariés repris depuis vos fichiers.</p></li>
-          <li class="step"><span class="step__n">4</span><h3>Formation</h3><p>Chaque équipe apprend sur ses propres tâches.</p></li>
-          <li class="step"><span class="step__n">5</span><h3>Accompagnement</h3><p>Nous restons disponibles après le démarrage.</p></li>
+          <li><span class="steps__n">01</span><h3>Démo</h3><p>Le logiciel sur les cas de votre entreprise.</p></li>
+          <li><span class="steps__n">02</span><h3>Installation</h3><p>Votre espace préparé, accessible depuis un navigateur.</p></li>
+          <li><span class="steps__n">03</span><h3>Reprise des données</h3><p>Articles, clients, fournisseurs et salariés repris de vos fichiers.</p></li>
+          <li><span class="steps__n">04</span><h3>Formation</h3><p>Chaque équipe formée sur ses propres tâches.</p></li>
+          <li><span class="steps__n">05</span><h3>Accompagnement</h3><p>Nous restons disponibles après le démarrage.</p></li>
         </ol>
       </div>
     </section>
 
     <!-- 6. Sécurité et hébergement -->
     <section class="section section--dark" id="securite" aria-labelledby="securite-titre">
-      <div class="wrap split split--wide">
-        <div class="split__text">
+      <div class="wrap security">
+        <div class="security__text">
           <h2 id="securite-titre">Vos données restent les vôtres</h2>
           <p class="section__lead">Consultation et export garantis, à tout moment. Vous choisissez où elles sont hébergées.</p>
+          <ul class="safe">
+            <li><h3>Données isolées par client</h3><p>Jamais mélangées à celles d'une autre entreprise.</p></li>
+            <li><h3>Sauvegardes régulières</h3><p>Restaurables en cas d'incident.</p></li>
+            <li><h3>Hébergement en Algérie possible</h3><p>Vos données restent sur le territoire national.</p></li>
+            <li><h3>Export garanti</h3><p>Vos données exportables, y compris en fin de contrat.</p></li>
+          </ul>
         </div>
-        <ul class="safe">
-          <li>
-            <span class="safe__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="8" height="7" rx="1.5"/><rect x="13" y="4" width="8" height="7" rx="1.5"/><rect x="3" y="13" width="8" height="7" rx="1.5"/><rect x="13" y="13" width="8" height="7" rx="1.5"/></svg></span>
-            <h3>Données isolées par client</h3>
-            <p>Les données de votre entreprise ne sont jamais mélangées à celles d'une autre.</p>
-          </li>
-          <li>
-            <span class="safe__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 7v10c0 1.7 3.6 3 8 3s8-1.3 8-3V7"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
-            <h3>Sauvegardes régulières</h3>
-            <p>Vos données sont sauvegardées et peuvent être restaurées en cas d'incident.</p>
-          </li>
-          <li>
-            <span class="safe__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-            <h3>Hébergement en Algérie possible</h3>
-            <p>Si votre activité l'exige, vos données restent sur le territoire national.</p>
-          </li>
-          <li>
-            <span class="safe__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 19h14"/></svg></span>
-            <h3>Export garanti</h3>
-            <p>Vous consultez et exportez vos données quand vous le souhaitez, y compris en fin de contrat.</p>
-          </li>
-        </ul>
+        <div class="security__art" aria-hidden="true">
+          <svg viewBox="0 0 480 440" class="vaults">
+            <defs>
+              <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#55CFEA" stop-opacity=".35"/><stop offset="1" stop-color="#55CFEA" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle cx="240" cy="200" r="190" fill="url(#glow)"/>
+            <circle cx="240" cy="200" r="150" fill="none" stroke="rgba(255,255,255,.10)" stroke-dasharray="3 6"/>
+            <circle cx="240" cy="200" r="92" fill="none" stroke="rgba(255,255,255,.10)" stroke-dasharray="3 6"/>
+            <!-- autres clients -->
+            <g class="vault vault--other"><rect x="40" y="54" width="104" height="72" rx="14"/><path d="M80 82h24v20H80z M85 82v-5a7 7 0 0 1 14 0v5" /></g>
+            <g class="vault vault--other"><rect x="336" y="54" width="104" height="72" rx="14"/><path d="M376 82h24v20h-24z M381 82v-5a7 7 0 0 1 14 0v5" /></g>
+            <g class="vault vault--other"><rect x="40" y="276" width="104" height="72" rx="14"/><path d="M80 304h24v20H80z M85 304v-5a7 7 0 0 1 14 0v5" /></g>
+            <!-- votre entreprise -->
+            <g class="vault vault--you">
+              <rect x="160" y="140" width="160" height="120" rx="20"/>
+              <path d="M226 186h28v26h-28z M232 186v-6a8 8 0 0 1 16 0v6" />
+              <text x="240" y="240">Votre entreprise</text>
+            </g>
+            <!-- export -->
+            <path class="export-line" d="M320 230 C 370 250, 380 290, 392 312" fill="none"/>
+            <g class="export"><rect x="352" y="312" width="88" height="56" rx="12"/><path d="M396 324v18M388 336l8 8 8-8M384 352h24"/></g>
+            <text class="vault__cap" x="396" y="392">Export</text>
+          </svg>
+        </div>
       </div>
     </section>
 
-    <!-- 7. Option IA + 8. Demande de démo -->
-    <section class="section" id="demo" aria-labelledby="demo-titre">
-      <div class="wrap split split--form">
-        <div class="split__text">
+    <!-- 7. Demande de démo -->
+    <section class="section demo-sec" id="demo" aria-labelledby="demo-titre">
+      <div class="wrap demo">
+        <div class="demo__text">
           <h2 id="demo-titre">Demande de démo</h2>
           <p class="section__lead">Une démonstration sur les cas de votre entreprise. Nous vous rappelons pour fixer la date avec vous.</p>
-          <dl class="facts">
-            <div><dt>Tarif</dt><dd>Sur devis, selon la taille de votre entreprise.</dd></div>
-            <div><dt>Pour qui</dt><dd>Entreprises moyennes et grandes qui fabriquent ou cuisinent.</dd></div>
-          </dl>
-          <aside class="ai" aria-labelledby="ia-titre">
-            <p class="ai__tag">Option payante</p>
-            <h3 id="ia-titre">Option IA, en supplément</h3>
-            <p>Propositions de menus et analyses automatiques de votre activité. Non incluse dans l'offre de base, elle s'ajoute à la demande.</p>
-          </aside>
+          <ul class="demo__list">
+            <li>Le logiciel présenté sur votre activité : catering, usine ou agroalimentaire.</li>
+            <li>Vos questions sur la G50, l'IRG, la CNAS et la paie.</li>
+            <li>Un devis selon la taille de votre entreprise.</li>
+          </ul>
+          <p class="demo__price"><b>Tarif sur devis</b> selon la taille de votre entreprise.</p>
         </div>
-
         <form class="form" id="form-demo" action="/api/demande-demo" method="post" novalidate data-form>
           <div class="form__grid">
             <div class="field">
@@ -484,8 +538,8 @@
       </div>
     </section>
 
-    <!-- 9. FAQ -->
-    <section class="section section--alt" id="questions" aria-labelledby="faq-titre">
+    <!-- 8. FAQ -->
+    <section class="section section--soft" id="questions" aria-labelledby="faq-titre">
       <div class="wrap">
         <div class="section__head">
           <h2 id="faq-titre">Questions fréquentes</h2>
@@ -520,6 +574,7 @@
             <p>Le tarif est établi sur devis, selon la taille de votre entreprise et les domaines dont vous avez besoin.</p>
           </div>
         </div>
+        
         <div class="close-cta">
           <p>Le plus simple pour juger&nbsp;: une démo sur les cas de votre entreprise.</p>
           <a class="btn btn--primary" href="#demo">Demander une démo</a>
@@ -529,12 +584,13 @@
 
   </main>
 
-  <!-- 10. Pied de page -->
+  <!-- 9. Pied de page -->
   <footer class="footer">
     <div class="wrap">
       <div class="footer__top">
         <div class="footer__brand">
           <img src="/assets/logo/tasyir-erp-negatif.svg" alt="Tasyir ERP" width="173" height="48">
+          <p class="footer__name"><span lang="ar" dir="rtl">تسيير</span> · « la gestion »</p>
           <p>Le logiciel de gestion des entreprises algériennes qui fabriquent.</p>
         </div>
         <nav class="footer__col" aria-label="Plan du site">

@@ -12,7 +12,8 @@ public/                     ← tout ce qui est publié
   merci/                    confirmation après envoi sans JavaScript (non indexée)
   404.html                  page introuvable
   assets/css/site.css       styles (couleurs de la charte en haut du fichier)
-  assets/js/site.js         menu mobile et formulaire
+  assets/js/site.js         menu mobile, thème, animations et formulaire
+  assets/js/theme.js        applique le thème choisi avant l'affichage
   assets/fonts/             Inter et IBM Plex Sans Arabic, auto-hébergées
   assets/logo/              logos et icônes (copiés depuis catering-manager/docs/branding)
   assets/img/               photos des secteurs (WebP)
@@ -105,6 +106,20 @@ Tous les textes sont dans les fichiers HTML de `public/`. Chaque section de `ind
 - **Image de partage** : `public/assets/og/tasyir-erp-og.png`, 1200 × 630 px.
 
 Règles de contenu à garder : montrer les bénéfices, jamais le fonctionnement interne ; aucun prix ; aucune référence client ; pas de BTP ; l'option IA toujours présentée comme une option payante.
+
+## Thème sombre et clair
+
+Le site s'affiche en **sombre par défaut** (`data-theme="dark"` sur la balise `<html>` de chaque page). Le bouton lune/soleil de l'en-tête bascule en clair ; le choix du visiteur est gardé dans son navigateur.
+
+- Pour revenir au clair par défaut : retirer `data-theme="dark"` de la balise `<html>` des pages.
+- Les couleurs des deux thèmes sont des variables en haut de `site.css` (bloc « thème clair », puis « thème sombre »).
+
+## Animations
+
+- Hero : la petite carte « Clôture de la paie » se rejoue toutes les 6 secondes, avec un bouton pause.
+- Problèmes : la grande phrase s'allume mot à mot au défilement.
+- Points forts : le circuit des documents et la chaîne s'animent deux fois quand ils apparaissent, puis s'arrêtent.
+- Tout s'arrête si le visiteur a demandé à réduire les animations dans son système.
 
 ## Nom de domaine
 
