@@ -657,3 +657,40 @@ a { color: inherit; }
   .chain-m li.is-end { background: var(--magenta-txt); color: #fff; border-color: transparent; }
   .tile__art .docflow { transform: none; }
 }
+
+/* Technologie */
+.techno { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; }
+.techno__text { display: grid; gap: 20px; }
+.techno__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; margin-top: 20px; }
+.techno__list li { display: grid; gap: 6px; padding-top: 18px; border-top: 1px solid var(--line-strong); }
+.techno__list h3 { font-size: 17px; }
+.techno__list p { color: var(--ink-2); }
+.techno__art {
+  position: relative; border-radius: var(--r-xl); padding: 56px 40px 40px; overflow: hidden; border: 1px solid var(--line);
+  background: repeating-linear-gradient(0deg, var(--ground-line) 0 1px, transparent 1px 32px), var(--ground);
+  display: grid; gap: 28px; justify-items: center;
+}
+.layers { display: grid; gap: 0; width: 100%; max-width: 440px; perspective: 900px; }
+.layer {
+  display: flex; align-items: center; gap: 12px; padding: 22px 22px; border-radius: 16px;
+  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
+  transform: rotateX(18deg); transform-origin: center bottom; transition: transform .4s var(--ease);
+  font-size: 15px;
+}
+.layer + .layer { margin-top: -6px; }
+.layer b { font-weight: 700; }
+.layer .chip { margin-inline-start: auto; }
+.layer__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bleu-2); box-shadow: 0 0 0 4px color-mix(in oklab, var(--bleu-2) 22%, transparent); flex: none; }
+.layer--2 { margin-inline: 12px; } .layer--2 .layer__dot { background: var(--cyan); }
+.layer--3 { margin-inline: 24px; } .layer--3 .layer__dot { background: var(--magenta); box-shadow: 0 0 0 4px color-mix(in oklab, var(--magenta) 22%, transparent); }
+.techno__art:hover .layer--1 { transform: rotateX(18deg) translateY(-6px); }
+.techno__art:hover .layer--3 { transform: rotateX(18deg) translateY(4px); }
+.layers__note { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+@media (max-width: 1023px) { .techno { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
+@media (max-width: 639px) {
+  .techno__list { grid-template-columns: minmax(0, 1fr); }
+  .techno__art { padding: 32px 16px 24px; }
+  .layer { padding: 16px; font-size: 14px; flex-wrap: wrap; row-gap: 8px; }
+  .layer .chip { margin-inline-start: 22px; }
+  .layer--2 { margin-inline: 6px; } .layer--3 { margin-inline: 12px; }
+}
