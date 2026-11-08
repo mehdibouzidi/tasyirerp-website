@@ -45,6 +45,8 @@
         "name": "Tasyir ERP",
         "url": "https://tasyirerp.com/",
         "logo": "https://tasyirerp.com/assets/logo/favicon-512.png",
+        "email": "contact@tasyirerp.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Alger", "addressCountry": "DZ" },
         "areaServed": { "@type": "Country", "name": "Algérie" }
       },
       {
@@ -105,9 +107,9 @@
       </a>
       <nav class="nav__menu" id="menu" aria-label="Navigation principale">
         <ul>
-          <li><a href="#points-forts">Points forts</a></li>
+          <li><a href="#points-forts">Conformité</a></li>
+          <li><a href="#chaine">Production</a></li>
           <li><a href="#secteurs">Secteurs</a></li>
-          <li><a href="#methode">Méthode</a></li>
           <li><a href="#securite">Sécurité</a></li>
           <li><a href="#questions">Questions</a></li>
           <li class="nav__menu-cta"><a class="btn btn--primary" href="#demo">Demander une démo</a></li>
@@ -131,29 +133,30 @@
 
     <!-- 1. Accueil -->
     <section class="hero" aria-labelledby="hero-titre">
-      <div class="wrap hero__grid">
-        <div class="hero__text" data-enter>
-          <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Conforme G50, IRG et CNAS</p>
-          <h1 id="hero-titre">L'ERP algérien des entreprises qui fabriquent</h1>
-          <p class="lead">Production, achats, stock, comptabilité et paie dans un seul logiciel, conforme à la réglementation algérienne. La G50, l'IRG, la CNAS et les fiches de paie sont générées automatiquement.</p>
-          <div class="btn-row">
-            <a class="btn btn--primary" href="#demo">Demander une démo
-              <svg class="arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a class="btn btn--secondary" href="#points-forts">Voir les points forts</a>
-          </div>
-          <a class="hero__ref" href="#reference">
-            <span class="hero__ref-badge">Client de référence</span>
-            <span><b>El Afia Catering</b> utilise Tasyir ERP depuis plus d'un an.</span>
+      <div class="wrap hero__intro" data-enter>
+        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span>Conforme G50, IRG et CNAS</p>
+        <h1 id="hero-titre">L'ERP algérien des entreprises qui fabriquent</h1>
+        <p class="lead">Production, achats, stock, comptabilité et paie dans un seul logiciel, conforme à la réglementation algérienne. La G50, l'IRG, la CNAS et les fiches de paie sont générées automatiquement.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary btn--lg" href="#demo">Demander une démo
+            <svg class="arrow" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
+          <a class="btn btn--secondary btn--lg" href="#points-forts">Voir les points forts</a>
         </div>
+        <a class="hero__ref" href="#reference">
+          <span class="hero__ref-badge">Client de référence</span>
+          <span><b>El Afia Catering</b> utilise Tasyir ERP depuis plus d'un an.</span>
+        </a>
+      </div>
 
-        <div class="hero__art" data-enter>
+      <div class="hero__stage" data-enter>
+        <div class="stage">
           <!-- Maquette stylisée de l'écran Paie et déclarations : chiffres fictifs, aucun montant, aucun écran de production -->
           <div class="win" aria-hidden="true">
             <div class="win__bar">
               <span class="win__dots"><i></i><i></i><i></i></span>
               <span class="win__crumb"><img src="/assets/logo/tasyir-erp-icone.svg" alt="" width="18" height="15"> Tasyir ERP <span class="sep">/</span> <b>Paie et déclarations</b></span>
+              <span class="win__search">Rechercher</span>
             </div>
             <div class="win__body">
               <div class="win__side">
@@ -170,14 +173,20 @@
                   <div><b>Octobre 2026</b><span>248 salariés · 3 sites</span></div>
                   <span class="ui-btn">Clôturer la période</span>
                 </div>
+                <div class="win__kpis">
+                  <div><span>Salariés</span><b>248</b></div>
+                  <div><span>Fiches de paie</span><b>248 / 248</b></div>
+                  <div><span>Déclarations prêtes</span><b>3</b></div>
+                  <div><span>Périodes clôturées</span><b>9</b></div>
+                </div>
                 <div class="win__tabs"><span class="is-on">Tout 6</span><span>Prêt 4</span><span>Clôturé 1</span></div>
                 <ul class="win__rows">
-                  <li><span class="doc-i"></span><span class="r__t"><b>Fiches de paie</b><span>248 salariés</span></span><span class="chip chip--ok">Générées</span></li>
-                  <li><span class="doc-i"></span><span class="r__t"><b>IRG sur salaires</b><span>Barème en vigueur</span></span><span class="chip chip--ok">Calculé</span></li>
-                  <li><span class="doc-i"></span><span class="r__t"><b>Déclaration CNAS</b><span>Cotisations du mois</span></span><span class="chip chip--blue">Prête</span></li>
-                  <li><span class="doc-i"></span><span class="r__t"><b>G50</b><span>Ventes, achats et paie repris</span></span><span class="chip chip--blue">Prête</span></li>
-                  <li><span class="doc-i"></span><span class="r__t"><b>Contrats et avenants</b><span>3 nouveaux</span></span><span class="chip chip--ok">Générés</span></li>
-                  <li class="is-locked"><span class="doc-i doc-i--lock"></span><span class="r__t"><b>Septembre 2026</b><span>Période validée</span></span><span class="chip chip--lock">Clôturée</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>Fiches de paie</b><span>248 salariés</span></span><span class="r__when">Aujourd'hui</span><span class="chip chip--ok">Générées</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>IRG sur salaires</b><span>Barème en vigueur</span></span><span class="r__when">Aujourd'hui</span><span class="chip chip--ok">Calculé</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>Déclaration CNAS</b><span>Cotisations du mois</span></span><span class="r__when">Aujourd'hui</span><span class="chip chip--blue">Prête</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>G50</b><span>Ventes, achats et paie repris</span></span><span class="r__when">Aujourd'hui</span><span class="chip chip--blue">Prête</span></li>
+                  <li><span class="doc-i"></span><span class="r__t"><b>Contrats et avenants</b><span>3 nouveaux</span></span><span class="r__when">Hier</span><span class="chip chip--ok">Générés</span></li>
+                  <li class="is-locked"><span class="doc-i doc-i--lock"></span><span class="r__t"><b>Septembre 2026</b><span>Période validée</span></span><span class="r__when">30 sept.</span><span class="chip chip--lock">Clôturée</span></li>
                 </ul>
               </div>
             </div>
@@ -190,6 +199,15 @@
               <li><span class="tick"></span>248 fiches de paie générées</li>
             </ol>
             <p class="runcard__end"><svg viewBox="0 0 24 24" width="14" height="14"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>Période verrouillée</p>
+          </div>
+          <div class="floatcard" aria-hidden="true">
+            <p class="floatcard__t"><span class="floatcard__ico"></span>G50 · Octobre 2026</p>
+            <ul class="checks">
+              <li><span>Ventes du mois</span><em>repris</em></li>
+              <li><span>Achats du mois</span><em>repris</em></li>
+              <li><span>Paie du mois</span><em>repris</em></li>
+            </ul>
+            <span class="chip chip--blue">Prête à déposer</span>
           </div>
           <button class="pause" type="button" data-run-toggle aria-pressed="false">
             <span class="sr-only">Mettre l'animation en pause</span>
@@ -237,16 +255,15 @@
       </div>
     </section>
 
-    <!-- 3. Points forts -->
+    <!-- 3. Points forts : conformité -->
     <section class="section section--soft" id="points-forts" aria-labelledby="forts-titre">
       <div class="wrap">
         <div class="section__head">
-          <h2 id="forts-titre">Ce que Tasyir fait à votre place</h2>
-          <p class="section__lead">Les déclarations et la paie se préparent seules. Les achats, la production et le stock suivent le besoin réel.</p>
+          <p class="kicker">Conformité</p>
+          <h2 id="forts-titre">Déclarations et paie générées automatiquement</h2>
+          <p class="section__lead">Les montants viennent directement des ventes, des achats et du pointage. Vous vérifiez, vous validez, vous déposez.</p>
         </div>
-
         <div class="bento">
-          <!-- G50 -->
           <article class="tile tile--7">
             <div class="tile__art" aria-hidden="true">
               <div class="frag frag--doc">
@@ -262,7 +279,6 @@
             <div class="tile__text"><h3>G50 générée automatiquement</h3><p>Les montants viennent des ventes, des achats et de la paie. Vous vérifiez, vous déposez.</p></div>
           </article>
 
-          <!-- Paie -->
           <article class="tile tile--5">
             <div class="tile__art" aria-hidden="true">
               <div class="frag frag--slip">
@@ -279,8 +295,7 @@
             <div class="tile__text"><h3>Paie calculée en une fois</h3><p>Pointage, IRG, cotisations CNAS et fiches de paie pour tout l'effectif.</p></div>
           </article>
 
-          <!-- Contrats -->
-          <article class="tile tile--4">
+          <article class="tile tile--5">
             <div class="tile__art" aria-hidden="true">
               <div class="stack">
                 <div class="frag frag--mini stack__back"><b>Contrat de travail</b><span>CDI</span></div>
@@ -290,8 +305,7 @@
             <div class="tile__text"><h3>Contrats et avenants rédigés</h3><p>Générés depuis la fiche du salarié, prêts à signer.</p></div>
           </article>
 
-          <!-- Verrouillage -->
-          <article class="tile tile--4">
+          <article class="tile tile--7">
             <div class="tile__art" aria-hidden="true">
               <div class="frag frag--lock">
                 <span class="lock-ico"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
@@ -302,18 +316,20 @@
             <div class="tile__text"><h3>Périodes verrouillées</h3><p>Une paie clôturée ou une période validée ne peut plus être modifiée.</p></div>
           </article>
 
-          <!-- Devis → proforma -->
-          <article class="tile tile--4">
-            <div class="tile__art" aria-hidden="true">
-              <ol class="docflow" data-loop>
-                <li>Devis</li><li>Proforma</li><li>Commande</li><li>Livraison</li><li>Facture</li>
-              </ol>
-            </div>
-            <div class="tile__text"><h3>Du devis à la proforma</h3><p>Le devis lance le besoin. Chaque document suivant se crée sans ressaisie.</p></div>
-          </article>
+        </div>
+      </div>
+    </section>
 
-          <!-- Chaîne complète -->
-          <article class="tile tile--8">
+    <!-- 3b. Points forts : production -->
+    <section class="section" id="chaine" aria-labelledby="chaine-titre">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="kicker">Production</p>
+          <h2 id="chaine-titre">Toute l'entreprise pilotée par le besoin réel</h2>
+          <p class="section__lead">Du devis à la proforma, le logiciel lance le besoin et structure toute la chaîne&nbsp;: achat, production, logistique, client.</p>
+        </div>
+        <div class="bento">
+          <article class="tile tile--12">
             <div class="tile__art tile__art--chain" aria-hidden="true">
               <svg class="chain" viewBox="0 0 640 150" preserveAspectRatio="xMidYMid meet">
                 <defs>
@@ -328,10 +344,18 @@
               </svg>
               <ol class="chain-m"><li>Achat</li><li>Production</li><li>Logistique</li><li class="is-end">Client et suivi</li></ol>
             </div>
-            <div class="tile__text"><h3>Toute la chaîne, reliée</h3><p>De l'achat à la production, de la logistique au client et à son suivi : chaque étape alimente la suivante.</p></div>
+            <div class="tile__text"><h3>Toute la chaîne, reliée</h3><p>De l'achat à la production, de la logistique au client et à son suivi&nbsp;: chaque étape alimente la suivante.</p></div>
           </article>
 
-          <!-- Zéro stock -->
+          <article class="tile tile--4">
+            <div class="tile__art" aria-hidden="true">
+              <ol class="docflow" data-loop>
+                <li>Devis</li><li>Proforma</li><li>Commande</li><li>Livraison</li><li>Facture</li>
+              </ol>
+            </div>
+            <div class="tile__text"><h3>Du devis à la proforma</h3><p>Le devis lance le besoin. Chaque document suivant se crée sans ressaisie.</p></div>
+          </article>
+
           <article class="tile tile--4">
             <div class="tile__art" aria-hidden="true">
               <div class="frag frag--stock">
@@ -342,8 +366,7 @@
             <div class="tile__text"><h3>Zéro stock inutile</h3><p>Le logiciel calcule le besoin réel. Vous n'achetez que ce qui sera consommé.</p></div>
           </article>
 
-          <!-- PPI -->
-          <article class="tile tile--6">
+          <article class="tile tile--4">
             <div class="tile__art" aria-hidden="true">
               <div class="frag frag--doc">
                 <div class="frag__head"><b>Besoins annuels calculés</b><span class="ui-btn ui-btn--ghost">Exporter</span></div>
@@ -357,8 +380,7 @@
             <div class="tile__text"><h3>Une base pour votre PPI</h3><p>Les besoins calculés servent de base au Programme Prévisionnel d'Importation demandé par le ministère du Commerce extérieur.</p></div>
           </article>
 
-          <!-- Option IA -->
-          <article class="tile tile--6 tile--ai" id="option-ia">
+          <article class="tile tile--12 tile--ai tile--row" id="option-ia">
             <div class="tile__art" aria-hidden="true">
               <div class="frag frag--ai">
                 <div class="frag__head"><b><svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="#EE2E78"/></svg>Proposition de menus</b><span class="muted-ui">Semaine 46</span></div>
@@ -369,7 +391,6 @@
             <div class="tile__text"><p class="tag">Option payante, non incluse de base</p><h3>Option IA</h3><p>Propositions de menus et analyses automatiques de votre activité, à ajouter si vous le souhaitez.</p></div>
           </article>
         </div>
-
         <div class="domains">
           <p class="domains__title">Six domaines, un seul logiciel</p>
           <ul>
@@ -396,7 +417,7 @@
             </div>
             <div class="sector__text">
               <h3>Catering et restauration collective</h3>
-              <p>Bases de vie, cantines d'entreprise, hôpitaux, écoles, traiteurs et cuisines centrales : menus, recettes et coûts suivis au repas près.</p>
+              <p>Bases de vie, cantines d'entreprise, hôpitaux, écoles, traiteurs et cuisines centrales&nbsp;: menus, recettes et coûts suivis au repas près.</p>
               <p class="sector__ref">Déjà en production chez <a class="link" href="#reference">El Afia Catering</a>, depuis plus d'un an.</p>
             </div>
           </article>
@@ -454,7 +475,7 @@
           <ul class="techno__list">
             <li><h3>Les standards des grands comptes</h3><p>Les mêmes fondations que les logiciels des plus grandes entreprises, pas un outil confidentiel.</p></li>
             <li><h3>Un logiciel pérenne</h3><p>Des technologies maintenues depuis des années par une large communauté mondiale.</p></li>
-            <li><h3>Prêt à grandir avec vous</h3><p>Nouveaux sites, nouveaux salariés, volumes plus importants : le logiciel suit.</p></li>
+            <li><h3>Prêt à grandir avec vous</h3><p>Nouveaux sites, nouveaux salariés, volumes plus importants&nbsp;: le logiciel suit.</p></li>
             <li><h3>Rien à installer</h3><p>Accessible depuis un navigateur, sur les postes de toutes vos équipes.</p></li>
           </ul>
         </div>
@@ -516,7 +537,7 @@
           <h2 id="demo-titre">Demande de démo</h2>
           <p class="section__lead">Une démonstration sur les cas de votre entreprise. Nous vous rappelons pour fixer la date avec vous.</p>
           <ul class="demo__list">
-            <li>Le logiciel présenté sur votre activité : catering, usine ou agroalimentaire.</li>
+            <li>Le logiciel présenté sur votre activité&nbsp;: catering, usine ou agroalimentaire.</li>
             <li>Vos questions sur la G50, l'IRG, la CNAS et la paie.</li>
             <li>Un devis selon la taille de votre entreprise.</li>
           </ul>
@@ -668,9 +689,8 @@
           <p class="footer__title">Contact</p>
           <ul>
             <li><a href="#demo">Formulaire de demande de démo</a></li>
-            <li><span class="todo">[E-MAIL DE CONTACT]</span></li>
-            <li><span class="todo">[TÉLÉPHONE]</span></li>
-            <li><span class="todo">[VILLE, WILAYA]</span></li>
+            <li><a href="mailto:contact@tasyirerp.com">contact@tasyirerp.com</a></li>
+            <li>Alger, Algérie</li>
           </ul>
         </div>
       </div>

@@ -87,7 +87,7 @@ Variables à définir dans Cloudflare Pages > Settings > Variables and Secrets (
 | Variable | Rôle |
 |---|---|
 | `RESEND_API_KEY` (secret) | Clé du service d'e-mail [Resend](https://resend.com) (offre gratuite suffisante) |
-| `DEMO_TO_EMAIL` | Adresse qui reçoit les demandes (plusieurs : séparées par des virgules) |
+| `DEMO_TO_EMAIL` | Adresse qui reçoit les demandes, par exemple `contact@tasyirerp.com` (plusieurs : séparées par des virgules) |
 | `DEMO_FROM_EMAIL` | Expéditeur vérifié chez Resend, ex. `Tasyir ERP <site@tasyirerp.com>` |
 | `FORM_WEBHOOK_URL` (secret) | Optionnel : URL qui reçoit chaque demande en JSON (Make, Zapier, n8n, Google Sheets via Apps Script, CRM…) |
 

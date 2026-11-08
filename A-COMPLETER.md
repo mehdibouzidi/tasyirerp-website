@@ -14,11 +14,12 @@ Les champs à compléter sont surlignés en jaune sur les pages tant qu'ils ne s
 - [ ] Renseigner les variables Cloudflare : `RESEND_API_KEY`, `DEMO_TO_EMAIL`, `DEMO_FROM_EMAIL` et/ou `FORM_WEBHOOK_URL`.
 - [ ] Faire un envoi de test après la mise en ligne et vérifier la réception.
 
-## 2. Coordonnées (pied de page de `public/index.html`)
+## 2. Coordonnées
 
-- [ ] `[E-MAIL DE CONTACT]`
-- [ ] `[TÉLÉPHONE]`
-- [ ] `[VILLE, WILAYA]`
+Renseignées : contact@tasyirerp.com et Alger (pied de page, mentions légales, politique de confidentialité). Pas de téléphone pour l'instant.
+
+- [ ] Le jour où un numéro existe : l'ajouter dans le pied de page de `public/index.html` et dans les mentions légales.
+- [ ] Créer la boîte contact@tasyirerp.com si ce n'est pas déjà fait.
 
 ## 3. Mentions légales (`public/mentions-legales/index.html`)
 
@@ -29,13 +30,12 @@ Les champs à compléter sont surlignés en jaune sur les pages tant qu'ils ne s
 - [ ] `[NIF/RC]`
 - [ ] `[NIS, AI]`
 - [ ] `[NOM DU RESPONSABLE]` (directeur de la publication)
-- [ ] `[E-MAIL DE CONTACT]` et `[TÉLÉPHONE]`
 - [ ] `[HÉBERGEUR]` (Cloudflare par défaut ; ajuster si le site est hébergé ailleurs)
 
 ## 4. Politique de confidentialité (`public/confidentialite/index.html`)
 
 - [ ] `[DATE]`
-- [ ] `[RAISON SOCIALE]`, `[ADRESSE]`, `[NIF/RC]`, `[E-MAIL DE CONTACT]`
+- [ ] `[RAISON SOCIALE]`, `[ADRESSE]`, `[NIF/RC]`
 - [ ] `[NUMÉRO DE RÉCÉPISSÉ OU D'AUTORISATION ANPDP]` : déclaration du traitement auprès de l'ANPDP
 - [ ] `[HÉBERGEUR]` et `[SERVICE D'ENVOI DU FORMULAIRE]` (ex. Cloudflare, Resend)
 - [ ] `[À CONFIRMER SELON L'HÉBERGEUR RETENU]` : transfert des données hors d'Algérie (articles 44 et 45 de la loi 18-07)
