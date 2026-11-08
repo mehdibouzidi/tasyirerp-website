@@ -694,3 +694,38 @@ a { color: inherit; }
   .layer .chip { margin-inline-start: 22px; }
   .layer--2 { margin-inline: 6px; } .layer--3 { margin-inline: 12px; }
 }
+
+/* Client de référence */
+.hero__ref {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; width: 100%;
+  padding: 14px 18px; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--surface);
+  color: var(--ink-2); text-decoration: none; font-size: 15px; line-height: 1.45;
+  transition: border-color .2s, transform .2s var(--ease);
+}
+.hero__ref b { color: var(--ink); }
+.hero__ref:hover { border-color: var(--line-strong); transform: translateY(-1px); }
+.hero__ref-badge { flex: none; font-size: 12.5px; font-weight: 700; padding: 3px 10px; border-radius: 99px; background: var(--lock-bg); color: var(--lock-tx); }
+
+.reference-sec { padding-top: 0; }
+.reference {
+  position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: center;
+  padding: 64px; border-radius: var(--r-xl); border: 1px solid var(--line);
+  background: repeating-linear-gradient(0deg, var(--ground-line) 0 1px, transparent 1px 32px), var(--ground);
+}
+.reference__mark { display: grid; gap: 8px; }
+.reference__big { font-size: clamp(88px, 9vw, 168px); font-weight: 800; line-height: .9; letter-spacing: -.05em; color: var(--ink); }
+.reference__big { background: linear-gradient(120deg, var(--cyan), var(--bleu-2) 45%, var(--magenta)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.reference__sub { font-size: 18px; font-weight: 600; color: var(--ink-2); }
+.reference__text { display: grid; gap: 18px; }
+.reference__text .kicker { margin-bottom: 0; }
+.reference__facts { margin: 8px 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.reference__facts > div { padding: 16px 18px; border-radius: var(--r-md); background: var(--surface); border: 1px solid var(--line); }
+.reference__facts dt { font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--ink); }
+.reference__facts dd { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+.reference__src { font-size: 14px; color: var(--muted); }
+.sector__ref { font-size: 15px; font-weight: 600; color: var(--ink) !important; }
+@media (max-width: 1023px) { .reference { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 48px 40px; } }
+@media (max-width: 639px) {
+  .reference { padding: 32px 20px; border-radius: var(--r-lg); }
+  .reference__facts { grid-template-columns: minmax(0, 1fr); }
+}

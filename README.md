@@ -105,7 +105,7 @@ Tous les textes sont dans les fichiers HTML de `public/`. Chaque section de `ind
 - **Photos** : remplacer les fichiers de `public/assets/img/` en gardant les noms, au format WebP 4:3 (640 px de large, plus une version plus grande), puis mettre à jour la page `credits/`.
 - **Image de partage** : `public/assets/og/tasyir-erp-og.png`, 1200 × 630 px.
 
-Règles de contenu à garder : montrer les bénéfices, jamais le fonctionnement interne ; aucun prix ; aucune référence client ; pas de BTP ; l'option IA toujours présentée comme une option payante.
+Règles de contenu à garder : montrer les bénéfices, jamais le fonctionnement interne ; aucun prix ; pas de BTP ; l'option IA toujours présentée comme une option payante. Seule référence client citée : El Afia Catering (hero, section « Client de référence », secteurs, FAQ) ; ne pas inventer de chiffre ni de citation à son sujet.
 
 ## Thème sombre et clair
 

@@ -53,7 +53,13 @@ Les trois photos des secteurs sont des illustrations sous licence libre (Wikimed
 
 - [ ] Idéalement, les remplacer par vos propres photos (cuisine collective, atelier de production, ligne agroalimentaire), sans client reconnaissable ni marque visible, puis mettre à jour `/credits/`.
 
-## 7. Relecture
+## 7. Référence client El Afia Catering
+
+- [ ] Obtenir l'accord écrit d'El Afia Catering pour être cité comme client de référence (nom, lien vers son site, chiffres repris de son site : depuis 2002, jusqu'à 5 000 repas par jour, 15 sites).
+- [ ] Vérifier que ces chiffres sont toujours à jour sur elafiacatering.com.
+- [ ] En option, avec leur accord : leur logo et une citation signée (nom, fonction) à ajouter dans la section « Client de référence ».
+
+## 8. Relecture
 
 - [ ] Relire la FAQ, en particulier la réponse sur la conformité (G50, IRG, CNAS) et celle sur l'hébergement en Algérie.
 - [ ] Vérifier que les engagements de la section Sécurité (sauvegardes, export, isolation des données) correspondent au contrat.
