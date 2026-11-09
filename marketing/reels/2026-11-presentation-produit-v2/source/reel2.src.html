@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Inter;font-weight:100 900;src:url(inter-latin-wght-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:100 900;src:url(inter-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+1E00-1EFF}
+@font-face{font-family:Plex;font-weight:400;src:url(ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2")}
+@font-face{font-family:Plex;font-weight:700;src:url(ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2")}
+:root{--cyan:#55CFEA;--bleu:#0079BC;--bleu2:#0099E1;--mag:#EE2E78;--magl:#FF8DB8;--ink:#F1F5F9;--ink2:#CBD5E1;--muted:#98A4B6;--ok:#6EE7B7;--surface:#121B2F;--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#060A14}
+body{font-family:Inter,Plex,sans-serif;color:var(--ink)}
+.ar{font-family:Plex,Inter,sans-serif;direction:rtl}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(70% 45% at 80% 0%,rgba(85,207,234,.24),transparent 70%),radial-gradient(60% 40% at 0% 100%,rgba(238,46,120,.18),transparent 70%),linear-gradient(160deg,#10203A,#0B1426 55%,#070C18)}
+#grid{position:absolute;inset:-200px;background-image:linear-gradient(rgba(85,207,234,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(85,207,234,.07) 1px,transparent 1px);background-size:90px 90px}
+.abs{position:absolute}
+.scene{position:absolute;inset:0;opacity:0}
+.c{position:absolute;left:0;right:0;text-align:center}
+.bgimg{position:absolute;inset:0;background-size:cover;background-position:center}
+#vign{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 45%,transparent 55%,rgba(0,0,0,.65))}
+#flash{position:absolute;inset:0;background:#fff;opacity:0}
+#grain{position:absolute;inset:-50%;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#subs{position:absolute;left:70px;right:70px;bottom:430px;display:flex;justify-content:center;z-index:20}
+#sub{direction:rtl;unicode-bidi:plaintext;text-align:center;font:700 54px/1.25 Plex,Inter;padding:14px 30px 18px;border-radius:20px;background:rgba(5,9,18,.82);border:1px solid rgba(85,207,234,.25);box-shadow:0 10px 40px rgba(0,0,0,.5);white-space:nowrap}
+#sub .hl{color:var(--cyan)}
+.w{display:inline-block;will-change:transform}
+.glow{text-shadow:0 0 40px rgba(85,207,234,.6)}
+/* A */
+.gear{position:absolute}
+.belt{position:absolute;left:-100px;right:-100px;top:1280px;height:14px;background:repeating-linear-gradient(90deg,#2A3550 0 40px,#1A2238 40px 80px);border-radius:7px}
+.box{position:absolute;width:110px;height:90px;border-radius:10px;background:linear-gradient(160deg,#2B3B5E,#18223A);border:2px solid rgba(85,207,234,.45);box-shadow:inset 0 -10px 0 rgba(0,0,0,.2)}
+.box:after{content:"";position:absolute;left:44%;top:0;width:12%;height:100%;background:rgba(85,207,234,.35)}
+/* C */
+.mod{position:absolute;left:0;top:0;padding:22px 34px;border-radius:26px;background:rgba(18,27,47,.94);border:1px solid rgba(85,207,234,.5);font:700 42px Inter;white-space:nowrap;display:flex;gap:14px;align-items:center}
+.mod i{width:16px;height:16px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan)}
+.mod.m i{background:var(--mag);box-shadow:0 0 14px var(--mag)}
+/* D */
+.doc{position:absolute;left:260px;top:520px;width:560px;height:700px;border-radius:36px;background:linear-gradient(170deg,#1A2742,#101A2E);border:2px solid rgba(85,207,234,.45);box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 80px rgba(85,207,234,.2);padding:48px 44px;backface-visibility:hidden}
+.doc .tag{font:700 26px Inter;color:var(--cyan);letter-spacing:3px;text-transform:uppercase}
+.doc .nm{font:900 92px/1 Inter;letter-spacing:-3px;margin-top:20px}
+.doc .ln{height:18px;border-radius:9px;background:rgba(255,255,255,.08);margin-top:26px}
+.doc .tot{position:absolute;left:44px;right:44px;bottom:48px;height:70px;border-radius:18px;background:linear-gradient(135deg,rgba(85,207,234,.25),rgba(0,121,188,.25));border:1px solid rgba(85,207,234,.4)}
+.track{position:absolute;left:90px;right:90px;top:1290px;height:6px;background:rgba(255,255,255,.1);border-radius:3px}
+.track b{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--cyan),var(--mag));border-radius:3px}
+.dot{position:absolute;top:-17px;width:40px;height:40px;margin-left:-20px;border-radius:50%;background:#17223A;border:3px solid rgba(255,255,255,.2)}
+.dot.on{background:var(--cyan);border-color:#fff;box-shadow:0 0 24px var(--cyan)}
+/* E */
+.shelf{position:absolute;left:150px;width:780px;height:10px;background:#2A3550;border-radius:5px}
+.need{position:absolute;left:120px;right:120px;border-top:5px dashed var(--cyan)}
+/* F */
+.slip{position:absolute;left:0;top:0;width:150px;height:200px;border-radius:14px;background:#EAF2FA;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.slip i{display:block;height:10px;border-radius:5px;background:#C5D3E2;margin-top:10px}
+.slip i:first-child{background:var(--bleu);width:70%;margin-top:0;height:14px}
+.bigbtn{position:absolute;left:240px;width:600px;top:780px;height:150px;border-radius:40px;display:grid;place-items:center;font:800 50px Inter;background:linear-gradient(135deg,#FF6FA6,var(--mag));box-shadow:0 20px 70px rgba(238,46,120,.55)}
+.decl{position:absolute;font:900 Inter;letter-spacing:-6px;text-align:center}
+.src{position:absolute;top:300px;font:700 34px Inter;padding:12px 24px;border-radius:99px;background:rgba(18,27,47,.9);border:1px solid rgba(85,207,234,.4)}
+.pt{position:absolute;width:14px;height:14px;margin:-7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+.auto{position:absolute;left:50%;top:1250px;padding:22px 44px;border-radius:24px;border:5px solid var(--ok);color:var(--ok);font:800 52px Inter;background:rgba(6,30,24,.9);white-space:nowrap}
+/* G */
+.sec{position:absolute;inset:0;overflow:hidden}
+.sec .bgimg{transform-origin:center}
+.sec .lab{position:absolute;left:0;right:0;top:760px;text-align:center;font:900 120px/1 Inter;letter-spacing:-4px;text-shadow:0 10px 60px rgba(0,0,0,.9)}
+.strip{position:absolute;top:0;bottom:0;width:360px;overflow:hidden;background-size:cover;background-position:center}
+/* H */
+.cta{position:absolute;left:50%;top:1060px;padding:34px 64px;border-radius:30px;background:linear-gradient(135deg,#FF6FA6,var(--mag));font:800 52px Inter;white-space:nowrap;box-shadow:0 20px 60px rgba(238,46,120,.5)}
+.touch{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.9) 0 18%,rgba(255,255,255,.35) 19% 45%,transparent 46%);opacity:0;z-index:15}
+.ripple{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;border:4px solid #fff;opacity:0;z-index:15}
+.sweep{position:absolute;top:-20px;bottom:-20px;width:160px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);mix-blend-mode:overlay}
+</style></head>
+<body><div id="stage">
+<div id="grid"></div>
+
+<!-- A : accroche -->
+<div class="scene" id="A">
+  <div id="gears"></div>
+  <div class="belt" id="belt"></div><div id="boxesA"></div>
+  <div class="c ar" style="top:520px;font:700 190px/1.05 Plex"><span class="w" id="a1">شركتك</span></div>
+  <div class="c ar" style="top:740px;font:700 210px/1.05 Plex;color:var(--cyan)"><span class="w glow" id="a2">تصنع؟</span></div>
+  <div class="c ar" style="top:1010px;font:700 84px Plex"><span class="w" id="a3">هذا الفيديو</span> <span class="w" id="a4" style="color:var(--mag)">ليك</span></div>
+  <div class="abs" id="dotA" style="left:530px;top:870px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 0 60px 20px rgba(85,207,234,.9);opacity:0"></div>
+</div>
+
+<!-- B : logo -->
+<div class="scene" id="B">
+  <div class="abs" id="haloB" style="left:140px;top:560px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(0,153,225,.45),transparent 65%)"></div>
+  <div class="abs" id="logoB" style="left:90px;top:760px;width:900px">{{LOGO_B}}<div class="sweep" id="swB"></div></div>
+  <div class="c" id="meanB" style="top:1100px"><span class="ar" style="font:700 64px Plex;color:var(--cyan)">تسيير</span><span style="font:500 46px Inter;color:var(--ink2)"> = « la gestion »</span></div>
+</div>
+
+<!-- C : un logiciel -->
+<div class="scene" id="C">
+  <div class="c ar" id="c1" style="top:300px;font:700 96px Plex"><span style="font-family:Inter;color:var(--cyan)">logiciel</span> واحد</div>
+  <div class="abs" id="symC" style="left:401px;top:735px;width:963px;transform-origin:139px 135px">{{LOGO_C}}</div>
+  <div class="mod" id="m0"><i></i>Commercial</div><div class="mod m" id="m1"><i></i>Achats</div><div class="mod" id="m2"><i></i>Stock</div>
+  <div class="mod m" id="m3"><i></i>Production</div><div class="mod" id="m4"><i></i>Comptabilité</div><div class="mod m" id="m5"><i></i>Paie</div>
+  <div class="c ar" id="c2" style="top:1210px;font:700 84px Plex"><span class="w" id="c2a">الشركة</span> <span class="w" id="c2b" style="color:var(--mag)">كاملة</span></div>
+</div>
+
+<!-- D : documents -->
+<div class="scene" id="D" style="perspective:1800px">
+  <div class="c ar" id="d0" style="top:290px;font:700 74px Plex">من <span style="font-family:Inter;color:var(--cyan)">devis</span> حتى <span style="font-family:Inter;color:var(--mag)">facture</span></div>
+  <div class="doc" id="doc"><div class="tag" id="dtag">Étape 1 / 5</div><div class="nm" id="dnm">Devis</div>
+   <div class="ln" style="width:80%;margin-top:50px"></div><div class="ln" style="width:60%"></div><div class="ln" style="width:72%"></div><div class="ln" style="width:50%"></div><div class="ln" style="width:66%"></div><div class="tot"></div></div>
+  <div class="track"><b id="trk"></b><div class="dot" id="dt0" style="left:0%"></div><div class="dot" id="dt1" style="left:25%"></div><div class="dot" id="dt2" style="left:50%"></div><div class="dot" id="dt3" style="left:75%"></div><div class="dot" id="dt4" style="left:100%"></div></div>
+  <div class="auto ar" id="d9" style="top:1200px;font-family:Plex,Inter">✓ يتخلق وحدو</div>
+</div>
+
+<!-- E : stock -->
+<div class="scene" id="E">
+  <div class="c ar" id="e0" style="top:290px;font:700 80px Plex">تشري <span style="color:var(--cyan)">غير واش يلزمك</span></div>
+  <div id="boxesE"></div>
+  <div class="shelf" style="top:1290px"></div>
+  <div class="need" id="need" style="top:1010px"><span style="position:absolute;right:0;top:-62px;font:800 36px Inter;color:var(--cyan)">Besoin réel</span></div>
+  <div class="c ar" id="e9" style="top:1325px;font:700 0px Plex"></div>
+</div>
+
+<!-- F : paie + déclarations -->
+<div class="scene" id="F">
+  <div id="slips"></div>
+  <div class="bigbtn" id="pbtn">Calculer la paie</div>
+  <div class="c ar" id="f1" style="top:1020px;font:700 120px Plex">مرة <span style="color:var(--cyan)">وحدة</span></div>
+  <div id="F2" style="position:absolute;inset:0;opacity:0">
+    <div class="src" id="sr0" style="left:90px">Ventes</div><div class="src" id="sr1" style="left:420px">Achats</div><div class="src" id="sr2" style="right:90px">Pointage</div>
+    <div id="pts"></div>
+    <div class="decl" id="g50" style="left:0;right:0;top:560px;font-size:280px;line-height:1;background:linear-gradient(180deg,#fff,#7DDCF1);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 50px rgba(85,207,234,.5))">G50</div>
+    <div class="decl" id="irg" style="left:120px;width:400px;top:900px;font-size:170px;color:#fff">IRG</div>
+    <div class="decl" id="cnas" style="left:520px;width:460px;top:900px;font-size:170px;color:var(--magl)">CNAS</div>
+    <div class="auto" id="autoF">✓ automatiquement</div>
+  </div>
+</div>
+
+<!-- G : secteurs -->
+<div class="scene" id="G">
+  <div class="sec" id="g0"><div class="bgimg" style="background-image:url(gen/kitchen.png)"></div><div class="lab">Catering</div></div>
+  <div class="sec" id="g1"><div class="bgimg" style="background-image:url(gen/factory.png)"></div><div class="lab">Usine</div></div>
+  <div class="sec" id="g2"><div class="bgimg" style="background-image:url(gen/agro.png)"></div><div class="lab" style="font-size:104px">Agroalimentaire</div></div>
+  <div id="strips" style="position:absolute;inset:0;opacity:0">
+    <div class="strip" id="sp0" style="left:0;background-image:url(gen/kitchen.png)"></div>
+    <div class="strip" id="sp1" style="left:360px;background-image:url(gen/factory.png)"></div>
+    <div class="strip" id="sp2" style="left:720px;background-image:url(gen/agro.png)"></div>
+    <div style="position:absolute;inset:0;background:rgba(6,10,20,.55)"></div>
+    <div class="c ar" id="g9" style="top:760px;font:700 170px Plex;text-shadow:0 10px 60px #000">راهو <span style="color:var(--cyan)">ليكم</span></div>
+  </div>
+</div>
+
+<!-- H : fin -->
+<div class="scene" id="H">
+  <div class="abs" id="haloH" style="left:140px;top:380px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(0,153,225,.35),transparent 65%)"></div>
+  <div class="abs" id="logoH" style="left:90px;top:620px;width:900px">{{LOGO_H}}<div class="sweep" id="swH"></div></div>
+  <div class="c" id="h1" style="top:920px;font:600 40px Inter;color:var(--ink2)">L'ERP algérien des entreprises qui fabriquent</div>
+  <div class="cta" id="cta">Demander une démo</div>
+  <div class="c" id="h2" style="top:1240px;font:700 46px Inter;color:var(--cyan)">tasyirerp.com · <span class="ar">الرابط في la bio</span> ↑</div>
+  <div class="c" id="h3" style="top:1330px;font:600 30px Inter;color:var(--muted)">+1 an en entreprise · Conforme G50 · IRG · CNAS</div>
+</div>
+
+<div class="touch" id="touch"></div><div class="ripple" id="ripple"></div>
+<div id="subs"><div id="sub" class="ar"></div></div>
+<div id="grain"></div><div id="vign"></div><div id="flash"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3), ex=x=>x>=1?1:1-Math.pow(2,-10*x), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, ei=x=>x*x*x;
+const back=x=>{const c=1.9;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const rnd=i=>{const x=Math.sin(i*12.9898+78.233)*43758.5453;return x-Math.floor(x)};
+function T(el,s){(typeof el=='string'?$(el):el).style.transform=s}
+function O(el,o){(typeof el=='string'?$(el):el).style.opacity=o}
+const slam=(t,t0,from=2.6)=>{const p=P(t,t0,t0+0.28);return {o:p>0?1:0,s:from-(from-1)*back(p)}};
+function SL(id,t,t0,from=2.6,extra=''){const k=slam(t,t0,from);O(id,k.o);T(id,`${extra} scale(${k.s})`)}
+
+// --- voix ---
+const VO=[[0.2,2.56,["شركتك تصنع؟","هذا الفيديو ليك."]],[3.35,1.85,["Tasyir ERP."]],[5.55,3.12,["logiciel واحد،","باش تسيّر الشركة كاملة."]],
+[9.0,3.53,["من الـdevis حتى للـfacture،","كل document يتخلق وحدو."]],[12.85,2.61,["تشري غير واش يلزمك،","بلا stock زايد."]],
+[15.8,7.52,["la paie تتحسب مرة وحدة،","والـG50، الـIRG والـCNAS،","يخرجو automatiquement."]],[23.65,4.12,["Catering، usine","ولا agroalimentaire:","راهو ليكم."]],[28.6,2.4,["أطلب ديمو،","الرابط كاين في البيو."]]];
+// découpage calé sur les pauses réelles mesurées dans l'audio
+const SUBS=[[0.2,1.45,"شركتك تصنع؟"],[1.7,2.85,"هذا الفيديو ليك."],[3.35,5.2,"Tasyir ERP."],[5.55,6.6,"logiciel واحد،"],[6.6,8.7,"باش تسيّر الشركة كاملة."],
+[9.0,10.85,"من الـdevis حتى للـfacture،"],[10.95,12.55,"كل document يتخلق وحدو."],[12.85,14.2,"تشري غير واش يلزمك،"],[14.2,15.5,"بلا stock زايد."],
+[15.8,17.4,"la paie تتحسب مرة وحدة،"],[18.05,21.2,"والـG50، الـIRG والـCNAS،"],[21.3,23.35,"يخرجو automatiquement."],
+[23.65,25.4,"Catering، usine"],[25.4,26.9,"ولا agroalimentaire:"],[26.9,27.8,"راهو ليكم."],[28.6,29.55,"أطلب ديمو،"],[29.55,31.0,"الرابط كاين في البيو."]];
+const SC={A:[0,2.95],B:[2.95,5.45],C:[5.45,8.85],D:[8.85,12.7],E:[12.7,15.65],F:[15.65,23.5],G:[23.5,28.2],H:[28.2,32.7]};
+const ENTER={A:'none',B:'none',C:'zoom',D:'whip',E:'whipv',F:'zoom',G:'whip',H:'zoom'};
+
+// --- construction ---
+function gearPath(r,teeth){let d='';for(let i=0;i<teeth*2;i++){const a=i/(teeth*2)*Math.PI*2,a2=(i+1)/(teeth*2)*Math.PI*2,R=i%2?r:r*1.18;d+=(i?'L':'M')+(Math.cos(a)*R).toFixed(1)+' '+(Math.sin(a)*R).toFixed(1)+'L'+(Math.cos(a2)*R).toFixed(1)+' '+(Math.sin(a2)*R).toFixed(1)}return d+'Z'}
+$('gears').innerHTML=[[170,430,130,12,'#0099E1'],[900,560,170,14,'#EE2E78'],[120,1150,100,10,'#55CFEA'],[960,1200,120,12,'#0079BC']].map(([x,y,r,n,c],i)=>`<svg class="gear" id="gr${i}" style="left:${x-r*1.3}px;top:${y-r*1.3}px" width="${r*2.6}" height="${r*2.6}" viewBox="${-r*1.3} ${-r*1.3} ${r*2.6} ${r*2.6}"><path d="${gearPath(r,n)}" fill="none" stroke="${c}" stroke-width="10" stroke-opacity=".55"/><circle r="${r*.35}" fill="none" stroke="${c}" stroke-width="10" stroke-opacity=".55"/></svg>`).join('');
+$('boxesA').innerHTML=Array.from({length:8},(_, i)=>`<div class="box" id="ba${i}" style="top:1190px"></div>`).join('');
+// stock : 6 colonnes x 6 rangées, besoin réel = 2 rangées
+const BX=[];let bh='';for(let r=0;r<6;r++)for(let c=0;c<6;c++){const i=BX.length;BX.push({x:175+c*125,y:1290-90-r*92,r});bh+=`<div class="box" id="be${i}"></div>`}$('boxesE').innerHTML=bh;
+$('slips').innerHTML=Array.from({length:44},(_, i)=>`<div class="slip" id="sl${i}"><i></i><i></i><i style="width:60%"></i><i></i><i style="width:80%"></i><i></i></div>`).join('');
+$('pts').innerHTML=Array.from({length:36},(_, i)=>`<div class="pt" id="pt${i}"></div>`).join('');
+
+// pièces du logo
+function parts(id){const s=$(id).querySelector('svg');const g=s.querySelector('g');const ch=[...g.children].filter(e=>e.tagName!='defs');
+ const txt=[...s.children].filter(e=>e.tagName=='path');[...ch,...txt,...g.querySelectorAll('rect')].forEach(e=>{e.style.transformBox='fill-box';e.style.transformOrigin='center'});
+ return {ringB:ch[0],bars:[...ch[1].querySelectorAll('rect')],ringF:ch[2],rip:ch.slice(3),txt}}
+const LB=parts('logoB'),LC=parts('symC'),LH=parts('logoH');
+LC.txt.forEach(e=>e.style.opacity=0);
+function buildLogo(L,t,t0,sp=1,noTxt=false){
+ const p=x=>P(t,t0+x*sp,t0+(x+0.35)*sp);
+ O(L.ringB,p(0)*0.45/0.45);T(L.ringB,`scaleX(${eo(p(0))})`);
+ L.bars.forEach((b,i)=>{const k=back(P(t,t0+(0.12+i*0.09)*sp,t0+(0.42+i*0.09)*sp));T(b,`translateY(${(1-k)*230}px)`)});
+ O(L.ringF,eo(p(0.05)));T(L.ringF,`scaleX(${eo(p(0.05))})`);
+ L.rip.forEach((r,i)=>{const k=P(t,t0+(0.45+i*0.06)*sp,t0+(0.7+i*0.06)*sp);O(r,eo(k));T(r,`translateY(${(1-eo(k))*-30}px)`)});
+ if(!noTxt)L.txt.forEach((e,i)=>{const k=P(t,t0+(0.5+i*0.08)*sp,t0+(0.9+i*0.08)*sp);O(e,k>0?1:0);e.style.clipPath=`inset(0 ${100-100*eo(k)}% 0 0)`;T(e,`translateX(${(1-eo(k))*-40}px)`)});}
+function touchAt(t,t0,x,y){const a=P(t,t0-0.35,t0-0.05),b=P(t,t0,t0+0.45);
+ O('touch',a>0&&b<1?(b>0?1-b:eo(a)):0);T('touch',`scale(${b>0?1-0.15*Math.sin(Math.PI*cl(b*3)):1.3-0.3*eo(a)})`);$('touch').style.left=x+'px';$('touch').style.top=y+'px';
+ O('ripple',b>0&&b<1?1-b:0);T('ripple',`scale(${0.5+2*eo(b)})`);$('ripple').style.left=x+'px';$('ripple').style.top=y+'px';}
+
+function render(t){
+ T('grid',`translate(${-(t*14)%90}px,${-(t*22)%90}px)`);
+ for(const [id,[a,b]] of Object.entries(SC)){const el=$(id);const vis=t>=a-0.01&&t<b+0.01;if(!vis){O(el,0);continue}
+  const i=P(t,a,a+0.3),o=P(t,b-0.15,b);let tr='',f=0,op=1;const e=ENTER[id];
+  if(e=='zoom'){tr=`scale(${1.25-0.25*ex(i)})`;f=(1-ex(i))*16;op=eo(i)}
+  else if(e=='whip'){tr=`translateX(${(1-ex(i))*900}px)`;f=(1-ex(i))*24}
+  else if(e=='whipv'){tr=`translateY(${(1-ex(i))*1200}px)`;f=(1-ex(i))*24}
+  if(o>0&&id!='H'){tr+=` scale(${1+0.12*o})`;f+=o*14;op*=1-o}
+  T(el,tr);el.style.filter=f>0.2?`blur(${f}px)`:'none';O(el,op)}
+ let fl=0;[[3.3,.9],[5.45,.35],[18.28,.4],[28.2,.5]].forEach(([c,k])=>{const p=P(t,c,c+0.22);if(p>0&&p<1)fl=Math.max(fl,k*(1-p))});O('flash',fl);
+ let sh=0;[[0.32,.6],[0.9,.8],[3.3,1.2],[18.28,1],[19.36,.6],[20.12,.6],[31.2,1]].forEach(([c,k])=>{const p=P(t,c,c+0.35);if(p>0&&p<1)sh=Math.max(sh,k*(1-p))});
+ T('stage',`translate(${(rnd(Math.floor(t*30))-.5)*30*sh}px,${(rnd(Math.floor(t*30)+7)-.5)*30*sh}px)`);
+
+ // A
+ if(t<3.1){SL('a1',t,0.3,3);SL('a2',t,0.88,3.2);
+  [0,1,2,3].forEach(i=>{const k=eo(P(t,0.88+i*0.06,1.3+i*0.06));O('gr'+i,k);T('gr'+i,`rotate(${(i%2?-1:1)*t*90}deg) scale(${0.5+0.5*k})`)});
+  O('belt',eo(P(t,0.9,1.2)));T('belt',`translateX(${-(t*160)%80}px)`);
+  for(let i=0;i<8;i++){const el=$('ba'+i);O(el,eo(P(t,0.9,1.2)));el.style.left=((i*190+t*160)%1520-220)+'px'}
+  SL('a3',t,1.62,2);SL('a4',t,2.12,3.5);
+  const im=ei(P(t,2.55,2.9));if(im>0){['a1','a2','a3','a4','gears','belt','boxesA'].forEach(id=>{const el=$(id);el.style.transform+=` scale(${1-im})`;el.style.opacity=1-im})}
+  O('dotA',P(t,2.6,2.8)*(1-P(t,2.9,3.0)));}
+ // B
+ if(t>2.9&&t<5.6){const k=P(t,2.95,3.3);T('haloB',`scale(${0.3+0.9*eo(k)+0.05*Math.sin(t*5)})`);O('haloB',eo(k));
+  buildLogo(LB,t,2.95,1);T('logoB',`scale(${1.12-0.12*eo(P(t,2.95,4.2))})`);
+  T('swB',`translateX(${-300+1400*eio(P(t,4.0,4.7))}px)`);
+  O('meanB',eo(P(t,4.15,4.45)));T('meanB',`translateY(${30*(1-eo(P(t,4.15,4.45)))}px)`);}
+ // C
+ if(t>5.3&&t<9.0){SL('c1',t,5.55,1.8);
+  buildLogo(LC,t,5.45,0.6,true);T('symC',`scale(${1+0.05*Math.sin(t*4)})`);
+  const spin=t*1.4;
+  for(let i=0;i<6;i++){const el=$('m'+i);const w=el.offsetWidth,h=el.offsetHeight;
+   const a=i/6*Math.PI*2+spin;const z=Math.sin(a);const ox=540+Math.cos(a)*360,oy=870+z*230;
+   const gx=i%2?760:320,gy=650+Math.floor(i/2)*170+ (i%2?0:0);
+   const ap=back(P(t,5.6+i*0.08,6.0+i*0.08));
+   const x=ox,y=oy;const sc=(0.75+0.25*(z+1)/2)*ap;
+   T(el,`translate(${x-w/2}px,${y-h/2}px) scale(${sc})`);O(el,ap>0?0.6+0.4*(z+1)/2:0);el.style.zIndex=z>0?5:1;}
+  $('symC').style.zIndex=3;
+  SL('c2a',t,6.85,2.2);SL('c2b',t,7.9,2.8);}
+ // D
+ if(t>8.7&&t<12.9){O('d0',eo(P(t,8.95,9.25)));T('d0',`translateY(${-40*(1-eo(P(t,8.95,9.25)))}px)`);
+  const N=['Devis','Proforma','Commande','Livraison','Facture'],TT=[9.0,9.55,10.05,10.5,10.95];
+  let k=0;TT.forEach((x,i)=>{if(t>=x)k=i});const fp=P(t,TT[k],TT[k]+0.28);
+  const ang=k==0?(1-eo(fp))*-90:(fp<0.5?-90*(fp*2):90*(1-(fp-0.5)*2));
+  const showK=k>0&&fp<0.5?k-1:k;$('dnm').textContent=N[showK];$('dtag').textContent=`Étape ${showK+1} / 5`;
+  T('doc',`rotateY(${ang}deg) scale(${1+0.04*Math.sin(Math.PI*fp)})`);
+  $('trk').style.width=(eio(P(t,9.0,11.0))*100)+'%';
+  for(let i=0;i<5;i++)$('dt'+i).className='dot'+(t>=TT[i]?' on':'');
+  const dk=P(t,11.3,11.55);O('d9',dk>0?1:0);T('d9',`translateX(-50%) rotate(-6deg) scale(${2.4-1.4*eo(dk)})`);$('d9').style.left='50%';}
+ // E
+ if(t>12.5&&t<15.8){O('e0',eo(P(t,12.85,13.1)));T('e0',`scale(${1.3-0.3*back(P(t,12.85,13.2))})`);
+  BX.forEach((b,i)=>{const el=$('be'+i);const t0=12.95+((i*7)%36)*0.025+b.r*0.03;const p=P(t,t0,t0+0.35);
+   let y=-200+(b.y+200)*ei(p);if(p>=1){const q=P(t,t0+0.35,t0+0.55);y=b.y-Math.sin(Math.PI*q)*18}
+   let x=b.x,o=p>0?1:0,r=0,s=1;
+   if(b.r>=2){const k=P(t,14.3+(i%6)*0.02,14.85+(i%6)*0.02);if(k>0){const ang=rnd(i)*Math.PI*2;x+=Math.cos(ang)*900*ei(k);y+=(-500*k+900*k*k)*(0.6+rnd(i+9));r=(rnd(i+3)-.5)*400*k;o=1-k;}
+    el.style.borderColor=t>14.1?'#FF8DB8':'rgba(85,207,234,.45)';el.style.background=t>14.1?'linear-gradient(160deg,#6B2246,#3A1428)':''}
+   else{el.style.boxShadow=t>14.9?'0 0 26px rgba(85,207,234,.6)':''}
+   el.style.left=x+'px';el.style.top=y+'px';O(el,o);T(el,`rotate(${r}deg) scale(${s})`)});
+  O('need',eo(P(t,13.95,14.15)));$('need').style.clipPath=`inset(0 0 0 ${100-100*eo(P(t,13.95,14.3))}%)`;}
+ // F
+ if(t>15.5&&t<23.7){const f1=t<18.1;O('pbtn',f1?eo(P(t,15.7,15.95))*(1-P(t,17.7,18.0)):0);T('pbtn',`scale(${(0.6+0.4*back(P(t,15.7,16.05)))*(t>16.1?1-0.07*Math.sin(Math.PI*P(t,16.1,16.35)):1)})`);
+  touchAt(t,16.1,540,855);
+  for(let i=0;i<44;i++){const el=$('sl'+i);const t0=16.25+i*0.018;const k=P(t,t0,t0+0.55);
+   const a=-Math.PI/2+(rnd(i)-.5)*2.6;const d=380+rnd(i+5)*520;const x=540+Math.cos(a)*d*eo(k)-75,y=855+Math.sin(a)*d*eo(k)*0.9+500*k*k*0.3-100;
+   const out=P(t,17.6,18.0);O(el,k>0?(1-out):0);T(el,`translate(${x}px,${y+out*900}px) rotate(${(rnd(i+2)-.5)*80*k}deg) scale(${0.4+0.6*eo(k)})`)}
+  SL('f1',t,16.72,2.5);if(t>17.7)O('f1',1-P(t,17.7,18.0));
+  O('F2',P(t,17.95,18.1));
+  ['sr0','sr1','sr2'].forEach((id,i)=>{O(id,eo(P(t,18.0+i*0.08,18.3+i*0.08)))});
+  for(let i=0;i<36;i++){const el=$('pt'+i);const src=i%3;const sx=[200,540,880][src],sy=360;const per=1.1;const ph=((t-18.0)/per+rnd(i))%1;
+   const on=t>18.1&&t<22.6;const tx=540+(rnd(i+1)-.5)*240,ty=700;el.style.left=(sx+(tx-sx)*eio(ph))+'px';el.style.top=(sy+(ty-sy)*ph)+'px';O(el,on?Math.sin(Math.PI*ph):0);el.style.background=src==1?'#EE2E78':'#55CFEA'}
+  SL('g50',t,18.28,3);SL('irg',t,19.36,2.6);SL('cnas',t,20.12,2.6);
+  const ak=P(t,22.15,22.4);O('autoF',ak>0?1:0);T('autoF',`translateX(-50%) rotate(-5deg) scale(${2.4-1.4*eo(ak)})`);}
+ // G
+ if(t>23.3&&t<28.4){const TT=[23.65,24.87,25.5];
+  TT.forEach((x,i)=>{const el=$('g'+i);const k=eio(P(t,x-0.05,x+0.3));el.style.clipPath=i==0?'none':`polygon(${100-130*k}% 0,100% 0,100% 100%,${130-130*k}% 100%)`;
+   O(el,t>=x-0.05||i==0?1:0);el.querySelector('.bgimg').style.transform=`scale(${1.25-0.15*P(t,x,x+2)})`;
+   const lab=el.querySelector('.lab');const sk=P(t,x,x+0.3);const nx=TT[i+1]||26.45;lab.style.opacity=sk>0?1-P(t,nx-0.2,nx-0.05):0;lab.style.transform=`scale(${2-back(sk)})`});
+  const sp=eio(P(t,26.45,26.9));O('strips',sp>0?1:0);
+  ['sp0','sp1','sp2'].forEach((id,i)=>{T(id,`translateY(${(1-sp)*(i%2?-1:1)*1920}px)`)});
+  SL('g9',t,26.95,2.6);}
+ // H
+ if(t>28.0){const k=P(t,28.2,28.5);T('haloH',`scale(${0.3+0.9*eo(k)+0.05*Math.sin(t*5)})`);O('haloH',eo(k));
+  buildLogo(LH,t,28.2,0.7);T('swH',`translateX(${-300+1400*eio(P(t,29.0,29.7))}px)`);
+  O('h1',eo(P(t,28.75,29.05)));
+  const c=P(t,28.75,29.15);O('cta',c>0?1:0);T('cta',`translateX(-50%) scale(${(0.5+0.5*back(c))*(t>29.6?1-0.06*Math.sin(Math.PI*P(t,29.6,29.85)):1)})`);
+  touchAt(t,29.6,700,1130);
+  O('h2',eo(P(t,29.6,29.9)));T('h2',`translateY(${30*(1-eo(P(t,29.6,29.9)))}px)`);O('h3',eo(P(t,30.1,30.4)));
+  if(t>31.2){const q=P(t,31.2,31.5);T('logoH',`scale(${1+0.06*Math.sin(Math.PI*q)})`)}}
+ // sous-titres
+ const cur=SUBS.find(s=>t>=s[0]&&t<s[1]);const sub=$('sub');
+ if(cur){if(sub.dataset.k!=cur[2]){sub.dataset.k=cur[2];sub.innerHTML=cur[2].replace(/(Tasyir ERP|G50|IRG|CNAS|paie|logiciel|devis|facture|document|stock|automatiquement|Catering|usine|agroalimentaire|ليكم|ديمو|البيو|ليك)/g,'<span class="hl">$1</span>')}
+  const k=P(t,cur[0],cur[0]+0.12);O('subs',1);sub.style.transform='';const w=sub.scrollWidth;$('subs').style.transform=`translateY(${14*(1-eo(k))}px) scale(${(0.94+0.06*eo(k))*(w>940?940/w:1)})`;}
+ else O('subs',0);
+}
+window.render=render;
+window.cover=function(){render(4.9);O('B',1);$('B').style.filter='none';T('B','none');T('stage','none');O('subs',0);O('flash',0);
+ const d=document.createElement('div');d.className='c ar';d.style.cssText='top:440px;font:700 92px/1.15 Plex';d.innerHTML='شركتك <span style="color:#55CFEA">تصنع؟</span>';$('B').appendChild(d);
+ const e=document.createElement('div');e.className='c';e.style.cssText='top:1260px;font:600 40px Inter;color:#CBD5E1';e.textContent="L'ERP algérien des entreprises qui fabriquent";$('B').appendChild(e);};
+</script></body></html>
