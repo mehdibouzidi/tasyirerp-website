@@ -129,13 +129,13 @@ Son (ElevenLabs) :
 
 ## Fichiers
 
--  : vidéo finale (1080 × 1920, 30 i/s, 32,1 s, son -14 LUFS).
--  : couverture (titre et logo dans la zone 3:4).
--  : sous-titres horodatés.
--  : voix off complète, et une phrase par fichier (p01 à p08).
--  : les 3 écritures testées du nom de marque.
--  : les 7 plans bruts, sans son.
--  : les 2 images générées.
--  : musique et bruitages générés, avec leurs prompts.
--  : images de contrôle et planche avec les zones interdites en rouge.
--  : animation (, rendue image par image avec ), mixage (), voix (, , ). Pour refaire le rendu, placer à côté de  les polices et logos de , et les images d'ambiance dans .
+- `reel.mp4` : vidéo finale (1080 × 1920, 30 i/s, 32,1 s, son -14 LUFS).
+- `couverture.png` : couverture (titre et logo dans la zone 3:4).
+- `sous-titres.srt` : sous-titres horodatés.
+- `voix/` : voix off complète, et une phrase par fichier (p01 à p08).
+- `tests-nom/` : les 3 écritures testées du nom de marque.
+- `plans/` : les 7 plans bruts, sans son.
+- `ambiance/` : les 2 images générées.
+- `sons/` : musique et bruitages générés, avec leurs prompts.
+- `controle/` : images de contrôle et planche avec les zones interdites en rouge.
+- `source/` : animation (`reel.html`, rendue image par image avec `render.js`), mixage (`mix.py`), voix (`tts.py`, `takes.py`, `stt.py`). Pour refaire le rendu, placer à côté de `reel.html` les polices et logos de `public/assets/`, et les images d'ambiance dans `gen/`.
