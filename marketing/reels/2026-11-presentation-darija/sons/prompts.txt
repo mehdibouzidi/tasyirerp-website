@@ -1,0 +1,8 @@
+whoosh : fast cinematic air whoosh transition, clean, short (0,8 s)
+tap : single crisp UI touchscreen tap click, dry, no reverb (0,5 s)
+pop : soft digital UI pop notification appear, modern (0,5 s)
+impact : deep cinematic trailer boom impact with sub bass hit and short tail (2 s)
+riser : short tension riser synth swell building up, cinematic (1,5 s)
+glitch : short digital glitch stutter transition, electronic (0,6 s)
+stamp : heavy stamp thud on paper, confirmation, punchy (0,6 s)
+swipe : quick swipe slide UI sound, smooth (0,5 s)

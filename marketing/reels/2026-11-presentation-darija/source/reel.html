@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Inter;font-weight:100 900;src:url(inter-latin-wght-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:100 900;src:url(inter-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+1E00-1EFF}
+@font-face{font-family:Plex;font-weight:400;src:url(ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2")}
+@font-face{font-family:Plex;font-weight:700;src:url(ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2")}
+:root{--bg:#0B1120;--surface:#121B2F;--surface2:#17223A;--ink:#F1F5F9;--ink2:#CBD5E1;--muted:#98A4B6;
+--bleu:#0079BC;--bleu2:#0099E1;--cyan:#55CFEA;--mag:#EE2E78;--magl:#FF8DB8;--ok:#6EE7B7;--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#060A14}
+body{font-family:Inter,Plex,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.ar{font-family:Plex,Inter,sans-serif}
+#stage{position:absolute;inset:0;overflow:hidden;background:
+ radial-gradient(70% 45% at 80% 0%,rgba(85,207,234,.26),transparent 70%),
+ radial-gradient(60% 40% at 0% 100%,rgba(238,46,120,.18),transparent 70%),
+ linear-gradient(160deg,#10203A,#0B1426 55%,#070C18)}
+#grid{position:absolute;inset:-200px;background-image:linear-gradient(rgba(85,207,234,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(85,207,234,.07) 1px,transparent 1px);background-size:90px 90px}
+.abs{position:absolute}
+.scene{position:absolute;inset:0;opacity:0;will-change:transform,opacity,filter}
+.bgimg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.0}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,20,.85),rgba(6,10,20,.35) 40%,rgba(6,10,20,.9))}
+#vign{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 50% 45%,transparent 55%,rgba(0,0,0,.65))}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;mix-blend-mode:screen}
+#grain{position:absolute;inset:-50%;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+/* titres d'étape */
+.step{position:absolute;z-index:4;top:262px;left:60px;right:60px;display:flex;align-items:center;gap:26px;direction:rtl}
+.step .n{flex:none;width:112px;height:112px;border-radius:30px;background:linear-gradient(135deg,#FF6FA6,var(--mag));display:grid;place-items:center;font:800 70px Inter;color:#fff;box-shadow:0 0 50px rgba(238,46,120,.55)}
+.step .t{font:700 70px/1.1 Plex,Inter;letter-spacing:-.5px;white-space:nowrap}
+.step .t b{color:var(--cyan);font-weight:700}
+/* sous-titres */
+#subs{position:absolute;left:70px;right:70px;bottom:430px;display:flex;justify-content:center}
+#sub{direction:rtl;unicode-bidi:plaintext;text-align:center;font:700 54px/1.25 Plex,Inter;padding:14px 30px 18px;border-radius:20px;background:rgba(5,9,18,.82);border:1px solid rgba(85,207,234,.25);box-shadow:0 10px 40px rgba(0,0,0,.5);white-space:nowrap}
+#sub .hl{color:var(--cyan)}
+/* téléphone */
+.phone{position:absolute;left:50%;top:430px;width:600px;height:910px;margin-left:-300px;border-radius:70px;background:#05080F;border:3px solid #2A3550;box-shadow:0 0 0 12px #0E1424,0 0 0 14px #2A3550,0 60px 120px rgba(0,0,0,.7),0 0 120px rgba(85,207,234,.18);overflow:hidden}
+.phone .scr{position:absolute;inset:16px;border-radius:56px;background:linear-gradient(180deg,#0F1729,#0B1120);overflow:hidden;direction:ltr}
+.notch{position:absolute;top:14px;left:50%;width:150px;height:36px;margin-left:-75px;border-radius:20px;background:#000;z-index:5}
+.app-h{display:flex;align-items:center;gap:14px;padding:70px 34px 22px;border-bottom:1px solid var(--line)}
+.app-h img{height:40px}
+.app-h span{font:600 26px Inter;color:var(--ink2)}
+.card{margin:26px 26px 0;padding:26px;border-radius:28px;background:var(--surface);border:1px solid var(--line)}
+.card h4{font:700 32px Inter;letter-spacing:-.3px}
+.card .sm{font:500 22px Inter;color:var(--muted);margin-top:4px}
+.row{display:flex;align-items:center;justify-content:space-between;padding:20px 4px;border-top:1px solid var(--line);font:500 25px Inter;color:var(--ink2)}
+.row:first-of-type{border-top:0}
+.pill{font:700 21px Inter;padding:8px 16px;border-radius:99px;background:rgba(255,255,255,.06);color:var(--muted);display:flex;gap:8px;align-items:center}
+.pill.ok{background:rgba(52,211,153,.16);color:var(--ok)}
+.pill.bl{background:rgba(85,207,234,.16);color:#7DDCF1}
+.pill.lk{background:rgba(238,46,120,.18);color:var(--magl)}
+.btn{margin:26px;height:84px;border-radius:24px;display:grid;place-items:center;font:700 28px Inter;color:#fff;background:linear-gradient(135deg,var(--bleu2),var(--bleu));box-shadow:0 10px 30px rgba(0,153,225,.35)}
+.btn.mag{background:linear-gradient(135deg,#FF6FA6,var(--mag));box-shadow:0 10px 30px rgba(238,46,120,.4)}
+.stamp{position:absolute;padding:16px 30px;border:5px solid var(--ok);color:var(--ok);font:800 40px Inter;border-radius:18px;transform:rotate(-8deg);background:rgba(6,30,24,.85);letter-spacing:.5px;white-space:nowrap}
+.touch{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.9) 0 18%,rgba(255,255,255,.35) 19% 45%,transparent 46%);opacity:0;z-index:9}
+.ripple{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;border:4px solid #fff;opacity:0;z-index:9}
+.hlbox{position:absolute;border-radius:22px;border:4px solid var(--cyan);box-shadow:0 0 30px rgba(85,207,234,.7),inset 0 0 20px rgba(85,207,234,.25);opacity:0}
+/* S1 */
+#xls{position:absolute;left:-40px;top:200px;width:1160px;transform:rotate(-8deg);display:grid;grid-template-columns:repeat(6,1fr);gap:0;opacity:.9}
+#xls div{height:74px;border:1px solid rgba(160,180,200,.18);font:500 24px Inter;color:rgba(203,213,225,.45);display:flex;align-items:center;padding-left:14px;white-space:nowrap;overflow:hidden}
+#xls div.err{color:#FF6B8A;background:rgba(238,46,120,.14)}
+.hook{position:absolute;left:0;right:0;top:640px;text-align:center;direction:rtl}
+.hook .l1{font:700 130px/1.1 Plex,Inter;letter-spacing:-2px;text-shadow:0 10px 50px rgba(0,0,0,.8)}
+.hook .l2{font:700 118px/1.15 Plex,Inter;margin-top:24px;text-shadow:0 10px 50px rgba(0,0,0,.8)}
+.hook .xl{display:inline-block;position:relative;color:#fff;padding:0 26px;background:#1D6F42;border-radius:22px;font-family:Inter;font-weight:800;letter-spacing:-2px}
+.hook .xl .strike{position:absolute;left:-10px;right:-10px;top:52%;height:16px;border-radius:8px;background:var(--mag);transform-origin:left center;box-shadow:0 0 30px var(--mag)}
+.rgb{position:absolute;inset:0}
+/* S2 */
+.mod{position:absolute;left:0;top:0;padding:22px 30px;border-radius:24px;background:rgba(18,27,47,.92);border:1px solid rgba(85,207,234,.35);font:700 34px Inter;white-space:nowrap;box-shadow:0 0 40px rgba(85,207,234,.18);display:flex;gap:14px;align-items:center}
+.mod i{width:16px;height:16px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan)}
+.mod.m i{background:var(--mag);box-shadow:0 0 14px var(--mag)}
+.core{position:absolute;left:540px;top:900px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:80px;background:radial-gradient(circle at 50% 40%,#17223A,#0B1120);border:2px solid rgba(85,207,234,.5);display:grid;place-items:center;box-shadow:0 0 120px rgba(0,153,225,.45)}
+.core img{width:190px}
+.big2{position:absolute;left:0;right:0;top:1180px;text-align:center;direction:rtl;font:700 92px Plex,Inter}
+.big2 em{font-style:normal;color:var(--cyan)}
+/* S5 */
+.bars{position:absolute;left:110px;right:110px;top:480px;height:760px}
+.bar{position:absolute;bottom:90px;width:330px;border-radius:30px 30px 10px 10px}
+.blab{position:absolute;bottom:0;width:330px;text-align:center;font:700 34px Inter;color:var(--ink2)}
+.over{position:absolute;width:330px;border:4px dashed var(--magl);border-radius:30px 30px 0 0;display:grid;place-items:center;font:800 46px Plex,Inter;color:var(--magl)}
+.zero{position:absolute;left:0;right:0;top:1250px;text-align:center;font:800 64px Inter;letter-spacing:-1px}
+/* S6 */
+.plus1{position:absolute;left:0;right:0;top:400px;text-align:center}
+.plus1 .n{font:900 300px/1 Inter;letter-spacing:-12px;background:linear-gradient(180deg,#fff,#7DDCF1);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 40px rgba(85,207,234,.5))}
+.plus1 .u{font:700 76px Plex,Inter;direction:rtl;margin-top:-10px}
+.plus1 .u b{color:var(--cyan)}
+.trust{position:absolute;left:90px;right:90px;top:880px}
+.tr{display:flex;align-items:center;gap:26px;padding:28px 32px;margin-bottom:22px;border-radius:28px;background:rgba(18,27,47,.92);border:1px solid var(--line);font:700 38px Inter}
+.tr .ic{flex:none;width:72px;height:72px;border-radius:22px;display:grid;place-items:center;background:rgba(85,207,234,.14)}
+.tr.on{border-color:var(--cyan);box-shadow:0 0 50px rgba(85,207,234,.35)}
+/* S7 */
+.endlogo{position:absolute;left:90px;right:90px;top:620px}
+.endlogo img{width:100%}
+.slogan{position:absolute;left:60px;right:60px;top:930px;text-align:center;font:600 40px Inter;color:var(--ink2)}
+.cta{position:absolute;left:50%;top:1080px;transform:translateX(-50%);padding:34px 64px;border-radius:30px;background:linear-gradient(135deg,#FF6FA6,var(--mag));font:800 50px Inter;white-space:nowrap;box-shadow:0 20px 60px rgba(238,46,120,.5)}
+.url{position:absolute;left:0;right:0;top:1260px;text-align:center;font:700 46px Inter;color:var(--cyan);letter-spacing:.5px}
+.sweep{position:absolute;top:0;bottom:0;width:180px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);mix-blend-mode:overlay}
+#ai{position:absolute;right:28px;top:1480px;font:600 18px Inter;color:rgba(255,255,255,.0)}
+</style></head>
+<body><div id="stage">
+<div id="grid"></div>
+<div class="bgimg" id="bgK" style="background-image:url(gen/kitchen.png)"></div>
+<div class="bgimg" id="bgF" style="background-image:url(gen/factory.png)"></div>
+<div class="shade" id="shade" style="opacity:0"></div>
+
+<!-- S1 accroche -->
+<div class="scene" id="s1">
+  <div id="xls"></div>
+  <div class="shade" style="background:radial-gradient(70% 45% at 50% 48%,rgba(6,10,20,.9),rgba(6,10,20,.35))"></div>
+  <div class="hook ar" id="hook">
+    <div class="l1" id="h1">الـG50 والـpaie</div>
+    <div class="l2" id="h2">مازال بـ <span class="xl" id="xl">Excel<span class="strike" id="strike"></span></span> ؟</div>
+  </div>
+</div>
+
+<!-- S2 un seul logiciel -->
+<div class="scene" id="s2">
+  <svg class="abs" id="links" width="1080" height="1920" style="left:0;top:0"></svg>
+  <div class="core" id="core"><img src="tasyir-erp-symbole.svg"></div>
+  <div class="mod" id="m0"><i></i>Production</div>
+  <div class="mod m" id="m1"><i></i>Stock</div>
+  <div class="mod" id="m2"><i></i>Paie</div>
+  <div class="mod m" id="m3"><i></i>Comptabilité</div>
+  <div class="mod" id="m4"><i></i>Achats</div>
+  <div class="mod m" id="m5"><i></i>Commercial</div>
+  <div class="abs" id="brand2" style="left:140px;right:140px;top:420px"><img src="tasyir-erp-negatif.svg" style="width:100%"></div>
+  <div class="big2 ar" id="big2"><em>logiciel</em> واحد</div>
+</div>
+
+<!-- S3 G50 -->
+<div class="scene" id="s3">
+  <div class="step" id="st3"><div class="n">1</div><div class="t">الـG50 <b>تخرج وحدها</b></div></div>
+  <div class="phone" id="ph3"><div class="notch"></div><div class="scr">
+    <div class="app-h"><img src="tasyir-erp-negatif.svg"><span>/ Déclarations</span></div>
+    <div class="card" id="g50">
+      <h4>G50 · Octobre 2026</h4><div class="sm">Généré depuis vos saisies</div>
+      <div style="margin-top:14px">
+      <div class="row">Ventes du mois<span class="pill" id="r0">repris</span></div>
+      <div class="row">Achats du mois<span class="pill" id="r1">repris</span></div>
+      <div class="row">Paie du mois<span class="pill" id="r2">repris</span></div>
+      <div class="row">IRG sur salaires<span class="pill" id="r3">calculé</span></div>
+      <div class="row">Déclaration CNAS<span class="pill" id="r4">prête</span></div>
+      </div>
+    </div>
+    <div class="btn" id="b3">Générer la G50</div>
+  </div></div>
+  <div class="stamp" id="stamp3" style="left:300px;top:1180px">Prête à déposer ✓</div>
+</div>
+
+<!-- S4 paie -->
+<div class="scene" id="s4">
+  <div class="step" id="st4"><div class="n">2</div><div class="t">la paie <b>في مرة وحدة</b></div></div>
+  <div class="phone" id="ph4"><div class="notch"></div><div class="scr">
+    <div class="app-h"><img src="tasyir-erp-negatif.svg"><span>/ Paie</span></div>
+    <div class="card" style="display:flex;align-items:center;gap:26px">
+      <svg width="150" height="150" viewBox="0 0 150 150"><circle cx="75" cy="75" r="62" stroke="rgba(255,255,255,.08)" stroke-width="16" fill="none"/>
+      <circle id="ring" cx="75" cy="75" r="62" stroke="url(#rg)" stroke-width="16" fill="none" stroke-linecap="round" transform="rotate(-90 75 75)" stroke-dasharray="389.6" stroke-dashoffset="389.6"/>
+      <defs><linearGradient id="rg"><stop offset="0" stop-color="#55CFEA"/><stop offset="1" stop-color="#0099E1"/></linearGradient></defs>
+      <text id="pct" x="75" y="86" text-anchor="middle" fill="#F1F5F9" font-family="Inter" font-weight="800" font-size="34">0%</text></svg>
+      <div><h4>Paie d'octobre</h4><div class="sm">Tout l'effectif</div></div>
+    </div>
+    <div class="card" style="padding-top:10px;padding-bottom:10px">
+      <div class="row">Pointage importé<span class="pill" id="q0">…</span></div>
+      <div class="row">IRG et CNAS<span class="pill" id="q1">…</span></div>
+      <div class="row">Fiches de paie<span class="pill" id="q2">…</span></div>
+    </div>
+    <div class="btn mag" id="b4">Clôturer la période</div>
+  </div></div>
+  <div class="stamp" id="stamp4" style="left:250px;top:1190px;border-color:var(--magl);color:var(--magl);background:rgba(40,8,22,.88)">🔒 Période verrouillée</div>
+</div>
+
+<!-- S5 stock -->
+<div class="scene" id="s5">
+  <div class="step" id="st5"><div class="n">3</div><div class="t">تشري <b>غير واش يلزمك</b></div></div>
+  <div class="bars">
+    <div class="bar" id="barA" style="left:0;background:linear-gradient(180deg,#FF6FA6,#A01F64)"></div>
+    <div class="over ar" id="overA" style="left:0">stock زايد ✕</div>
+    <div class="blab" style="left:0">« Au cas où »</div>
+    <div class="bar" id="barB" style="right:0;background:linear-gradient(180deg,#7DDCF1,#0079BC)"></div>
+    <div class="blab" style="right:0;color:var(--cyan)">Besoin réel</div>
+  </div>
+  <div class="zero" id="zero">Zéro stock inutile</div>
+</div>
+
+<!-- S6 preuve -->
+<div class="scene" id="s6">
+  <div class="plus1" id="p1"><div class="n" id="p1n">+1</div><div class="u ar">عام في <b>entreprise</b></div></div>
+  <div class="trust">
+    <div class="tr" id="t0"><div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#55CFEA" stroke-width="2.2"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>Conforme G50 · IRG · CNAS</div>
+    <div class="tr" id="t1"><div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#55CFEA" stroke-width="2.2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>Hébergement en Algérie possible</div>
+    <div class="tr" id="t2"><div class="ic"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#55CFEA" stroke-width="2.2"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg></div>Export de vos données garanti</div>
+  </div>
+</div>
+
+<!-- S7 fin -->
+<div class="scene" id="s7">
+  <div class="endlogo" id="endlogo"><img src="tasyir-erp-negatif.svg"><div class="sweep" id="sweep"></div></div>
+  <div class="slogan" id="slogan">L'ERP algérien des entreprises qui fabriquent</div>
+  <div class="cta" id="cta">Demander une démo</div>
+  <div class="url" id="url">tasyirerp.com · <span class="ar">الرابط في la bio</span> ↑</div>
+</div>
+
+<div class="touch" id="touch"></div><div class="ripple" id="ripple"></div>
+<div class="hlbox" id="hl"></div>
+<div id="subs"><div id="sub" class="ar"></div></div>
+<div id="grain"></div><div id="vign"></div><div id="flash"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3), ex=x=>x>=1?1:1-Math.pow(2,-10*x), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c=1.9;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+function S(el,o){el=typeof el=='string'?$(el):el;let tr='';
+ if(o.x!=null||o.y!=null)tr+=`translate(${o.x||0}px,${o.y||0}px) `; if(o.s!=null)tr+=`scale(${o.s}) `; if(o.r!=null)tr+=`rotate(${o.r}deg) `;
+ if(o.base)tr=o.base+' '+tr; if(tr)el.style.transform=tr; if(o.o!=null)el.style.opacity=o.o; if(o.f!=null)el.style.filter=o.f;}
+const rnd=(i)=>{const x=Math.sin(i*12.9898)*43758.5453;return x-Math.floor(x)};
+
+// --- calage sur la voix (secondes) ---
+const VO=[[0.15,2.72,["الـG50 والـpaie،","مازال تحسبهم بالـExcel؟"]],
+[3.17,4.64,["مع Tasyir ERP،","الـstock، الـproduction والـpaie،","في logiciel واحد."]],
+[8.11,4.21,["واحد: الـG50، الـIRG والـCNAS،","يخرجو automatiquement."]],
+[12.62,3.20,["زوج: la paie تتحسب مرة وحدة،","لقاع الخدامين."]],
+[16.12,4.00,["تلاتة: تشري غير واش يلزمك،","بلا stock زايد."]],
+[20.47,5.44,["مخدوم بيه في entreprise","من كثر من عام،","و les données تاعك","تقدر تبقى في الدزاير."]],
+[26.31,1.85,["Tasyir ERP."]],
+[28.36,2.40,["أطلب ديمو،","الرابط كاين في البيو."]]];
+const SUBS=[];VO.forEach(([s,d,ch])=>{const tot=ch.reduce((a,c)=>a+c.length,0);let t=s;ch.forEach(c=>{const dd=d*c.length/tot;SUBS.push([t,t+dd,c]);t+=dd})});
+const SC={s1:[0,3.05],s2:[3.05,8.0],s3:[8.0,12.5],s4:[12.5,16.0],s5:[16.0,20.35],s6:[20.35,26.2],s7:[26.2,32.1]};
+const CUTS=[3.05,8.0,12.5,16.0,20.35,26.2];
+
+// grille Excel (aucun chiffre : formules et erreurs génériques)
+(()=>{const v=["=SOMME(B2:B48)","#REF!","####","=RECHERCHEV(…)","#VALEUR!","Feuil1","G50_final_v3","Paie_OCT","CNAS (copie)","#N/A","=B12*C12","Stock_vrai?"];
+ let h='';for(let i=0;i<6*24;i++){const k=Math.floor(rnd(i+3)*v.length);const e=v[k].startsWith('#');h+=`<div class="${e?'err':''}">${v[k]}</div>`}$('xls').innerHTML=h})();
+
+// positions des modules autour du cœur
+const MODS=[[540,560],[860,740],[860,1060],[540,1240],[220,1060],[220,740]];
+function touchAt(t,t0,x,y){const a=P(t,t0-0.35,t0-0.05),b=P(t,t0,t0+0.45);
+ S('touch',{o:a>0&&b<1?(b>0?1-b:eo(a)):0,s:b>0?1-0.15*Math.sin(Math.PI*cl(b*3)):1.3-0.3*eo(a)});$('touch').style.left=x+'px';$('touch').style.top=y+'px';
+ S('ripple',{o:b>0&&b<1?1-b:0,s:0.5+2*eo(b)});$('ripple').style.left=x+'px';$('ripple').style.top=y+'px';}
+function pillOn(id,t,t0,cls,label){const el=$(id);if(t>=t0){el.className='pill '+cls;el.innerHTML=(cls=='lk'?'':'✓ ')+label;const k=P(t,t0,t0+0.3);S(el,{s:1+0.35*Math.sin(Math.PI*k)})}else{el.className='pill';S(el,{s:1})}}
+
+function render(t){
+ // fond
+ S('grid',{x:-(t*14)%90,y:-(t*22)%90});
+ // scènes : entrée zoom+flou, sortie
+ for(const [id,[a,b]] of Object.entries(SC)){const el=$(id);const i=P(t,a,a+0.32),o=P(t,b-0.18,b);const vis=t>=a-0.01&&t<b+0.01;
+  if(!vis){el.style.opacity=0;continue}
+  const s=(1.18-0.18*ex(i))*(1+0.08*o);el.style.opacity=Math.min(eo(i)*1.2,1-o);el.style.transform=`scale(${s})`;el.style.filter=`blur(${(1-ex(i))*18+o*14}px)`;}
+ // flash sur les coupes
+ let f=0;CUTS.forEach(c=>{f=Math.max(f,1-P(t,c-0.03,c+0.16))*(t>=c-0.03?1:0)});S('flash',{o:f*0.55});
+ // secousse
+ let sh=0;[[0.05,.5],[3.12,1],[26.31,1],[30.8,1.2]].forEach(([c,k])=>{const p=P(t,c,c+0.4);if(p>0&&p<1)sh=Math.max(sh,k*(1-p))});
+ $('stage').style.transform=`translate(${(rnd(Math.floor(t*30))-.5)*28*sh}px,${(rnd(Math.floor(t*30)+7)-.5)*28*sh}px)`;
+ // images d'ambiance
+ const kO=Math.max(t>3.05&&t<8?0.38*P(t,3.05,3.5):0,t>20.35&&t<26.2?0.32:0);S('bgK',{o:kO,s:1.05+0.04*((t%6)/6)});
+ const fO=t>16&&t<20.35?0.4:(t>26.2?0.22*P(t,26.2,27):0);S('bgF',{o:fO,s:1.05+0.05*P(t,16,32)});S('shade',{o:Math.max(kO,fO)>0?1:0});
+
+ // ===== S1 accroche =====
+ if(t<3.2){S('xls',{base:'rotate(-8deg)',y:-t*60,x:Math.sin(t*20)*3*(t<0.4?1:0)});
+  const g=t<0.5||(t>1.6&&t<1.75)||(t>2.55&&t<2.75);
+  S('h1',{o:eo(P(t,0.1,0.4)),s:1.25-0.25*back(P(t,0.1,0.45)),x:g?(rnd(t*99)-.5)*30:0});
+  S('h2',{o:eo(P(t,0.9,1.15)),y:60*(1-ex(P(t,0.9,1.3))),x:g?(rnd(t*77)-.5)*24:0});
+  $('h1').style.textShadow=g?'-8px 0 #EE2E78,8px 0 #55CFEA':'0 10px 50px rgba(0,0,0,.8)';
+  $('strike').style.transform=`scaleX(${eo(P(t,2.45,2.7))})`;
+  S('xl',{r:t>2.45?-3*eo(P(t,2.45,2.7)):0,s:1+0.1*Math.sin(Math.PI*P(t,2.45,2.8))});}
+ // ===== S2 =====
+ if(t>2.9&&t<8.2){
+  S('brand2',{o:eo(P(t,3.15,3.45))*(1-P(t,4.6,4.9)),s:1.3-0.3*back(P(t,3.15,3.6)),y:-40*P(t,4.6,4.9)});
+  S('core',{o:eo(P(t,4.5,4.8)),s:0.3+0.7*back(P(t,4.5,4.95))*(1+0.04*Math.sin(t*6))});
+  let svg='';
+  MODS.forEach(([x,y],i)=>{const t0=4.7+i*0.22;const p=back(P(t,t0,t0+0.45));const el=$('m'+i);
+   const w=el.offsetWidth,h=el.offsetHeight;const ang=i/6*Math.PI*2-Math.PI/2;const fx=540+Math.cos(ang)*900,fy=900+Math.sin(ang)*1100;
+   const cx=fx+(x-fx)*p,cy=fy+(y-fy)*p;S(el,{x:cx-w/2,y:cy-h/2,o:P(t,t0,t0+0.15)});
+   const lp=P(t,6.4,6.9);if(lp>0){const lx=540+(x-540)*lp,ly=900+(y-900)*lp;svg+=`<line x1="540" y1="900" x2="${lx}" y2="${ly}" stroke="${i%2?'#EE2E78':'#55CFEA'}" stroke-width="4" stroke-opacity=".7" stroke-dasharray="10 10" stroke-dashoffset="${-t*80}"/>`;}});
+  $('links').innerHTML=svg;
+  S('big2',{o:eo(P(t,6.75,7.0)),s:1.4-0.4*back(P(t,6.75,7.2)),y:60});}
+ // ===== S3 G50 =====
+ if(t>7.8&&t<12.7){
+  S('st3',{o:eo(P(t,8.05,8.3)),x:-80*(1-ex(P(t,8.05,8.45)))});
+  const z=eio(P(t,9.0,9.6))*(1-eio(P(t,11.2,11.8)));S('ph3',{y:80*(1-ex(P(t,8.0,8.5)))+40*z,s:1+0.1*z});
+  touchAt(t,8.55,540,1235);if(t>8.55)$('b3').style.filter=`brightness(${1+0.6*(1-P(t,8.55,8.9))})`;
+  pillOn('r0',t,8.75,'ok','repris');pillOn('r1',t,9.0,'ok','repris');pillOn('r2',t,9.25,'ok','repris');pillOn('r3',t,9.75,'bl','calculé');pillOn('r4',t,10.4,'ok','prête');
+  const sp=P(t,11.15,11.35);S('stamp3',{o:sp>0?1:0,s:2.4-1.4*eo(sp),r:-8});}
+ // ===== S4 paie =====
+ if(t>12.3&&t<16.2){
+  S('st4',{o:eo(P(t,12.55,12.8)),x:-80*(1-ex(P(t,12.55,12.95))) });
+  S('ph4',{y:80*(1-ex(P(t,12.5,13.0)))});
+  const r=eio(P(t,12.9,14.4));$('ring').setAttribute('stroke-dashoffset',389.6*(1-r));$('pct').textContent=Math.round(r*100)+'%';
+  pillOn('q0',t,13.1,'ok','importé');pillOn('q1',t,13.6,'bl','calculés');pillOn('q2',t,14.4,'ok','générées');
+  touchAt(t,14.85,540,1235);
+  const sp=P(t,15.05,15.25);S('stamp4',{o:sp>0?1:0,s:2.4-1.4*eo(sp),r:-6});}
+ // ===== S5 stock =====
+ if(t>15.8&&t<20.5){
+  S('st5',{o:eo(P(t,16.05,16.3)),x:-80*(1-ex(P(t,16.05,16.45)))});
+  const A=620*eo(P(t,16.4,17.0));const shrink=eio(P(t,18.1,18.7));const B=330*eo(P(t,17.4,17.9));
+  $('barA').style.height=(A-(A-B)*shrink*0)+'px';
+  $('barA').style.opacity=1-0.65*shrink;$('barB').style.height=B+'px';
+  const ov=$('overA');ov.style.bottom=(90+330)+'px';ov.style.height=Math.max(0,620-330)+'px';S(ov,{o:eo(P(t,18.6,18.9)),s:1+0.1*Math.sin(Math.PI*P(t,18.6,19.0))});
+  S('zero',{o:eo(P(t,19.2,19.45)),s:1.3-0.3*back(P(t,19.2,19.6))});}
+ // ===== S6 preuve =====
+ if(t>20.1&&t<26.4){
+  S('p1',{o:eo(P(t,20.45,20.7)),s:1.5-0.5*back(P(t,20.45,20.95)),y:-20*P(t,22.6,23.2)});
+  ['t0','t1','t2'].forEach((id,i)=>{const t0=[21.9,23.2,24.6][i];S(id,{o:eo(P(t,t0,t0+0.25)),x:120*(1-ex(P(t,t0,t0+0.4)))})});
+  $('t1').className='tr'+(t>23.4&&t<25.9?' on':'');}
+ // ===== S7 fin =====
+ if(t>26.0){
+  S('endlogo',{o:eo(P(t,26.3,26.5)),s:1.35-0.35*back(P(t,26.3,26.8))});
+  S('sweep',{x:-300+1300*eio(P(t,26.9,27.7))});
+  S('slogan',{o:eo(P(t,27.4,27.8)),y:30*(1-eo(P(t,27.4,27.8)))});
+  S('cta',{base:'translateX(-50%)',o:eo(P(t,28.35,28.6)),s:(0.6+0.4*back(P(t,28.35,28.8)))*(t>29.25?1-0.06*Math.sin(Math.PI*P(t,29.25,29.5)):1)});
+  touchAt(t,29.25,700,1150);
+  S('url',{o:eo(P(t,29.6,29.9)),y:30*(1-eo(P(t,29.6,29.9)))});
+  const fo=P(t,31.4,32.0);S('s7',{o:1-fo*0.0});}
+ // sous-titres
+ const cur=SUBS.find(s=>t>=s[0]&&t<s[1]+0.08);const sub=$('sub');
+ if(cur){if(sub.dataset.k!=cur[2]){sub.dataset.k=cur[2];sub.innerHTML=cur[2].replace(/(Tasyir ERP|G50|IRG|CNAS|paie|logiciel|Excel|stock|automatiquement|entreprise|données|الدزاير|ديمو|البيو)/g,'<span class="hl">$1</span>')}
+  const k=P(t,cur[0],cur[0]+0.12);S('subs',{o:1,y:14*(1-eo(k)),s:0.94+0.06*eo(k)});
+  // ajustement automatique : jamais plus large que 940 px
+  sub.style.transform='';const w=sub.scrollWidth;sub.style.transform=w>940?`scale(${940/w})`:'';}
+ else S('subs',{o:0});
+}
+window.render=render;
+window.cover=function(){render(2.95);$('s1').style.opacity=1;$('s1').style.filter='none';$('s1').style.transform='none';$('stage').style.transform='none';$('subs').style.opacity=0;$('flash').style.opacity=0;
+ $('hook').style.top='760px';const l=document.createElement('img');l.src='tasyir-erp-negatif.svg';l.style.cssText='position:absolute;left:250px;width:580px;top:430px;z-index:5';$('s1').appendChild(l);
+ const c=document.createElement('div');c.className='ar';c.innerHTML='كلش في <span style="color:#55CFEA;font-family:Inter">logiciel</span> واحد';c.style.cssText='position:absolute;left:0;right:0;top:1150px;text-align:center;font:700 64px Plex,Inter;direction:rtl;z-index:5';$('s1').appendChild(c);};
+</script></body></html>
