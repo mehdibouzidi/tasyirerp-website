@@ -129,9 +129,9 @@ Règles de contenu à garder : montrer les bénéfices, jamais le fonctionnement
 
 ## Thème sombre et clair
 
-Le site s'affiche en **sombre par défaut** (`data-theme="dark"` sur la balise `<html>` de chaque page). Le bouton lune/soleil de l'en-tête bascule en clair ; le choix du visiteur est gardé dans son navigateur.
+Le site s'affiche en **clair par défaut** (`data-theme="light"` sur la balise `<html>` de chaque page). Le bouton lune/soleil de l'en-tête bascule en sombre ; le choix du visiteur est gardé dans son navigateur.
 
-- Pour revenir au clair par défaut : retirer `data-theme="dark"` de la balise `<html>` des pages.
+- Pour passer en sombre par défaut : mettre `data-theme="dark"` sur la balise `<html>` des pages.
 - Les couleurs des deux thèmes sont des variables en haut de `site.css` (bloc « thème clair », puis « thème sombre »).
 
 ## Animations

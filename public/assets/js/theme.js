@@ -1,4 +1,4 @@
-/* Thème sombre par défaut (data-theme="dark" dans le HTML). Si le visiteur a choisi le thème clair, il est appliqué
+/* Thème clair par défaut (data-theme="light" dans le HTML). Si le visiteur a choisi le thème sombre, il est appliqué
    avant l'affichage pour éviter un flash. Le choix est gardé dans son navigateur. */
 (function () {
   try {
