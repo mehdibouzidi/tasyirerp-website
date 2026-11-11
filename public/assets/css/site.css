@@ -805,3 +805,32 @@ a { color: inherit; }
 .chain { max-width: 960px; }
 @media (max-width: 1279px) { .floatcard { display: none; } }
 @media (max-width: 379px) { .reference__big { font-size: 72px; } }
+
+/* ---------- Captures réelles du logiciel ---------- */
+.win--shot { margin: 0; display: flex; flex-direction: column; background: #F4F6F8; }
+.win--shot .win__img { display: block; width: 100%; height: auto; flex: none; }
+.tile__art--shot { padding: 32px 32px 0; place-items: end center; }
+.shot {
+  margin: 0; width: 100%; height: 100%; max-height: 288px; overflow: hidden; align-self: end;
+  background: #fff; border: 1px solid var(--line); border-bottom: 0; border-radius: 12px 12px 0 0;
+  box-shadow: var(--shadow); display: flex; flex-direction: column;
+  transition: transform .4s var(--ease);
+}
+.shot__bar { flex: none; display: flex; align-items: center; gap: 12px; height: 30px; padding: 0 12px; background: #F4F6F8; border-bottom: 1px solid rgba(17,24,39,.08); }
+.shot__bar .win__dots i { width: 8px; height: 8px; background: #D5DCE3; }
+.shot__crumb { font-size: 11.5px; font-weight: 600; color: #4B5563; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.shot img { display: block; width: 100%; height: auto; transform-origin: top left; transition: transform .6s var(--ease); }
+.tile:hover .shot { transform: translateY(-4px); }
+.tile:hover .shot img { transform: scale(1.02); }
+@media (max-width: 639px) {
+  .tile__art--shot { padding: 20px 16px 0; min-height: 0; }
+  .shot { max-height: 220px; }
+}
+.win--shot { border-color: rgba(255,255,255,.14); }
+.win--shot .win__bar { background: #F4F6F8; border-bottom-color: rgba(17,24,39,.08); }
+.win--shot .win__crumb { color: #586273; }
+.win--shot .win__crumb b { color: #111827; }
+.win--shot .win__dots i { background: #D5DCE3; }
+.tile__art.tile__art--shot { height: 320px; display: flex; align-items: flex-end; justify-content: center; padding: 36px 32px 0; }
+.tile__art--shot .shot { height: auto; max-height: 100%; }
+@media (max-width: 639px) { .tile__art.tile__art--shot { height: 240px; padding: 20px 14px 0; } }

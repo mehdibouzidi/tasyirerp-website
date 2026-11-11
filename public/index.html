@@ -154,63 +154,22 @@
 
       <div class="hero__stage" data-enter>
         <div class="stage">
-          <!-- Maquette stylisée de l'écran Paie et déclarations : chiffres fictifs, aucun montant, aucun écran de production -->
-          <div class="win" aria-hidden="true">
-            <div class="win__bar">
+          <!-- Capture réelle de Tasyir ERP, base de démonstration aux données entièrement fictives (SARL Restauration Démo) -->
+          <figure class="win win--shot">
+            <div class="win__bar" aria-hidden="true">
               <span class="win__dots"><i></i><i></i><i></i></span>
-              <span class="win__crumb"><img src="/assets/logo/tasyir-erp-icone.svg" alt="" width="18" height="15"> Tasyir ERP <span class="sep">/</span> <b>Paie et déclarations</b></span>
-              <span class="win__search">Rechercher</span>
+              <span class="win__crumb"><img src="/assets/logo/tasyir-erp-icone.svg" alt="" width="18" height="15"> <span>Tasyir ERP</span> <span class="sep">/</span> <span>Comptabilité</span> <span class="sep">/</span> <b>Déclaration G50</b></span>
             </div>
-            <div class="win__body">
-              <div class="win__side">
-                <span class="side__i">Tableau de bord</span>
-                <span class="side__i">Commercial</span>
-                <span class="side__i">Achats et stock</span>
-                <span class="side__i">Production</span>
-                <span class="side__i">Comptabilité</span>
-                <span class="side__i is-on">Paie <em>248</em></span>
-                <span class="side__i">Ressources humaines</span>
-              </div>
-              <div class="win__main">
-                <div class="win__head">
-                  <div><b>Octobre 2026</b><span>248 salariés · 3 sites</span></div>
-                  <span class="ui-btn">Clôturer la période</span>
-                </div>
-                <div class="win__kpis">
-                  <div><span>Salariés</span><b>248</b></div>
-                  <div><span>Fiches de paie</span><b>248 / 248</b></div>
-                  <div><span>Déclarations prêtes</span><b>3</b></div>
-                  <div><span>Périodes clôturées</span><b>9</b></div>
-                </div>
-                <div class="win__tabs"><span class="is-on">Tout 6</span><span>Prêt 4</span><span>Clôturé 1</span></div>
-                <ul class="win__rows">
-                  <li><span class="doc-i"></span><span class="r__t"><b>Fiches de paie</b><span>248 salariés</span></span><span class="r__when">Aujourd'hui</span><span class="chip chip--ok">Générées</span></li>
-                  <li><span class="doc-i"></span><span class="r__t"><b>IRG sur salaires</b><span>Barème en vigueur</span></span><span class="r__when">Aujourd'hui</span><span class="chip chip--ok">Calculé</span></li>
-                  <li><span class="doc-i"></span><span class="r__t"><b>Déclaration CNAS</b><span>Cotisations du mois</span></span><span class="r__when">Aujourd'hui</span><span class="chip chip--blue">Prête</span></li>
-                  <li><span class="doc-i"></span><span class="r__t"><b>G50</b><span>Ventes, achats et paie repris</span></span><span class="r__when">Aujourd'hui</span><span class="chip chip--blue">Prête</span></li>
-                  <li><span class="doc-i"></span><span class="r__t"><b>Contrats et avenants</b><span>3 nouveaux</span></span><span class="r__when">Hier</span><span class="chip chip--ok">Générés</span></li>
-                  <li class="is-locked"><span class="doc-i doc-i--lock"></span><span class="r__t"><b>Septembre 2026</b><span>Période validée</span></span><span class="r__when">30 sept.</span><span class="chip chip--lock">Clôturée</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <img class="win__img" src="/assets/img/app/g50-octobre-1600.webp" srcset="/assets/img/app/g50-octobre-800.webp 800w, /assets/img/app/g50-octobre-1600.webp 1600w" sizes="(max-width: 1023px) 100vw, 1000px" width="1600" height="1186" fetchpriority="high" decoding="async" alt="Écran Tasyir ERP : déclaration G50 d'octobre 2026 générée automatiquement, avec TVA nette, IRG, TFAP et contrôles de réconciliation (données fictives)">
+          </figure>
           <div class="runcard" data-run aria-hidden="true">
             <p class="runcard__t">Clôture de la paie d'octobre</p>
             <ol>
               <li><span class="tick"></span>Pointage du mois importé</li>
               <li><span class="tick"></span>IRG et CNAS calculés</li>
-              <li><span class="tick"></span>248 fiches de paie générées</li>
+              <li><span class="tick"></span>88 fiches de paie générées</li>
             </ol>
             <p class="runcard__end"><svg viewBox="0 0 24 24" width="14" height="14"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>Période verrouillée</p>
-          </div>
-          <div class="floatcard" aria-hidden="true">
-            <p class="floatcard__t"><span class="floatcard__ico"></span>G50 · Octobre 2026</p>
-            <ul class="checks">
-              <li><span>Ventes du mois</span><em>repris</em></li>
-              <li><span>Achats du mois</span><em>repris</em></li>
-              <li><span>Paie du mois</span><em>repris</em></li>
-            </ul>
-            <span class="chip chip--blue">Prête à déposer</span>
           </div>
           <button class="pause" type="button" data-run-toggle aria-pressed="false">
             <span class="sr-only">Mettre l'animation en pause</span>
@@ -272,32 +231,21 @@
         </div>
         <div class="bento">
           <article class="tile tile--7">
-            <div class="tile__art" aria-hidden="true">
-              <div class="frag frag--doc">
-                <div class="frag__head"><b>G50 · Octobre 2026</b><span class="chip chip--blue">Prête à déposer</span></div>
-                <ul class="checks">
-                  <li><span>Ventes du mois</span><em>repris</em></li>
-                  <li><span>Achats du mois</span><em>repris</em></li>
-                  <li><span>Paie du mois</span><em>repris</em></li>
-                  <li><span>IRG sur salaires</span><em>calculé</em></li>
-                </ul>
-              </div>
+            <div class="tile__art tile__art--shot">
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><span class="win__dots"><i></i><i></i><i></i></span><span class="shot__crumb">Comptabilité · Déclarations G50</span></div>
+                <img src="/assets/img/app/g50-liste-800.webp" srcset="/assets/img/app/g50-liste-800.webp 800w, /assets/img/app/g50-liste-1600.webp 1600w" sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 40vw" width="800" height="352" loading="lazy" decoding="async" alt="Écran Tasyir ERP : liste des déclarations G50 de l'année, avec TVA, IRG, TFAP, total et statut (données fictives)">
+              </figure>
             </div>
             <div class="tile__text"><h3>G50 générée automatiquement</h3><p>Les montants viennent des ventes, des achats et de la paie. Vous vérifiez, vous déposez.</p></div>
           </article>
 
           <article class="tile tile--5">
-            <div class="tile__art" aria-hidden="true">
-              <div class="frag frag--slip">
-                <div class="frag__head"><b>Fiche de paie</b><span class="muted-ui">Octobre 2026</span></div>
-                <dl class="slip">
-                  <div><dt>Salaire de base</dt><dd><i class="w70"></i></dd></div>
-                  <div><dt>Heures supplémentaires</dt><dd><i class="w34"></i></dd></div>
-                  <div><dt>Retenue CNAS</dt><dd><i class="w28"></i></dd></div>
-                  <div><dt>IRG</dt><dd><i class="w40"></i></dd></div>
-                  <div class="slip__net"><dt>Net à payer</dt><dd><i class="w62"></i></dd></div>
-                </dl>
-              </div>
+            <div class="tile__art tile__art--shot">
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><span class="win__dots"><i></i><i></i><i></i></span><span class="shot__crumb">Ressources humaines · État CNAS</span></div>
+                <img src="/assets/img/app/etat-cnas-800.webp" srcset="/assets/img/app/etat-cnas-800.webp 800w, /assets/img/app/etat-cnas-1600.webp 1600w" sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 40vw" width="800" height="396" loading="lazy" decoding="async" alt="Écran Tasyir ERP : état CNAS annuel, salaire cotisable par salarié et par mois (données fictives)">
+              </figure>
             </div>
             <div class="tile__text"><h3>Paie calculée en une fois</h3><p>Pointage, IRG, cotisations CNAS et fiches de paie pour tout l'effectif.</p></div>
           </article>
@@ -354,26 +302,27 @@
             <div class="tile__text"><h3>Toute la chaîne, reliée</h3><p>De l'achat à la production, de la logistique au client et à son suivi&nbsp;: chaque étape alimente la suivante.</p></div>
           </article>
 
-          <article class="tile tile--4">
-            <div class="tile__art" aria-hidden="true">
-              <ol class="docflow" data-loop>
-                <li>Devis</li><li>Proforma</li><li>Commande</li><li>Livraison</li><li>Facture</li>
-              </ol>
+          <article class="tile tile--6">
+            <div class="tile__art tile__art--shot">
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><span class="win__dots"><i></i><i></i><i></i></span><span class="shot__crumb">Commercial · Facture proforma</span></div>
+                <img src="/assets/img/app/proforma-800.webp" srcset="/assets/img/app/proforma-800.webp 800w, /assets/img/app/proforma-1600.webp 1600w" sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 40vw" width="800" height="532" loading="lazy" decoding="async" alt="Écran Tasyir ERP : facture proforma générée à partir d'un devis, avec totaux HT, TVA et TTC (données fictives)">
+              </figure>
             </div>
             <div class="tile__text"><h3>Du devis à la proforma</h3><p>Le devis lance le besoin. Chaque document suivant se crée sans ressaisie.</p></div>
           </article>
 
-          <article class="tile tile--4">
-            <div class="tile__art" aria-hidden="true">
-              <div class="frag frag--stock">
-                <div class="stockbar"><span>Stock «&nbsp;au cas où&nbsp;»</span><i class="stockbar__old"></i></div>
-                <div class="stockbar"><span>Besoin réel calculé</span><i class="stockbar__new"></i></div>
-              </div>
+          <article class="tile tile--6">
+            <div class="tile__art tile__art--shot">
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><span class="win__dots"><i></i><i></i><i></i></span><span class="shot__crumb">Approvisionnement · Bons de commande</span></div>
+                <img src="/assets/img/app/commandes-fournisseurs-800.webp" srcset="/assets/img/app/commandes-fournisseurs-800.webp 800w, /assets/img/app/commandes-fournisseurs-1600.webp 1600w" sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 40vw" width="800" height="361" loading="lazy" decoding="async" alt="Écran Tasyir ERP : bons de commande fournisseurs générés à partir des demandes d'achat (données fictives)">
+              </figure>
             </div>
             <div class="tile__text"><h3>Zéro stock inutile</h3><p>Le logiciel calcule le besoin réel. Vous n'achetez que ce qui sera consommé.</p></div>
           </article>
 
-          <article class="tile tile--4">
+          <article class="tile tile--6">
             <div class="tile__art" aria-hidden="true">
               <div class="frag frag--doc">
                 <div class="frag__head"><b>Besoins annuels calculés</b><span class="ui-btn ui-btn--ghost">Exporter</span></div>
@@ -385,6 +334,16 @@
               </div>
             </div>
             <div class="tile__text"><h3>Une base pour votre PPI</h3><p>Les besoins calculés servent de base au Programme Prévisionnel d'Importation demandé par le ministère du Commerce extérieur.</p></div>
+          </article>
+
+          <article class="tile tile--6">
+            <div class="tile__art tile__art--shot">
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><span class="win__dots"><i></i><i></i><i></i></span><span class="shot__crumb">Patrimoine · Biens immobilisés</span></div>
+                <img src="/assets/img/app/patrimoine-800.webp" srcset="/assets/img/app/patrimoine-800.webp 800w, /assets/img/app/patrimoine-1600.webp 1600w" sizes="(max-width: 639px) 92vw, (max-width: 1023px) 46vw, 40vw" width="800" height="317" loading="lazy" decoding="async" alt="Écran Tasyir ERP : registre des biens immobilisés avec catégorie, localisation, état et valeur d'acquisition (données fictives)">
+              </figure>
+            </div>
+            <div class="tile__text"><h3>Patrimoine suivi et amorti</h3><p>Équipements, véhicules et immobilisations : localisation, état, valeur et amortissements mensuels.</p></div>
           </article>
 
           <article class="tile tile--12 tile--row" id="iso-9001">
