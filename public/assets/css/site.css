@@ -804,3 +804,4 @@ a { color: inherit; }
 }
 .chain { max-width: 960px; }
 @media (max-width: 1279px) { .floatcard { display: none; } }
+@media (max-width: 379px) { .reference__big { font-size: 72px; } }
