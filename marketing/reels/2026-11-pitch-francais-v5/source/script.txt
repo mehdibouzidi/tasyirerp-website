@@ -1,0 +1,8 @@
+f01|[curious] Vous produisez encore... au feeling ?
+f02|[sighs] Achats « au cas où »... Coûts et écarts connus TROP tard.
+f03|[excited] Tassyir E.R.P. ! Toute l'entreprise, pilotée par le besoin RÉEL.
+f04|Du devis à la facture... sans ressaisie !
+f05|[confident] Vos besoins annuels calculés : la base de votre Programme Prévisionnel d'Importation.
+f06|G cinquante, I.R.G., Knass et paie : générées AUTOMATIQUEMENT !
+f07|[warm] Utilisé en entreprise depuis plus de deux ans.
+f08|[excited] Demandez votre démo !
