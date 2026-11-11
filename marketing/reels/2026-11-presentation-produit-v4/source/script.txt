@@ -1,0 +1,9 @@
+w01|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [curious, light] شحال عندكم بصح سلعة في ستوك؟
+w02|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [curious, light] ولا شحال بعتوهم برودوي؟
+w03|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [knowing, friendly] تسقسيو بصح كل سيرفيس يعطيكم شيفر واحد اخر!
+w04|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [enthusiastic, confident] تسيير إي إر پي يسنتراليزي كلش في بلاصة وحدة ويعطيكم لا ڤيزيبيليتي اللي كانت خاصتكم!
+w05|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [lively, positive] پروديكسيون، ستوك، كونتابيليتي، ولّا الپاي!
+w06|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [enthusiastic, happy] جامي لا جيستيون نا إيتي أوسي فاسيل!
+w07|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [warm, reassuring] الجواب راح يكون قدامكم وفي بلاصة واحدة!
+w08|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [confident, positive] ديسيدي وانتم على بالكم وش راكم تديروا!
+w09|[strong Algerian accent] [warm, upbeat, friendly TV commercial voice] [inviting, enthusiastic] ديمونديو لا ديمو توت دو سويت! لو ليان راهو ف لا بيو!
