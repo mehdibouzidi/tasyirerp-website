@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Inter;font-weight:100 900;src:url(inter-latin-wght-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-weight:100 900;src:url(inter-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+1E00-1EFF}
+:root{--cyan:#55CFEA;--bleu:#0079BC;--bleu2:#0099E1;--mag:#EE2E78;--magl:#FF8DB8;--ink:#F1F5F9;--ink2:#CBD5E1;--muted:#98A4B6;--ok:#6EE7B7;--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#060A14}
+body{font-family:Inter,sans-serif;color:var(--ink)}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(70% 45% at 80% 0%,rgba(85,207,234,.24),transparent 70%),radial-gradient(60% 40% at 0% 100%,rgba(238,46,120,.18),transparent 70%),linear-gradient(160deg,#10203A,#0B1426 55%,#070C18)}
+#tint{position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 45%,rgba(238,46,120,.22),transparent 70%);opacity:0}
+#grid{position:absolute;inset:-200px;background-image:linear-gradient(rgba(85,207,234,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(85,207,234,.07) 1px,transparent 1px);background-size:90px 90px}
+.abs{position:absolute}.scene{position:absolute;inset:0;opacity:0}.c{position:absolute;left:0;right:0;text-align:center}
+#vign{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 45%,transparent 55%,rgba(0,0,0,.65))}
+#flash{position:absolute;inset:0;background:#fff;opacity:0}
+#grain{position:absolute;inset:-50%;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#subs{position:absolute;left:70px;right:70px;bottom:430px;display:flex;justify-content:center;z-index:20}
+#sub{text-align:center;font:700 52px/1.25 Inter;padding:14px 30px 18px;border-radius:20px;background:rgba(5,9,18,.82);border:1px solid rgba(85,207,234,.25);box-shadow:0 10px 40px rgba(0,0,0,.5);white-space:nowrap}
+#sub .hl{color:var(--cyan)}
+.zz{font:900 80px Inter;color:#7DDCF1;opacity:0;text-shadow:0 0 20px rgba(85,207,234,.7)}
+.q{color:var(--magl);text-shadow:0 0 40px rgba(238,46,120,.6)}
+.box{position:absolute;width:120px;height:100px;border-radius:12px;background:linear-gradient(160deg,#2B3B5E,#18223A);border:2px solid rgba(255,141,184,.45)}
+.box:after{content:"";position:absolute;left:44%;top:0;width:12%;height:100%;background:rgba(255,141,184,.3)}
+.stamp{position:absolute;left:50%;padding:20px 40px;border-radius:22px;border:6px solid var(--mag);color:var(--magl);font:900 76px Inter;letter-spacing:1px;background:rgba(40,8,22,.9);white-space:nowrap}
+.stamp.ok{border-color:var(--ok);color:var(--ok);background:rgba(6,30,24,.9);font-size:60px}
+.node{position:absolute;left:300px;width:480px;height:120px;border-radius:30px;background:rgba(18,27,47,.94);border:2px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:22px;padding:0 34px;font:800 48px Inter}
+.node i{width:24px;height:24px;border-radius:50%;background:#2A3550}
+.node.on{border-color:var(--cyan);box-shadow:0 0 50px rgba(85,207,234,.45)}.node.on i{background:var(--cyan);box-shadow:0 0 18px var(--cyan)}
+.pulse{position:absolute;left:540px;width:30px;height:30px;margin:-15px;border-radius:50%;background:#fff;box-shadow:0 0 30px 12px rgba(85,207,234,.9)}
+.doc{position:absolute;left:260px;top:470px;width:560px;height:680px;border-radius:36px;background:linear-gradient(170deg,#1A2742,#101A2E);border:2px solid rgba(85,207,234,.45);box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 80px rgba(85,207,234,.2);padding:48px 44px;backface-visibility:hidden}
+.doc .tag{font:700 26px Inter;color:var(--cyan);letter-spacing:3px;text-transform:uppercase}
+.doc .nm{font:900 92px/1 Inter;letter-spacing:-3px;margin-top:20px}
+.doc .ln{height:18px;border-radius:9px;background:rgba(255,255,255,.08);margin-top:26px}
+.gr{display:flex;align-items:center;gap:24px;margin-top:18px;font:700 32px Inter;color:var(--ink2)}.gr span{width:150px}.gt{flex:1;height:34px;border-radius:10px;background:rgba(255,255,255,.06);position:relative}.gt i{position:absolute;top:0;bottom:0;width:0;border-radius:10px;background:linear-gradient(90deg,var(--cyan),var(--bleu2))}
+.mb{position:absolute;bottom:0;width:52px;border-radius:12px 12px 4px 4px;background:linear-gradient(180deg,var(--cyan),var(--bleu))}
+.ml{position:absolute;bottom:-50px;width:52px;text-align:center;font:700 28px Inter;color:var(--muted)}
+.ppi{position:absolute;left:170px;top:520px;width:740px;height:620px;border-radius:40px;background:linear-gradient(170deg,#1A2742,#101A2E);border:2px solid rgba(85,207,234,.55);box-shadow:0 0 100px rgba(85,207,234,.25);padding:50px}
+.ppi .big{font:900 150px/1 Inter;letter-spacing:-5px;background:linear-gradient(180deg,#fff,#7DDCF1);-webkit-background-clip:text;color:transparent}
+.ppi .w{display:inline-block;font:800 54px/1.2 Inter;margin-right:16px;opacity:0}
+.decl{position:absolute;text-align:center;font:900 Inter;letter-spacing:-5px;line-height:1}
+.big2{position:absolute;left:0;right:0;text-align:center;font:900 330px/1 Inter;letter-spacing:-12px;background:linear-gradient(180deg,#fff,#7DDCF1);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 50px rgba(85,207,234,.5))}
+.cta{position:absolute;left:50%;top:1060px;padding:34px 64px;border-radius:30px;background:linear-gradient(135deg,#FF6FA6,var(--mag));font:800 52px Inter;white-space:nowrap;box-shadow:0 20px 60px rgba(238,46,120,.5)}
+.touch{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.9) 0 18%,rgba(255,255,255,.35) 19% 45%,transparent 46%);opacity:0;z-index:15}
+.ripple{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;border-radius:50%;border:4px solid #fff;opacity:0;z-index:15}
+.sweep{position:absolute;top:-20px;bottom:-20px;width:160px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);mix-blend-mode:overlay}
+</style></head>
+<body><div id="stage">
+<div id="grid"></div><div id="tint"></div>
+
+<!-- A : au feeling -->
+<div class="scene" id="A">
+  <div class="c" id="a1" style="top:330px;font:700 64px Inter;color:var(--ink2)">Vous produisez encore…</div>
+  <svg class="abs" id="gauge" style="left:190px;top:520px" width="700" height="420" viewBox="-350 -370 700 420">
+    <path d="M-300 0 A300 300 0 0 1 300 0" fill="none" stroke="#2A3550" stroke-width="40" stroke-linecap="round"/>
+    <path d="M-300 0 A300 300 0 0 1 -150 -260" fill="none" stroke="#55CFEA" stroke-width="40" stroke-linecap="round" opacity=".5"/>
+    <path d="M150 -260 A300 300 0 0 1 300 0" fill="none" stroke="#EE2E78" stroke-width="40" stroke-linecap="round" opacity=".7"/>
+    <g id="needle"><path d="M-10 0 L0 -250 L10 0 Z" fill="#fff"/></g><circle r="26" fill="#fff"/>
+  </svg>
+  <div class="c q" id="a2" style="top:1010px;font:900 150px Inter;letter-spacing:-4px">au feeling ?</div>
+</div>
+
+<!-- B : stock qui dort, trésorerie bloquée, trop tard -->
+<div class="scene" id="B">
+  <div class="c q" id="bt" style="top:290px;font:800 84px Inter">Du stock qui dort…</div>
+  <div id="zz"><div class="abs zz" id="z0">z</div><div class="abs zz" id="z1">z</div><div class="abs zz" id="z2">Z</div></div>
+  <div class="abs" id="tres" style="left:190px;top:420px;width:700px;height:600px;border-radius:44px;background:rgba(18,27,47,.95);border:2px solid rgba(255,141,184,.5);opacity:0;box-shadow:0 0 80px rgba(238,46,120,.2)">
+    <div style="position:absolute;left:0;right:0;top:50px;text-align:center;font:800 70px Inter">Trésorerie</div>
+    <svg style="position:absolute;left:140px;top:170px" width="420" height="300" viewBox="0 0 420 300">
+      <g fill="#2B3B5E" stroke="#FF8DB8" stroke-width="5"><ellipse cx="110" cy="250" rx="90" ry="26"/><ellipse cx="110" cy="220" rx="90" ry="26"/><ellipse cx="110" cy="190" rx="90" ry="26"/><ellipse cx="110" cy="160" rx="90" ry="26"/>
+      <ellipse cx="300" cy="250" rx="90" ry="26"/><ellipse cx="300" cy="220" rx="90" ry="26"/><ellipse cx="300" cy="190" rx="90" ry="26"/></g></svg>
+    <svg class="abs" id="lock" style="left:250px;top:250px" width="200" height="230" viewBox="0 0 200 230"><path d="M50 100 V65 a50 50 0 0 1 100 0 V100" fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round"/><rect x="15" y="95" width="170" height="130" rx="26" fill="#EE2E78"/><circle cx="100" cy="150" r="16" fill="#fff"/><rect x="92" y="155" width="16" height="40" rx="6" fill="#fff"/></svg>
+    <div style="position:absolute;left:0;right:0;bottom:44px;text-align:center;font:800 54px Inter;color:var(--magl)" id="bloq">bloquée</div>
+  </div>
+  <div id="boxes"></div>
+  <div class="abs" style="left:170px;width:740px;top:1100px;height:10px;border-radius:5px;background:#2A3550" id="shelf"></div>
+  <div id="late" style="position:absolute;inset:0;opacity:0">
+    <div class="abs" id="tc0" style="left:130px;top:330px;padding:26px 44px;border-radius:26px;background:rgba(18,27,47,.94);border:2px solid rgba(255,141,184,.5);font:800 60px Inter">Coûts</div>
+    <div class="abs" id="tc1" style="left:600px;top:330px;padding:26px 44px;border-radius:26px;background:rgba(18,27,47,.94);border:2px solid rgba(255,141,184,.5);font:800 60px Inter">Écarts</div>
+    <svg class="abs" id="clock" style="left:340px;top:530px" width="400" height="400" viewBox="-100 -100 200 200"><circle r="88" fill="#121B2F" stroke="#FF8DB8" stroke-width="8"/><g id="hh"><path d="M0 0 L0 -45" stroke="#fff" stroke-width="10" stroke-linecap="round"/></g><g id="mh"><path d="M0 0 L0 -70" stroke="#FF8DB8" stroke-width="7" stroke-linecap="round"/></g></svg>
+  </div>
+  <div class="stamp" id="trop" style="top:1030px">TROP TARD</div>
+</div>
+
+<!-- C : logo + besoin réel -->
+<div class="scene" id="C">
+  <div class="abs" id="halo" style="left:140px;top:300px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(0,153,225,.45),transparent 65%)"></div>
+  <div class="abs" id="logoC" style="left:90px;top:580px;width:900px">{{LOGO_C}}<div class="sweep" id="swC"></div></div>
+  <div id="chain" style="position:absolute;inset:0;opacity:0">
+    <div class="c" id="c1" style="top:290px;font:800 60px Inter">Toute l'entreprise</div>
+    <div class="node" id="n0" style="top:440px"><i></i>Achat</div>
+    <div class="node" id="n1" style="top:620px"><i></i>Production</div>
+    <div class="node" id="n2" style="top:800px"><i></i>Logistique</div>
+    <div class="node" id="n3" style="top:980px"><i></i>Client</div>
+    <div class="pulse" id="pulse"></div>
+    <div class="c" id="c2" style="top:1150px;font:900 96px Inter;letter-spacing:-2px">besoin <span style="color:var(--cyan);text-shadow:0 0 40px rgba(85,207,234,.7)">RÉEL</span></div>
+  </div>
+</div>
+
+<!-- D : du devis à la facture -->
+<div class="scene" id="D" style="perspective:1800px">
+  <div class="doc" id="doc"><div class="tag" id="dtag">Étape 1 / 5</div><div class="nm" id="dnm">Devis</div>
+   <div class="ln" style="width:80%;margin-top:50px"></div><div class="ln" style="width:60%"></div><div class="ln" style="width:72%"></div><div class="ln" style="width:50%"></div><div class="ln" style="width:66%"></div></div>
+  <div class="stamp ok" id="sansr" style="top:1180px">✓ Sans ressaisie</div>
+</div>
+
+<!-- D7 : du devis à la facture, planning, livraison, suivi -->
+<div class="scene" id="D7">
+  <div class="abs" id="d7doc" style="left:260px;top:470px;width:560px;height:680px;perspective:1800px"><div class="doc" id="doc7" style="left:0;top:0"><div class="tag" id="dtag7">Devis</div><div class="nm" id="dnm7">Devis</div>
+   <div class="ln" style="width:80%;margin-top:50px"></div><div class="ln" style="width:60%"></div><div class="ln" style="width:72%"></div><div class="ln" style="width:50%"></div></div></div>
+  <div class="abs" id="gantt" style="left:90px;top:520px;width:900px;height:400px;border-radius:36px;background:rgba(18,27,47,.95);border:2px solid rgba(85,207,234,.5);padding:34px 40px;opacity:0">
+    <div style="font:800 46px Inter;margin-bottom:26px">Planning de production</div>
+    <div class="gr"><span>Étape 1</span><div class="gt"><i id="gb0" style="left:0%"></i></div></div>
+    <div class="gr"><span>Étape 2</span><div class="gt"><i id="gb1" style="left:22%"></i></div></div>
+    <div class="gr"><span>Étape 3</span><div class="gt"><i id="gb2" style="left:46%"></i></div></div>
+    <div class="gr"><span>Étape 4</span><div class="gt"><i id="gb3" style="left:68%"></i></div></div>
+  </div>
+  <div class="abs" id="liv" style="left:90px;top:960px;width:430px;height:200px;border-radius:32px;background:rgba(18,27,47,.95);border:2px solid rgba(85,207,234,.5);opacity:0;overflow:hidden">
+    <div style="position:absolute;left:30px;top:22px;font:800 40px Inter">Livraison</div>
+    <div style="position:absolute;left:30px;right:30px;top:150px;height:6px;border-radius:3px;background:repeating-linear-gradient(90deg,#55CFEA 0 24px,transparent 24px 40px);opacity:.6"></div>
+    <svg class="abs" id="truck" style="left:20px;top:84px" width="110" height="66" viewBox="0 0 110 66"><rect x="0" y="6" width="66" height="42" rx="6" fill="#55CFEA"/><path d="M66 18h22l16 16v14H66z" fill="#0099E1"/><circle cx="20" cy="54" r="10" fill="#F1F5F9"/><circle cx="86" cy="54" r="10" fill="#F1F5F9"/></svg>
+  </div>
+  <div class="abs" id="sui" style="left:560px;top:960px;width:430px;height:200px;border-radius:32px;background:rgba(18,27,47,.95);border:2px solid rgba(85,207,234,.5);opacity:0;overflow:hidden">
+    <div style="position:absolute;left:30px;top:22px;font:800 40px Inter">Suivi</div>
+    <svg class="abs" style="left:30px;top:80px" width="370" height="100" viewBox="0 0 370 100"><path id="route" d="M10 80 C90 10 170 100 250 40 S340 30 360 20" fill="none" stroke="#55CFEA" stroke-width="5" stroke-dasharray="10 10" opacity=".7"/></svg>
+    <svg class="abs" id="pin" style="left:340px;top:56px" width="56" height="74" viewBox="0 0 56 74"><path d="M28 72 C28 72 4 44 4 26 a24 24 0 0 1 48 0 C52 44 28 72 28 72z" fill="#EE2E78"/><circle cx="28" cy="26" r="9" fill="#fff"/></svg>
+  </div>
+  <svg class="abs" id="links7" width="1080" height="1920" style="left:0;top:0;pointer-events:none"></svg>
+  <div class="stamp ok" id="relie" style="top:1200px">✓ Tout est relié</div>
+</div>
+
+<!-- E : besoins annuels -> PPI -->
+<div class="scene" id="E">
+  <div class="c" id="e1" style="top:300px;font:800 64px Inter">Besoins <span style="color:var(--cyan)">annuels</span> calculés</div>
+  <div class="abs" id="months" style="left:105px;top:560px;width:870px;height:520px"></div>
+  <div class="ppi" id="ppi"><div class="big">PPI</div><div style="margin-top:40px"><span class="w" id="pw0">Programme</span><span class="w" id="pw1">Prévisionnel</span><span class="w" id="pw2" style="color:var(--cyan)">d'Importation</span></div>
+   <div style="position:absolute;left:50px;right:50px;bottom:50px;height:16px;border-radius:8px;background:rgba(255,255,255,.08)"><div id="pbar" style="height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--cyan),var(--bleu2))"></div></div></div>
+</div>
+
+<!-- F : déclarations -->
+<div class="scene" id="F">
+  <div class="decl" id="g50" style="left:60px;width:480px;top:440px;font-size:200px;background:linear-gradient(180deg,#fff,#7DDCF1);-webkit-background-clip:text;color:transparent">G50</div>
+  <div class="decl" id="irg" style="left:540px;width:480px;top:440px;font-size:200px;color:#fff">IRG</div>
+  <div class="decl" id="cnas" style="left:60px;width:480px;top:720px;font-size:180px;color:var(--magl)">CNAS</div>
+  <div class="decl" id="paie" style="left:540px;width:480px;top:720px;font-size:180px;color:var(--cyan)">Paie</div>
+  <div class="stamp ok" id="auto" style="top:1090px;font-size:64px">✓ AUTOMATIQUEMENT</div>
+</div>
+
+<!-- G : +2 ans -->
+<div class="scene" id="G">
+  <div class="c" id="g1" style="top:400px;font:700 60px Inter;color:var(--ink2)">Utilisé en entreprise depuis</div>
+  <div class="big2" id="g2" style="top:560px">+2</div>
+  <div class="c" id="g3" style="top:920px;font:900 120px Inter;letter-spacing:-3px">ans</div>
+</div>
+
+<!-- H : fin -->
+<div class="scene" id="H">
+  <div class="abs" id="haloH" style="left:140px;top:380px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(0,153,225,.35),transparent 65%)"></div>
+  <div class="abs" id="logoH" style="left:90px;top:620px;width:900px">{{LOGO_H}}<div class="sweep" id="swH"></div></div>
+  <div class="c" id="h1" style="top:920px;font:600 40px Inter;color:var(--ink2)">L'ERP algérien des entreprises qui fabriquent</div>
+  <div class="cta" id="cta">Demandez votre démo</div>
+  <div class="c" id="h2" style="top:1240px;font:700 46px Inter;color:var(--cyan)">tasyirerp.com · Lien en bio ↑</div>
+</div>
+
+<div class="touch" id="touch"></div><div class="ripple" id="ripple"></div>
+<div id="subs"><div id="sub"></div></div>
+<div id="grain"></div><div id="vign"></div><div id="flash"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)), P=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3), ex=x=>x>=1?1:1-Math.pow(2,-10*x), eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, ei=x=>x*x*x;
+const back=x=>{const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const rnd=i=>{const x=Math.sin(i*12.9898+78.233)*43758.5453;return x-Math.floor(x)};
+function T(el,s){(typeof el=='string'?$(el):el).style.transform=s}
+function O(el,o){(typeof el=='string'?$(el):el).style.opacity=o}
+function pop(id,t,t0,from=1.6,extra=''){const p=P(t,t0,t0+0.35);O(id,p>0?eo(Math.min(1,p*2)):0);T(id,`${extra} scale(${from-(from-1)*back(p)})`)}
+function rise(id,t,t0,d=60){const p=eo(P(t,t0,t0+0.4));O(id,p);T(id,`translateY(${(1-p)*d}px)`)}
+function stamp(id,t,t0,r=-6){const p=P(t,t0,t0+0.22);O(id,p>0?1:0);T(id,`translateX(-50%) rotate(${r}deg) scale(${2.4-1.4*eo(p)})`)}
+
+const SUBS=[[0.2,2.65,"Vous produisez encore… au feeling ?"],[3.55,4.85,"Du stock qui dort,"],[4.85,6.5,"de la trésorerie bloquée…"],[6.75,8.75,"Coûts et écarts connus TROP tard."],
+[8.93,10.6,"Tasyir ERP !"],[10.6,11.75,"Toute l'entreprise,"],[11.75,13.5,"pilotée par le besoin RÉEL."],
+[13.68,15.05,"Du devis à la facture,"],[15.05,15.75,"en passant par"],[15.75,16.95,"le planning de production,"],[16.95,18.55,"la livraison et le suivi :"],[18.55,19.55,"tout est relié !"],
+[19.68,21.85,"Vos besoins annuels calculés :"],[21.85,22.5,"la base de votre"],[22.5,24.4,"Programme Prévisionnel d'Importation."],
+[24.54,27.85,"G50, IRG, CNAS et paie :"],[27.85,29.55,"générées AUTOMATIQUEMENT !"],
+[29.7,30.83,"Utilisé en entreprise"],[30.83,32.25,"depuis plus de deux ans."],[32.39,34.0,"Demandez votre démo !"]];
+const SC={A:[0,2.95],B:[2.95,8.4],C:[8.4,13.2],D:[99,100],E:[16.35,21.5],F:[21.5,26.95],G:[26.95,29.8],H:[29.8,34.1]};
+
+// construction
+let bh='';const BX=[];for(let r=0;r<4;r++)for(let c=0;c<5;c++){BX.push({x:200+c*140,y:1100-100-r*104,r});bh+=`<div class="box" id="b${BX.length-1}"></div>`}$('boxes').innerHTML=bh;
+const MO='JFMAMJJASOND'.split('');$('months').innerHTML=MO.map((m,i)=>`<div class="mb" id="mb${i}" style="left:${i*72}px;height:0"></div><div class="ml" style="left:${i*72}px">${m}</div>`).join('');
+function parts(id){const s=$(id).querySelector('svg');const g=s.querySelector('g');const ch=[...g.children].filter(e=>e.tagName!='defs');
+ const txt=[...s.children].filter(e=>e.tagName=='path');[...ch,...txt,...g.querySelectorAll('rect')].forEach(e=>{e.style.transformBox='fill-box';e.style.transformOrigin='center'});
+ return {ringB:ch[0],bars:[...ch[1].querySelectorAll('rect')],ringF:ch[2],rip:ch.slice(3),txt}}
+const LC=parts('logoC'),LH=parts('logoH');
+function buildLogo(L,t,t0,sp=1){
+ const p=x=>P(t,t0+x*sp,t0+(x+0.35)*sp);
+ O(L.ringB,p(0));T(L.ringB,`scaleX(${eo(p(0))})`);
+ L.bars.forEach((b,i)=>{const k=back(P(t,t0+(0.12+i*0.09)*sp,t0+(0.42+i*0.09)*sp));T(b,`translateY(${(1-k)*230}px)`)});
+ O(L.ringF,eo(p(0.05)));T(L.ringF,`scaleX(${eo(p(0.05))})`);
+ L.rip.forEach((r,i)=>{const k=P(t,t0+(0.45+i*0.06)*sp,t0+(0.7+i*0.06)*sp);O(r,eo(k));T(r,`translateY(${(1-eo(k))*-30}px)`)});
+ L.txt.forEach((e,i)=>{const k=P(t,t0+(0.5+i*0.08)*sp,t0+(0.9+i*0.08)*sp);O(e,k>0?1:0);e.style.clipPath=`inset(0 ${100-100*eo(k)}% 0 0)`;T(e,`translateX(${(1-eo(k))*-40}px)`)});}
+function touchAt(t,t0,x,y){const a=P(t,t0-0.35,t0-0.05),b=P(t,t0,t0+0.45);
+ O('touch',a>0&&b<1?(b>0?1-b:eo(a)):0);T('touch',`scale(${b>0?1-0.15*Math.sin(Math.PI*cl(b*3)):1.3-0.3*eo(a)})`);$('touch').style.left=x+'px';$('touch').style.top=y+'px';
+ O('ripple',b>0&&b<1?1-b:0);T('ripple',`scale(${0.5+2*eo(b)})`);$('ripple').style.left=x+'px';$('ripple').style.top=y+'px';}
+
+function render0(t,nt){
+ T('grid',`translate(${-(t*14)%90}px,${-(t*22)%90}px)`);
+ O('tint',nt<9.3?0.9:1-P(nt,9.3,9.9));
+ for(const [id,[a,b]] of Object.entries(SC)){const el=$(id);const vis=t>=a-0.01&&t<b+0.01;if(!vis){O(el,0);continue}
+  const i=P(t,a,a+0.3),o=P(t,b-0.15,b);let s=1.12-0.12*ex(i),f=(1-ex(i))*12,op=eo(i);
+  if(o>0&&id!='H'){s*=1+0.1*o;f+=o*12;op*=1-o}
+  T(el,`scale(${s})`);el.style.filter=f>0.2?`blur(${f}px)`:'none';O(el,op)}
+ O('flash',Math.max(0,1-P(t,8.55,8.8))*(t>=8.55?0.55:0));
+
+ // A : jauge « au feeling »
+ if(t<3.1){rise('a1',t,0.3);pop('gauge',t,0.4,1.2);
+  const wob=Math.sin(t*5.3)*55+Math.sin(t*11.7)*30+Math.sin(t*2.1)*20;T('needle',`rotate(${wob}deg)`);
+  pop('a2',t,1.95,1.8,`rotate(${Math.sin(t*6)*3}deg)`);}
+ // B (temps réel nt) : stock qui dort, trésorerie bloquée, puis trop tard
+ if(nt>2.8&&nt<9.5){rise("bt",nt,3.75);
+  BX.forEach((b,i)=>{const el=$('b'+i);const t0=3.85+i*0.05;const p=P(nt,t0,t0+0.35);el.style.left=b.x+'px';el.style.top=(420+(b.y-420)*ei(p))+'px';O(el,p>0?Math.min(1,p*3):0);el.style.filter=nt>4.5?'brightness(.75)':''});
+  for(let i=0;i<3;i++){const ph=((nt-4.4)/1.3+i/3)%1;const on=nt>4.4;$('z'+i).style.left=(720+ph*120+i*10)+'px';$('z'+i).style.top=(620-ph*220)+'px';O('z'+i,on?Math.sin(Math.PI*ph):0);T('z'+i,`scale(${0.6+0.6*ph})`)}
+  const up=P(nt,5.0,5.25);["boxes","shelf","bt","zz"].forEach(id=>{O(id,1-up)});
+  const tr=P(nt,5.15,5.5);O('tres',eo(tr)*(1-P(nt,6.9,7.1)));T('tres',`scale(${1.2-0.2*back(tr)})`);
+  const lk=P(nt,5.95,6.2);O('lock',lk>0?1:0);T('lock',`translateY(${(1-eo(lk))*-260}px) rotate(${lk>=1?Math.sin((nt-6.2)*40)*4*Math.max(0,1-(nt-6.2)*3):0}deg)`);
+  O('bloq',eo(P(nt,6.0,6.25)));
+  O('late',eo(P(nt,7.0,7.2)));pop('tc0',nt,7.15,1.4);pop('tc1',nt,7.55,1.4);pop('clock',nt,7.65,1.3);
+  T('hh',`rotate(${nt*200}deg)`);T('mh',`rotate(${nt*1400}deg)`);
+  stamp('trop',nt,8.31,-6);}
+ // C : logo, puis chaîne pilotée par le besoin réel
+ if(t>8.3&&t<13.4){const k=P(t,8.5,8.9);T('halo',`scale(${0.3+0.9*eo(k)+0.04*Math.sin(t*4)})`);O('halo',eo(k)*(1-P(t,9.8,10.1)));
+  buildLogo(LC,t,8.5,1);T('swC',`translateX(${-300+1400*eio(P(t,9.3,9.9))}px)`);
+  O('logoC',1-P(t,9.85,10.05));
+  O('chain',P(t,9.95,10.15));rise('c1',t,10.05,40);
+  const nodes=['n0','n1','n2','n3'];nodes.forEach((id,i)=>{pop(id,t,10.2+i*0.12,1.25);$(id).className='node'+(t>11.2+i*0.35?' on':'')});
+  const pp=P(t,11.15,12.55);O('pulse',pp>0&&pp<1?1:(t>12.55&&t<12.9?1-P(t,12.55,12.9):0));$('pulse').style.top=(440+60+pp*540)+'px';
+  pop('c2',t,11.92,1.8);}
+ // D : devis -> facture
+ if(t>13.0&&t<16.5){const N=['Devis','Proforma','Commande','Livraison','Facture'],TT=[13.6,13.85,14.05,14.2,14.35];
+  let k=0;TT.forEach((x,i)=>{if(t>=x)k=i});const fp=P(t,TT[k],TT[k]+0.15);
+  const ang=t<TT[0]?-90*(1-eo(P(t,13.3,13.6))):(k==0?0:(fp<0.5?-90*(fp*2):90*(1-(fp-0.5)*2)));
+  const showK=k>0&&fp<0.5?k-1:k;$('dnm').textContent=N[showK];$('dtag').textContent=`Étape ${showK+1} / 5`;
+  T('doc',`rotateY(${ang}deg)`);stamp('sansr',t,15.27,-5);}
+ // D7 (temps réel T7)
+ {const a=13.46,b=19.62,el=$('D7');if(T7>=a-0.01&&T7<b+0.01){const i=P(T7,a,a+0.3),o=P(T7,b-0.15,b);let sc=(1.12-0.12*ex(i))*(1+0.1*o),f=(1-ex(i))*12+o*12;T(el,`scale(${sc})`);el.style.filter=f>0.2?`blur(${f}px)`:'none';O(el,eo(i)*(1-o));
+  const N=['Devis','Proforma','Commande','Livraison','Facture'],TT=[13.95,14.08,14.2,14.32,14.45];let k=0;TT.forEach((x,j)=>{if(T7>=x)k=j});const fp=P(T7,TT[k],TT[k]+0.12);
+  const ang=T7<TT[0]?-90*(1-eo(P(T7,13.6,13.95))):(k==0?0:(fp<0.5?-90*(fp*2):90*(1-(fp-0.5)*2)));const sk=k>0&&fp<0.5?k-1:k;$('dnm7').textContent=N[sk];$('dtag7').textContent=`Étape ${sk+1} / 5`;
+  T('doc7',`rotateY(${ang}deg)`);const mv=eio(P(T7,15.0,15.5));T('d7doc',`translate(${-210*mv}px,${-300*mv}px) scale(${1-0.62*mv})`);
+  const g=P(T7,15.6,15.95);O('gantt',eo(g));T('gantt',`translateY(${(1-eo(g))*60+80*mv*0}px)`);$('gantt').style.top='560px';
+  for(let j=0;j<4;j++)$('gb'+j).style.width=(30*eo(P(T7,15.85+j*0.22,16.25+j*0.22)))+'%';
+  const l=P(T7,16.95,17.25);O('liv',eo(l));T('liv',`translateY(${(1-eo(l))*60}px)`);T('truck',`translateX(${270*eio(P(T7,17.05,18.0))}px)`);
+  const su=P(T7,17.8,18.1);O('sui',eo(su));T('sui',`translateY(${(1-eo(su))*60}px)`);const pp=P(T7,17.9,18.3);T('pin',`translateY(${(1-back(pp))*-60}px) scale(${1+0.08*Math.sin(T7*8)})`);
+  const lk=P(T7,18.6,18.95);let sv='';if(lk>0){const pts=[[240,420],[540,560],[300,960],[780,960]];for(let j=0;j<3;j++){const [x1,y1]=pts[j],[x2,y2]=pts[j+1];sv+=`<line x1="${x1}" y1="${y1}" x2="${x1+(x2-x1)*eo(lk)}" y2="${y1+(y2-y1)*eo(lk)}" stroke="#55CFEA" stroke-width="5" stroke-dasharray="12 10" opacity=".8"/>`}}$('links7').innerHTML=sv;
+  ['gantt','liv','sui'].forEach(id=>{$(id).style.boxShadow=T7>18.62?'0 0 60px rgba(85,207,234,.45)':''});
+  stamp('relie',T7,18.62,-5);} else O(el,0);}
+ // E : besoins annuels -> PPI
+ if(t>16.2&&t<21.7){rise('e1',t,16.55);
+  const fold=eio(P(t,18.6,19.1));
+  for(let i=0;i<12;i++){const el=$('mb'+i);const p=back(P(t,16.8+i*0.08,17.2+i*0.08));el.style.height=(160+300*rnd(i+11))*Math.max(0,p)+'px';el.style.opacity=1-fold;el.style.transform=`translateX(${(380-i*72)*fold}px) scaleY(${1-fold})`}
+  O('months',1-fold);O('e1',(1-P(t,18.7,19.0)));
+  pop('ppi',t,18.85,1.4);[19.46,19.9,20.4].forEach((x,i)=>{const p=P(t,x,x+0.25);O('pw'+i,eo(p));T('pw'+i,`translateY(${(1-eo(p))*30}px)`)});
+  $('pbar').style.width=(eio(P(t,19.4,21.2))*100)+'%';}
+ // F : déclarations
+ if(t>21.4&&t<27.1){pop('g50',t,21.79,2.2);pop('irg',t,22.71,2.2);pop('cnas',t,23.67,2.2);pop('paie',t,24.41,2.2);stamp('auto',t,25.81,-4);}
+ // G : +2 ans
+ if(t>26.8&&t<30){rise('g1',t,27.15);pop('g2',t,28.68,2.2);pop('g3',t,29.2,1.5);}
+ // H : fin
+ if(t>29.6){const k=P(t,29.8,30.1);T('haloH',`scale(${0.3+0.9*eo(k)+0.04*Math.sin(t*4)})`);O('haloH',eo(k));
+  buildLogo(LH,t,29.8,0.6);T('swH',`translateX(${-300+1400*eio(P(t,31.0,31.7))}px)`);
+  const c=P(t,30.0,30.4);O('cta',c>0?1:0);T('cta',`translateX(-50%) scale(${(0.5+0.5*back(c))*(t>30.77?1-0.06*Math.sin(Math.PI*P(t,30.77,31.0)):1)})`);
+  touchAt(t,30.77,700,1130);rise('h1',t,31.0,30);rise('h2',t,31.4,30);}
+ // sous-titres
+ const cur=SUBS.find(s=>T7>=s[0]&&T7<s[1]);const sub=$('sub');
+ if(cur){if(sub.dataset.k!=cur[2]){sub.dataset.k=cur[2];sub.innerHTML=cur[2].replace(/(au feeling|stock qui dort|trésorerie bloquée|TROP tard|Tasyir ERP|besoin RÉEL|devis|facture|planning de production|livraison|suivi|tout est relié|besoins annuels|Programme Prévisionnel d'Importation|G50|IRG|CNAS|paie|AUTOMATIQUEMENT|deux ans|démo)/g,'<span class="hl">$1</span>')}
+  const k=P(T7,cur[0],cur[0]+0.12);O('subs',1);sub.style.transform='';const w=sub.scrollWidth;$('subs').style.transform=`translateY(${14*(1-eo(k))}px) scale(${(0.94+0.06*eo(k))*(w>940?940/w:1)})`;}
+ else O('subs',0);
+}
+const ANCH=[[0, 0], [2.95, 2.95], [8.4, 9.3], [8.55, 9.5], [10.12, 11.25], [11.2, 12.37], [11.92, 13.09], [13.2, 14.3], [33.9, 35.0]];
+function inv(t){for(let i=1;i<ANCH.length;i++){const [o0,n0]=ANCH[i-1],[o1,n1]=ANCH[i];if(t<=n1)return o0+(o1-o0)*(t-n0)/(n1-n0)}return t-1.1}
+let T7=0;const M76=[[0, 0], [0.2, 0.25], [2.6, 2.75], [2.82, 3.05], [8.71, 9.18], [8.93, 9.45], [13.46, 14.16], [19.68, 17.6], [24.32, 22.43], [24.54, 22.75], [29.48, 27.89], [29.7, 28.2], [32.17, 30.77], [32.39, 31.05], [33.78, 32.5], [35.0, 35.0]];
+function m76(t){for(let i=1;i<M76.length;i++){const [a0,b0]=M76[i-1],[a1,b1]=M76[i];if(t<=a1)return b0+(b1-b0)*(t-a0)/(a1-a0)}return t}
+window.render=t=>{T7=t;const n=m76(t);render0(inv(n),n)};
+window.cover=function(){T7=-1;render0(9.75,10.7);O('swC',0);O('chain',0);O('C',1);$('C').style.filter='none';T('C','none');O('subs',0);O('flash',0);O('tint',0);O('halo',1);
+ const d=document.createElement('div');d.className='c';d.style.cssText='top:330px;font:900 92px/1.1 Inter;letter-spacing:-2px';d.innerHTML='Vous produisez encore<br><span style="color:#FF8DB8">au feeling ?</span>';$('C').appendChild(d);
+ const e=document.createElement('div');e.className='c';e.style.cssText='top:900px;font:600 40px Inter;color:#CBD5E1';e.textContent="L'ERP algérien des entreprises qui fabriquent";$('C').appendChild(e);};
+</script></body></html>
