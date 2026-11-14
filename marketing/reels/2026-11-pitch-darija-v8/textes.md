@@ -95,3 +95,11 @@ Transcription automatique de la piste finale (les 8 phrases sont présentes) : �
 - `sons/musique.mp3`
 - `controle/` : images de contrôle et planche (zones interdites en rouge)
 - `source/` : `reel8.src.html` (animation ; `build8.py` y insère le logo ; s'appuie sur la table de temps du Reel 7), `render8.js`, `mix8.py`
+
+## Variante : musique plus dynamique
+
+`reel-musique-dynamique.mp4` : même image et même voix, avec une musique plus énergique (ElevenLabs Music, 118 BPM, batterie et basse plus présentes, montée puis « drop » au moment du nom de marque ; `sons/musique-dynamique.mp3`) et mixée plus fort.
+
+- Prompt : « Energetic, dynamic, modern commercial track for a business software ad, instrumental only, no vocals. Punchy drums and claps, driving bassline, bright synth stabs and plucks, subtle North African percussion (darbuka) adding groove, 118 BPM. First 10.5 seconds: rhythmic build-up with tension and risers. At 10.8 seconds: strong energetic drop into a confident, upbeat, motivating groove that keeps momentum until the end. Big clean final hit at 46.5 seconds. »
+- Mixage (`source/mix8b.py`) : musique + bruitages à -19,8 LUFS (contre -25,3 dans la version de base), voix -14,8 LUFS, donc la voix reste **5 LU devant** ; la musique ne baisse plus que légèrement sous la voix. Final -13,9 LUFS, crête -2,2 dBFS.
+- Transcription automatique de la piste finale : les 8 phrases sont toujours présentes et complètes.
